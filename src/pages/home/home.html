@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      {{ viewTitle }}
+    </ion-title>
+
+ <ion-buttons end>
+    <button ion-button icon-only (click)="addEvent()">
+      <ion-icon name="add"></ion-icon>
+  </button>
+</ion-buttons>
+
+
+<!--
+<ion-select [(ngModel)]="modo">
+    <ion-option value="month">Mes</ion-option>
+  <ion-option value="weekly">Semana</ion-option>
+</ion-select>-->
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+  <calendar [eventSource]="eventSource"
+  [calendarMode]="calendar.mode"
+  [currentDate]="calendar.currentDate"
+  (onEventSelected)="onEventSelected($event)"
+  (onTitleChanged)="OnViewTitleChanged($event)"
+  (onTimeSelected)="onTimeSelected($event)"
+  step="30"
+  class="calendar">
+  </calendar>
+
+</ion-content>
