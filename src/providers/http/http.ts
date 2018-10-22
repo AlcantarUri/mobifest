@@ -15,7 +15,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class HttpProvider {
 
-
+/*uri */
   path : string = 'https://randomuser.me/api/?results=25';
   private url : string = "http://avisositd.xyz/mobiliaria/ListaMobiliario.php";
 
