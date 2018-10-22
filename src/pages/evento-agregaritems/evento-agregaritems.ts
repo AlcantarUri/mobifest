@@ -58,7 +58,7 @@ export class EventoAgregaritemsPage {
    }
 
    getMessages(){
-     /*
+     
      var json; 
      this.http.getAll().subscribe(data => {  json = data; });
 
@@ -68,7 +68,7 @@ export class EventoAgregaritemsPage {
        }
        console.log(this.moviles);
 
-*/
+
    }
 
 /*
