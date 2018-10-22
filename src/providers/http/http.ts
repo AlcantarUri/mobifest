@@ -46,7 +46,7 @@ private catchError(error: Response | any){
 
 */
 
-
+///////////////////////////Troca////////////////////////////////77
 
   loginApp(usuario:string, contra:string){
 
@@ -79,23 +79,45 @@ private catchError(error: Response | any){
 
 
    
- /*
    sacarNombresMobiliarioBase(){
- 
-     //alert(usuario+contra);
+
+    // console.log("llega al http");
     
     var url = 'http://avisositd.xyz/mobiliaria/ListaMobiliarioNombre.php';
     return new Promise((resolve, reject) => {
      this.http.get(url)
         .subscribe(data => {
+         // console.log(data);
           resolve(data);
          }, (err) =>{
            reject(err);
          });
     });
    }
+ 
+   
+ 
+ 
+   sacarDetalles(nombre_mob:string){
+ 
+      console.log("llega al http");
+     
+     var url = 'http://avisositd.xyz/mobiliaria/detalles.php?nombre_mob='+nombre_mob;
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+ 
+     
+ 
+          // console.log(data);
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
 
 
- */
+
 
 }
