@@ -22,10 +22,18 @@
     
       <ion-card >
           <ion-card-header>
-            Cantidad  {{det.cantidad_mob}}
+            Total: {{det.cantidad_mob}}
           </ion-card-header>
           <ion-card-content>
             <div>Costo:  ${{det.costo_mob}}</div>
+            <ion-item>
+                <ion-range disabled min="0" max="det.cantidad_mob" [(ngModel)]="det.cantidad_mob" color="secondary">
+                    <ion-label range-left>0</ion-label>
+                    <ion-label range-right>{{det.cantidad_mob}}</ion-label>
+                </ion-range>
+               
+              </ion-item>
+              <p>Disponibles : {{det.cantidad_mob}}</p>
           </ion-card-content>
         </ion-card>
   </ion-list>

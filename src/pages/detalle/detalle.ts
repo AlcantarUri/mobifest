@@ -17,7 +17,9 @@ import { HttpProvider } from '../../providers/http/http';
 export class DetallePage {
 
   nombre:string;
-  detainv:any;
+  detainv:string[];
+ 
+
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpProvider) {
 
@@ -44,16 +46,23 @@ export class DetallePage {
 
     this.http.sacarDetalles(nombre).then(
       (data) => { 
-        console.log(data)  
+       // console.log(data)  
 
         this.detainv = data["detalle"];
 
-        console.log("Resultado"+JSON.stringify(this.detainv));
+       // console.log("Resultado"+JSON.stringify(this.detainv));
 
-        let nombre = this.detainv["nombre_mob"];
+        
 
-        console.log(nombre);
+       /*  var json = data["detalle"];
 
+       for (var i = 0; i < json.length; i++) {
+       // console.log(json[i].nombre_mob);
+       this.rango = json[i].cantidad_mob;
+       }
+
+        console.log("Nombre"+this.rango);
+*/
 
 
       },
