@@ -38,21 +38,25 @@ export class MobiliarioPage {
     this.id = navParams.get('data');
     //alert("pagina Mobiliario"+this.id);
 
-    this.traerNombres();
+    //this.traerNombres();
     this.initializeItems();
-   // this.traerDatos();
+    this.traerDatos();
   }
 
   initializeItems() {
 
-   this.items = this.nombres;
-   this.compl = this.inventario;
+  this.inventario = this.compl;
   
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad MobiliarioPage');
+    this.traerDatos();
 
+  }
+
+  ionViewCanEnter(){
+    return this.traerDatos();
   }
 
   openModal(nombre_mob:string){
@@ -62,8 +66,17 @@ export class MobiliarioPage {
     });
   }
 
-  
+  ionViewWillEnter(){
+    this.traerDatos();
+  }
 
+  ionViewDidEnter(){
+    this.traerDatos();
+  }
+
+
+  
+/*
   traerNombres(){
     
     this.http.sacarNombresMobiliarioBase().then(
@@ -84,31 +97,21 @@ export class MobiliarioPage {
     
   }
 
-  /*
+  */
 
  traerDatos(){
 
     this.http.revisarBase().then(
       (inv) => { 
-        console.log(inv)     
+       // console.log(inv)     
         
 
        this.inventario = inv["inventario"];
+       this.compl = inv["inventario"];
+
+      // console.log(this.inventario);
        
       
-       this.json = inv["inventario"];
-
-
-       for (var i = 0; i < this.json.length; i++) {
-       // console.log(json[i].nombre_mob);
-       this.compl = this.json[i].nombre_mob;
-       }
-
-      
-
-      
-
-       this.items = this.compl;
   
 
        //console.log("Resultado:    "+JSON.stringify(json));   
@@ -123,7 +126,7 @@ export class MobiliarioPage {
       }
     );
 
-  }*/
+  }
 
   getItems(ev: any) {
     // Reset items back to all of the items
@@ -134,8 +137,8 @@ export class MobiliarioPage {
 
     // if the value is an empty string don't filter the items
     if (val && val.trim() != '') {
-      this.items = this.items.filter((item) => {
-        return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      this.inventario = this.inventario.filter((item) => {
+        return (item.nombre_mob.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
       
     }

@@ -19,8 +19,8 @@ import { HttpProvider } from '../../providers/http/http';
 export class AnadirInvModalPage {
 
   theWallImageUrl: any=  "../assets/img/ic_card.jpg";
-  nombre_extra_item = true;
-  precio_extra_item = true;
+  nombre_extra_item;
+  precio_extra_item;
 
  
   todo = {};
@@ -63,10 +63,18 @@ export class AnadirInvModalPage {
 
     this.http.insertarInventario(this.todo).then(
       (res) => { 
-        console.log(res);
+        console.log(res["registro"]);
+
+        if(res["registro"] == "registrado"){
+          alert("Registro Existoso");
+          this.view.dismiss();
+        }else if(res["registro"] == "noregistrado"){
+          alert("No Registrado Asegurate de Cntar con Internet");
+        }
       },
       (error) =>{
         console.error(error);
+        alert("No Registrado Asegurate de Cntar con Internet"+error);
       }
     )
     
