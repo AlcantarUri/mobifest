@@ -143,6 +143,12 @@ export class MobiliarioPage {
     
   }
 
+  anadirInvModal(){
+    const myAnadir = this.modCtrl.create('AnadirInvModalPage');
+
+    myAnadir.present();
+  }
+
 
   
  
