@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, ToastController }
 import { HttpProvider } from '../../providers/http/http';
 import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
-import { SelectSearchableComponent } from 'ionic-select-searchable';
+
 
 
 
@@ -48,7 +48,6 @@ export class EventoAgregaritemsPage {
   searchQuery: string = '';
   
 
-@ViewChild('myselect') selectComponent:SelectSearchableComponent;
 user=null;
 userId = [];
 
