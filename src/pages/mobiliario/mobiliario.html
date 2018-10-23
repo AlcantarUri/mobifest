@@ -22,8 +22,8 @@
 <ion-content class="margin-class" padding >
 
   
-   
-      <ion-list class="mobList-class" *ngFor="let item of inventario">
+   <!--
+      <ion-list class="mobList-class" *ngFor="let item of nventario">
           <ion-item>
            
             <h2>{{item.nombre_mob}}</h2>
@@ -33,8 +33,8 @@
           </ion-item>
         </ion-list>
      
-      
-     <!--
+      -->
+     
       <ion-list>
           <ion-item *ngFor="let item of items" (click)="openModal(item)">
             {{ item }}
@@ -44,5 +44,5 @@
         <ion-fab bottom right>
             <button ion-fab ><ion-icon name="add"></ion-icon></button>
         </ion-fab>
-       -->
+       
 </ion-content>

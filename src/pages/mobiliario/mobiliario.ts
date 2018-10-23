@@ -38,9 +38,9 @@ export class MobiliarioPage {
     this.id = navParams.get('data');
     //alert("pagina Mobiliario"+this.id);
 
-//    this.traerNombres();
+    this.traerNombres();
     this.initializeItems();
-    this.traerDatos();
+   // this.traerDatos();
   }
 
   initializeItems() {
@@ -64,7 +64,7 @@ export class MobiliarioPage {
 
   
 
- /* traerNombres(){
+  traerNombres(){
     
     this.http.sacarNombresMobiliarioBase().then(
       (nomb) => { 
@@ -82,7 +82,9 @@ export class MobiliarioPage {
       }
     );
     
-  }*/
+  }
+
+  /*
 
  traerDatos(){
 
@@ -102,7 +104,9 @@ export class MobiliarioPage {
        this.compl = this.json[i].nombre_mob;
        }
 
+      
 
+      
 
        this.items = this.compl;
   
@@ -119,7 +123,7 @@ export class MobiliarioPage {
       }
     );
 
-  }
+  }*/
 
   getItems(ev: any) {
     // Reset items back to all of the items
