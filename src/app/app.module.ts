@@ -10,6 +10,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
 import { DetallePage } from '../pages/detalle/detalle';
+import { TabsPage } from '../pages/tabs/tabs';
 
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
@@ -22,7 +23,8 @@ import { HttpModule } from '@angular/http';
     HomePage,
     LoginPage,
     MobiliarioPage,
-    DetallePage
+    DetallePage,
+    TabsPage
   ],
   imports: [
     NgCalendarModule,
@@ -38,7 +40,8 @@ import { HttpModule } from '@angular/http';
     HomePage,
     LoginPage,
     MobiliarioPage,
-    DetallePage
+    DetallePage,
+    TabsPage
   ],
   providers: [
     StatusBar,

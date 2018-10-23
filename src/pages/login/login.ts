@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpProvider } from '../../providers/http/http';
-import { HomePage } from '../home/home';
+import { TabsPage } from '../tabs/tabs';
 
 
 
@@ -20,7 +20,7 @@ export class LoginPage {
   respuesta:string;
   id:any;
 
-  mobiliarioPage = HomePage;
+  mobiliarioPage = TabsPage;
 
 
 
@@ -76,7 +76,7 @@ export class LoginPage {
         console.log("ID:  "+this.id);
 
         if(this.id != 0){
-          this.navCtrl.push(HomePage, {
+          this.navCtrl.push(TabsPage, {
             data: this.id
           });
         }else{
