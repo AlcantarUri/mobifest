@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
 
 
+
 /*
   Generated class for the HttpProvider provider.
 
@@ -104,6 +105,35 @@ export class HttpProvider {
     }
 
 
+   
+    insertarInventario(todo){
 
+     
+      
+
+      
+
+      
+
+      let datos = { nombre:todo["nombre"],cantidad:todo["cantidad"], costo:todo["costo"],nombre_extra:todo["nombre_extra"], precio_extra:todo["precio_extra"]}
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/AgregarMobiliario.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+
+    }
+
+
+
+  
 
 }

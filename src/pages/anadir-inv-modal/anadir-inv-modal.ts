@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { IonicPage, ViewController, ActionSheetController } from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http';
 
 /**
  * Generated class for the AnadirInvModalPage page.
@@ -18,6 +19,10 @@ import { IonicPage, ViewController, ActionSheetController } from 'ionic-angular'
 export class AnadirInvModalPage {
 
   theWallImageUrl: any=  "../assets/img/ic_card.jpg";
+  nombre_extra_item;
+  precio_extra_item;
+
+ 
   todo = {};
   
 
@@ -26,25 +31,55 @@ export class AnadirInvModalPage {
   photos : any;
 
   constructor(public camera: Camera,
-    public platform: Platform, 
-    public actionSheetCtrl: 
-    ActionSheetController, 
-    private view: ViewController) {
+              public platform: Platform, 
+              public actionSheetCtrl: 
+              ActionSheetController, 
+              private view: ViewController,
+              public http: HttpProvider) {
+
+    this.nombre_extra_item = true;
+    this.precio_extra_item = true;
 
       this.theWallImageUrl = "../assets/img/ic_card.jpg";
   }
 
 
+  tgExtras(){
+    this.nombre_extra_item = !this.nombre_extra_item;
+    this.precio_extra_item = !this.precio_extra_item;
+  }
   cerrarModal(){
     this.view.dismiss();
   }
 
   ionViewDidLoad() {
+   
     console.log('ionViewDidLoad AnadirInvModalPage');
   }
 
   logForm() {
-    console.log(this.todo)
+    console.log(this.todo);
+
+
+    this.http.insertarInventario(this.todo).then(
+      (res) => { 
+        console.log(res["registro"]);
+
+        if(res["registro"] == "registrado"){
+          alert("Registro Existoso");
+          this.view.dismiss();
+        }else if(res["registro"] == "noregistrado"){
+          alert("No Registrado Asegurate de Cntar con Internet");
+        }
+      },
+      (error) =>{
+        console.error(error);
+        alert("No Registrado Asegurate de Cntar con Internet"+error);
+      }
+    )
+    
+
+
   }
 
   openeditprofile() {

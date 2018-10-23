@@ -19,6 +19,7 @@ export class LoginPage {
   public recuerda: boolean;
   respuesta:string;
   id:any;
+ 
 
   mobiliarioPage = TabsPage;
 
@@ -29,7 +30,8 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public http: HttpProvider, public storage: Storage) {
 
-    this.recuerda = false;
+    
+    
     
     
     this.storage.get('USU').then((usu) =>{
@@ -41,6 +43,9 @@ export class LoginPage {
       console.log(pass);
       this.contra = pass;
     });
+
+    
+    
 
     
   }
