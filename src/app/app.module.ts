@@ -16,6 +16,8 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { Camera } from '@ionic-native/camera';
+import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { HttpModule } from '@angular/http';
     IonicModule.forRoot(MyApp),
     HttpModule,
     HttpClientModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    SelectSearchableModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -48,7 +51,10 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    IonicStorageModule
+    Camera,
+    IonicStorageModule,
+    SelectSearchableModule
+    
   ]
 })
 export class AppModule {}

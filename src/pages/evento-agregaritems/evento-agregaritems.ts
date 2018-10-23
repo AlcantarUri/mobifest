@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
+import { SelectSearchableComponent } from 'ionic-select-searchable';
+
 
 
 
@@ -25,19 +27,30 @@ export class EventoAgregaritemsPage {
   inventario: any;
   
   totalnombres:string[];
-  nombres:string[];
+  public nombres:string[];
 
   tap: number = 0;
+
+  items:any;
+  
+
+
+
 
   root_url : string = "http://avisositd.xyz/mobiliaria/ListaMobiliario.php";
   mobiliarios =[];
   compl: string[];
   moviles:any;
   
+  queryText : string;
 
   searchbar
   searchQuery: string = '';
-  items: string[];
+  
+
+@ViewChild('myselect') selectComponent:SelectSearchableComponent;
+user=null;
+userId = [];
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
@@ -46,28 +59,30 @@ export class EventoAgregaritemsPage {
     public toastCtrl: ToastController,
     public events: Events
     ) {
-      //this.id = navParams.get('data');
+    
       this.getMessages();
-    //alert("pagina Mobiliario"+this.id);
+    
 
- 
+    
     this.initializeItems();
    
   }
 
   initializeItems() {
     
-    this.items = this.nombres;
-    this.mobiliarios = this.inventario;
+    //this.mobiliarios = this.inventario;
+    this.items=this.inventario;
+    this.inventario=this.moviles;
     
-  
    }
+
+   
 
    getMessages(){
      
     this.http.revisarBase().then(
       (inv) => { 
-        console.log(inv)     
+        //console.log(inv)     
         
 
        this.inventario = inv["inventario"];
@@ -76,14 +91,14 @@ export class EventoAgregaritemsPage {
        this.moviles = inv["inventario"];
 
 
-       for (var i = 0; i < this.moviles.length; i++) {
-       // console.log(json[i].nombre_mob);
-       this.mobiliarios = this.moviles[i].nombre_mob;
-       this.mobiliarios = this.moviles[i].cantidad_mob;
-       this.mobiliarios = this.moviles[i].costo_mob;
-       }
+       
+
+       //this.nombres = JSON.parse(JSON.stringify(this.moviles));
+
+      
 
        this.items = this.mobiliarios;
+       console.log(this.inventario);
 
        //console.log("Resultado:    "+JSON.stringify(json));   
          
@@ -98,18 +113,11 @@ export class EventoAgregaritemsPage {
    }
 
 
-   agregaruno(){
+   
 
-    this.tap++;
+  
 
 
-   }
-   restaruno(){
-
-    this.tap--;
-    
-
-  }
  
    getItems(ev: any) {
      // Reset items back to all of the items
@@ -120,8 +128,8 @@ export class EventoAgregaritemsPage {
  
      // if the value is an empty string don't filter the items
      if (val && val.trim() != '') {
-       this.items = this.items.filter((item) => {
-         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
+       this.inventario = this.inventario.filter((item) => {
+         return (item.nombre_mob.toLowerCase().indexOf(val.toLowerCase()) > -1);
        })
      }
    }
