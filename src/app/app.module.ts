@@ -49,8 +49,9 @@ import { Camera } from '@ionic-native/camera';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    IonicStorageModule,
-    Camera
+    Camera,
+    IonicStorageModule
+    
   ]
 })
 export class AppModule {}

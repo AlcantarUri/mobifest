@@ -17,7 +17,7 @@ import { IonicPage, ViewController, ActionSheetController } from 'ionic-angular'
 })
 export class AnadirInvModalPage {
 
-  theWallImageUrl: any;
+  theWallImageUrl: any=  "../assets/img/ic_card.jpg";
   todo = {};
   
 
