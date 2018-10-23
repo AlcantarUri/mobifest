@@ -29,10 +29,32 @@
               <ion-input type="text" [(ngModel)]="todo.nombre" name="nombre"></ion-input>
             </ion-item>
           <ion-item>
-            <ion-label>Description</ion-label>
-            <ion-textarea [(ngModel)]="todo.description" name="description"></ion-textarea>
+            <ion-label color="primary" floating>Cantidad</ion-label>
+            <ion-input type="number" [(ngModel)]="todo.cantidad" name="cantidad"></ion-input>
           </ion-item>
-          <button ion-button type="submit" block>Add Todo</button>
+          <ion-item>
+              <ion-label color="primary" floating>Costo del Articulo</ion-label>
+              <ion-input type="number" [(ngModel)]="todo.costo" name="costo"></ion-input>
+            </ion-item>
+
+          <ion-item class="item2">
+              <ion-label class="extras">Extras</ion-label>
+              <ion-toggle (change)="tgExtras()"></ion-toggle>
+            </ion-item>
+
+
+            <ion-item [hidden]= "nombre_extra_item">
+                <ion-label color="primary">Nombre del Extra</ion-label>
+                <ion-input placeholder="Sombrilla de Silla" type="text" [(ngModel)]="todo.nombre_extra" name="nombre_extra"></ion-input>
+              </ion-item>
+
+
+            <ion-item [hidden]= "precio_extra_item">
+                <ion-label color="primary">Precio del Extra</ion-label>
+                <ion-input placeholder="100" type="number" [(ngModel)]="todo.precio_extra" name="precio_extra"></ion-input>
+            </ion-item>
+          
+          <button ion-button type="submit" block>Añadir al Inventario</button>
         </form>
 
       
