@@ -23,6 +23,7 @@ export class MobiliarioPage {
   total:string[];
   totalnombres:string[];
   nombres:string[];
+  json: any;
 
 
   
@@ -37,8 +38,7 @@ export class MobiliarioPage {
     this.id = navParams.get('data');
     //alert("pagina Mobiliario"+this.id);
 
-    this.traerNombres();
-   // this.traerDatos();
+//    this.traerNombres();
     this.initializeItems();
     this.traerDatos();
   }
@@ -64,7 +64,7 @@ export class MobiliarioPage {
 
   
 
-  traerNombres(){
+ /* traerNombres(){
     
     this.http.sacarNombresMobiliarioBase().then(
       (nomb) => { 
@@ -82,7 +82,7 @@ export class MobiliarioPage {
       }
     );
     
-  }
+  }*/
 
  traerDatos(){
 
@@ -92,20 +92,19 @@ export class MobiliarioPage {
         
 
        this.inventario = inv["inventario"];
-       this.compl = this.inventario;
+       
       
-       var json = inv["inventario"];
+       this.json = inv["inventario"];
 
 
-       for (var i = 0; i < json.length; i++) {
+       for (var i = 0; i < this.json.length; i++) {
        // console.log(json[i].nombre_mob);
-       this.compl = json[i].nombre_mob;
+       this.compl = this.json[i].nombre_mob;
        }
 
-      
 
-      
 
+       this.items = this.compl;
   
 
        //console.log("Resultado:    "+JSON.stringify(json));   
@@ -134,15 +133,6 @@ export class MobiliarioPage {
       this.items = this.items.filter((item) => {
         return (item.toLowerCase().indexOf(val.toLowerCase()) > -1);
       });
-
-      
-    }
-
-    if (val && val.trim() != '') {
-      this.compl= this.compl.filter((item) => {
-        return (item.toString().toLowerCase().indexOf(val.toLowerCase()) > -1);
-      });
-
       
     }
 
