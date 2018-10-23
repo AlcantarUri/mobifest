@@ -16,6 +16,7 @@ import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { Camera } from '@ionic-native/camera';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { HttpModule } from '@angular/http';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
-    IonicStorageModule
+    IonicStorageModule,
+    Camera
   ]
 })
 export class AppModule {}
