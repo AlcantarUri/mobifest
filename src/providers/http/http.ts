@@ -26,25 +26,11 @@ export class HttpProvider {
   }
   getAll(): Observable<any>  {
     return this.http.get(this.url);
-    //.map(res=>res.json());
-  }
-/*
-private catchError(error: Response | any){
-    console.log(error);
-    return Observable.throw(error || "Error de Servidor");
+    //.map(res=>res.json())
   }
 
-  private logResponse(res: Response){
-    console.log(res);
-  }
+  
 
-  private extractData(res: Response){
-    return res.json();
-
-  }
-
-
-*/
 
 ///////////////////////////Troca////////////////////////////////77
 

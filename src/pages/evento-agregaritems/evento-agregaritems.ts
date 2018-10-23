@@ -21,12 +21,13 @@ export class EventoAgregaritemsPage {
 
   id: string;
   inventario: any;
-  total:any;
+  
   totalnombres:string[];
   nombres:string[];
 
   root_url : string = "http://avisositd.xyz/mobiliaria/ListaMobiliario.php";
-  mobiliarios =[] ;
+  mobiliarios =[];
+  compl: string[];
   moviles:any;
   
 
@@ -59,14 +60,39 @@ export class EventoAgregaritemsPage {
 
    getMessages(){
      
-     var json; 
-     this.http.getAll().subscribe(data => {  json = data; });
+    this.http.revisarBase().then(
+      (inv) => { 
+        console.log(inv)     
+        
 
-     this.moviles= [];
-     for (var i of json.data) {
-      this.moviles.push(i.quantity_produced);
+       this.inventario = inv["inventario"];
+       this.mobiliarios = this.inventario;
+      
+       var json = inv["inventario"];
+
+
+       for (var i = 0; i < json.length; i++) {
+       // console.log(json[i].nombre_mob);
+       this.mobiliarios = json[i].nombre_mob;
        }
-       console.log(this.moviles);
+
+      
+
+      
+
+  
+
+       //console.log("Resultado:    "+JSON.stringify(json));   
+       
+               
+          
+         
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
 
 
    }
