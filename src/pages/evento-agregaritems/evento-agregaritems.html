@@ -21,28 +21,33 @@
 
 <ion-content>
 
-    <ion-card *ngFor="let movil of mobiliarios">
+    <ion-card *ngFor="let movil of inventario">
        
-       <!-- <img [src]=""/> -->
+       <!--<img [src]=""/> -->
       
     <ion-card-content>
       <ion-card-title>
           {{movil.nombre_mob}}
         </ion-card-title>
       <p>
-          Silla Deco
+        Cantidad en el Inventario: {{movil.cantidad_mob}}
+      </p>
+      <p>
+        Costo: {{movil.costo_mob}}
       </p>
     </ion-card-content>
 
     <ion-item>
         <ion-segment [(ngModel)]="relationship" color="primary">
-            <ion-segment-button value="friends" (ionSelect)="selectedFriends()">
+            <button ion-button  block value="restar" (ionSelect)="restaruno()">
               -
-            </ion-segment-button>
-            <ion-badge item-end>260k</ion-badge>
-            <ion-segment-button value="enemies" (ionSelect)="selectedEnemies()">
+            </button>
+            <ion-item (tap)="tapEvent($event)">
+            <ion-badge item-end> {{tap}} </ion-badge>
+          </ion-item>
+            <button ion-button block value="agregar" (ionSelect)="agregaruno()">
               +
-            </ion-segment-button>
+            </button>
           </ion-segment>
         
     </ion-item>
@@ -51,5 +56,6 @@
 
         
     </ion-card>
+  -->
 
 </ion-content>

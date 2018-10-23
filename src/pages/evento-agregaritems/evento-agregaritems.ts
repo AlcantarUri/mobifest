@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import 'rxjs/add/operator/map';
+import { Events } from 'ionic-angular';
+
 
 
 /**
@@ -25,13 +27,15 @@ export class EventoAgregaritemsPage {
   totalnombres:string[];
   nombres:string[];
 
+  tap: number = 0;
+
   root_url : string = "http://avisositd.xyz/mobiliaria/ListaMobiliario.php";
   mobiliarios =[];
   compl: string[];
   moviles:any;
   
 
-  //searchbar
+  searchbar
   searchQuery: string = '';
   items: string[];
 
@@ -39,23 +43,24 @@ export class EventoAgregaritemsPage {
     public navParams: NavParams,
     private http: HttpProvider,
     public alertCtrl: AlertController,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public events: Events
     ) {
       //this.id = navParams.get('data');
       this.getMessages();
     //alert("pagina Mobiliario"+this.id);
 
-    //this.traerNombres();
-    //this.traerDatos();
+ 
     this.initializeItems();
    
   }
 
   initializeItems() {
-
-    this.items = this.nombres;
     
-   
+    this.items = this.nombres;
+    this.mobiliarios = this.inventario;
+    
+  
    }
 
    getMessages(){
@@ -66,26 +71,21 @@ export class EventoAgregaritemsPage {
         
 
        this.inventario = inv["inventario"];
-       this.mobiliarios = this.inventario;
+       //this.mobiliarios = this.inventario;
       
-       var json = inv["inventario"];
+       this.moviles = inv["inventario"];
 
 
-       for (var i = 0; i < json.length; i++) {
+       for (var i = 0; i < this.moviles.length; i++) {
        // console.log(json[i].nombre_mob);
-       this.mobiliarios = json[i].nombre_mob;
+       this.mobiliarios = this.moviles[i].nombre_mob;
+       this.mobiliarios = this.moviles[i].cantidad_mob;
+       this.mobiliarios = this.moviles[i].costo_mob;
        }
 
-      
-
-      
-
-  
+       this.items = this.mobiliarios;
 
        //console.log("Resultado:    "+JSON.stringify(json));   
-       
-               
-          
          
       },
       (error) =>{
@@ -97,93 +97,19 @@ export class EventoAgregaritemsPage {
 
    }
 
-/*
-this.http.sacarDetalles(nombre).then(
-      (data) => { 
-        console.log(data)  
 
-        this.detainv = data["detalle"];
+   agregaruno(){
 
-        console.log("Resultado"+JSON.stringify(this.detainv));
-
-        let nombre = this.detainv["nombre_mob"];
-
-        console.log(nombre);
+    this.tap++;
 
 
-
-      },
-      (error) =>{
-        console.log("Error"+JSON.stringify(error));
-        alert("Verifica que cuentes con internet");
-      }
-    );
-
-traerNombres(){
-    
-  this.http.revisarBase().then(
-    (nomb) => { 
-      console.log(nomb);
-
-      this.mobiliarios = nomb["inventario"];
-      console.log(this.mobiliarios);
-    
-    },(error)=>{
-
-    }
-    );
-    
-  
-}
-
- /*
-   traerNombres(){
-     
-     this.http.sacarNombresMobiliarioBase().then(
-       (nomb) => { 
-         console.log(nomb)  
- 
-         this.nombres = nomb["nombres"];
-         this.items = this.nombres;
-
-         //console.log("Resultado  "+this.nombres);
- 
-          
-       },
-       (error) =>{
-         console.log("Error"+JSON.stringify(error));
-         alert("Verifica que cuentes con internet");
-       }
-     );
-     
    }
- 
-   /*traerDatos(){
- 
-     this.http.revisarBase().then(
-       (inv) => { 
-         console.log(inv)  
- 
- 
-         this.inventario = inv["inventario"];
- 
-         this.items = this.inventario["nombre_mob"];
-         this.total = inv;
- 
-         
-         
-        // console.log("Resultado"+result);
-                
-           
-          
-       },
-       (error) =>{
-         console.log("Error"+JSON.stringify(error));
-         alert("Verifica que cuentes con internet");
-       }
-     );
- 
-   }*/
+   restaruno(){
+
+    this.tap--;
+    
+
+  }
  
    getItems(ev: any) {
      // Reset items back to all of the items
