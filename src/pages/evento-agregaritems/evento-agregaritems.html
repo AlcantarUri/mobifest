@@ -9,7 +9,7 @@
   <ion-navbar color="primary">
     <ion-title>Selección</ion-title>
     <ion-toolbar>
-        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+        <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
     </ion-toolbar>
   </ion-navbar>
 
@@ -21,9 +21,11 @@
 
 <ion-content>
 
+
+  
     <ion-card *ngFor="let movil of inventario">
        
-       <!--<img [src]=""/> -->
+       <img [src]=""/> 
       
     <ion-card-content>
       <ion-card-title>
@@ -37,25 +39,32 @@
       </p>
     </ion-card-content>
 
+    <!--
     <ion-item>
         <ion-segment [(ngModel)]="relationship" color="primary">
-            <button ion-button  block value="restar" (ionSelect)="restaruno()">
+            <button ion-button  color="secondary" value="restaruno" (ionSelect)="restaruno()">
               -
             </button>
             <ion-item (tap)="tapEvent($event)">
             <ion-badge item-end> {{tap}} </ion-badge>
           </ion-item>
-            <button ion-button block value="agregar" (ionSelect)="agregaruno()">
+            <button ion-button color="secondary" value="agregaruno" (ionSelect)="agregaruno()">
               +
             </button>
           </ion-segment>
         
     </ion-item>
-        
+        -->
         
 
         
     </ion-card>
-  -->
+  
 
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-title>Continuar</ion-title>
+  </ion-toolbar>
+</ion-footer>
