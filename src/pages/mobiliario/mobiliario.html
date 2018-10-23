@@ -25,7 +25,7 @@
  
       <ion-list class="mobList-class" *ngFor="let item of inventario">
           <ion-item (click)="openModal(item.nombre_mob)">
-            <h2>{{item.nombre_mob}}</h2>
+            <h2 class="h1Nomb">{{item.nombre_mob}}</h2>
             <p>{{item.cantidad_mob}} Piezas </p>
             <p> ${{item.costo_mob}} c/u</p>
             

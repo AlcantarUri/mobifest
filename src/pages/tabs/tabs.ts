@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, Tabs } from 'ionic-angular';
 
 import { HomePage } from '../home/home';
 import { MobiliarioPage } from '../mobiliario/mobiliario';
+import { ConfiguracionPage } from '../configuracion/configuracion';
 
 
 
@@ -15,6 +16,7 @@ export class TabsPage {
 
   calendario = HomePage;
   inventario = MobiliarioPage;
+  configuracion = ConfiguracionPage;
 
   @ViewChild('myTabs') tabsRef: Tabs;
 
