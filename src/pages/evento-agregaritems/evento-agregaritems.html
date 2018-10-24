@@ -23,9 +23,9 @@
 
 
   
-    <ion-card *ngFor="let movil of inventario">
+    <ion-card (click)="presentAlert()" *ngFor="let movil of inventario">
        
-       <img [src]=""/> 
+       
       
     <ion-card-content>
       <ion-card-title>
@@ -63,8 +63,11 @@
 
 </ion-content>
 
-<ion-footer>
+<ion-footer no-border>
+
   <ion-toolbar>
-    <ion-title>Continuar</ion-title>
+    
+    <button ion-button full (click)="continuarCotizacion()">Aceptar</button>
   </ion-toolbar>
+
 </ion-footer>

@@ -82,9 +82,5 @@
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
     <plugin name="cordova-plugin-ionic-webview" spec="^2.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
-<<<<<<< HEAD
-    <plugin name="cordova-plugin-camera" spec="4.0.3" />
-=======
     <plugin name="cordova-plugin-camera" spec="^4.0.3" />
->>>>>>> 76612076fe711da093c3f172fd59ae4c932b26e3
 </widget>

@@ -17,7 +17,6 @@ import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Camera } from '@ionic-native/camera';
-import { SelectSearchableModule } from 'ionic-select-searchable';
 
 @NgModule({
   declarations: [
@@ -34,8 +33,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     IonicModule.forRoot(MyApp),
     HttpModule,
     HttpClientModule,
-    IonicStorageModule.forRoot(),
-    SelectSearchableModule
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -52,8 +50,7 @@ import { SelectSearchableModule } from 'ionic-select-searchable';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
     Camera,
-    IonicStorageModule,
-    SelectSearchableModule
+    IonicStorageModule
     
   ]
 })
