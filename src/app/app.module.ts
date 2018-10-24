@@ -18,10 +18,6 @@ import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Camera } from '@ionic-native/camera';
-<<<<<<< HEAD
-=======
-
->>>>>>> 578c067f1a3e3809c86b09fe6d77ee4c7414c480
 
 @NgModule({
   declarations: [
