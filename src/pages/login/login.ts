@@ -19,6 +19,7 @@ export class LoginPage {
   public recuerda: boolean;
   respuesta:string;
   id:any;
+  guard:any;
  
 
   mobiliarioPage = TabsPage;
@@ -35,20 +36,40 @@ export class LoginPage {
     
     
     this.storage.get('USU').then((usu) =>{
-      console.log(usu);
+      console.log("Usuario"+usu);
       this.usuario = usu;
     });
 
     this.storage.get('PASS').then((pass) =>{
-      console.log(pass);
+      console.log("Contrasena"+pass);
       this.contra = pass;
     });
 
+    this.storage.get('NUM').then((num) =>{
+      console.log(num);
+
+      var guardado = num;
+
+    if(guardado != 0){
+      this.inicioSesion(this.usuario,this.contra);
+    }
     
+     
+    });
+
+   
     
 
     
   }
+
+  ionViewDidLoad() {
+    
+
+  }
+
+
+  
 
   public notify() {
     console.log("Recuerdame es: "+ this.recuerda);
@@ -62,6 +83,7 @@ export class LoginPage {
     if(this.recuerda == true){
       this.storage.set('USU',this.usuario);
       this.storage.set('PASS',this.contra);
+      this.storage.set('NUM', 1);
       console.log("Guardaste"+this.usuario+this.contra);
     }else{
       console.log("No vas a guardar DATOS");
@@ -98,6 +120,38 @@ export class LoginPage {
     );
 
    // alert("Usuario:"+this.usuario+"       Contraseña:"+this.contra);
+}
+
+inicioSesion(usuario:string, contra:string){
+
+ // console.log(usuario+contra);
+  this.http.loginApp(usuario,contra).then(
+    (data) => { 
+      console.log(data)  
+
+
+      var result = data["Usuario"];
+      this.id = result["id_usuario"];
+
+      //console.log("Result"+result);
+      console.log("ID:  "+this.id);
+
+      if(this.id != 0){
+        this.navCtrl.push(TabsPage, {
+          data: this.id
+        });
+      }else{
+        alert("Los Datos no Coinciden")
+      }
+             
+        
+       
+    },
+    (error) =>{
+      console.log("Error"+JSON.stringify(error));
+      alert("Verifica que cuentes con internet");
+    }
+  );
 }
 
 
