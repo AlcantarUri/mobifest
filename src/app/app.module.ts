@@ -11,12 +11,17 @@ import { LoginPage } from '../pages/login/login';
 import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
 import { DetallePage } from '../pages/detalle/detalle';
 import { TabsPage } from '../pages/tabs/tabs';
+import { ConfiguracionPage } from '../pages/configuracion/configuracion';
 
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Camera } from '@ionic-native/camera';
+<<<<<<< HEAD
+=======
+
+>>>>>>> 578c067f1a3e3809c86b09fe6d77ee4c7414c480
 
 @NgModule({
   declarations: [
@@ -25,7 +30,8 @@ import { Camera } from '@ionic-native/camera';
     LoginPage,
     MobiliarioPage,
     DetallePage,
-    TabsPage
+    TabsPage,
+    ConfiguracionPage
   ],
   imports: [
     NgCalendarModule,
@@ -42,7 +48,8 @@ import { Camera } from '@ionic-native/camera';
     LoginPage,
     MobiliarioPage,
     DetallePage,
-    TabsPage
+    TabsPage,
+    ConfiguracionPage
   ],
   providers: [
     StatusBar,
