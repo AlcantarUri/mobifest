@@ -101,7 +101,7 @@ private catchError(error: Response | any){
  
    sacarDetalles(nombre_mob:string){
  
-      console.log("llega al http");
+      //console.log("llega al http");
      
      var url = 'http://avisositd.xyz/mobiliaria/detalles.php?nombre_mob='+nombre_mob;
      return new Promise((resolve, reject) => {

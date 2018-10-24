@@ -36,7 +36,7 @@ export class DetallePage {
     }
  
 
-    console.log(this.nombre);
+   // console.log(this.nombre);
 
     this.detalle(this.nombre);
 
