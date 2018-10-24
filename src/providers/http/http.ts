@@ -108,14 +108,26 @@ export class HttpProvider {
    
     insertarInventario(todo){
 
-     
-      
-
-      
-
-      
-
       let datos = { nombre:todo["nombre"],cantidad:todo["cantidad"], costo:todo["costo"],nombre_extra:todo["nombre_extra"], precio_extra:todo["precio_extra"]}
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/AgregarMobiliario.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+
+    }
+
+    modificarInventario(id:string, nombre:string, cantidad:string, costo:string,nombre_exta:string, extra_costo:string){
+
+      let datos = { id:id, nombre:nombre, cantidad:cantidad, costo:costo, nombre_extra:nombre_exta, precio_extra:extra_costo}
   
        let options = {
          headers: {

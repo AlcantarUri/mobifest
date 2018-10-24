@@ -1,0 +1,59 @@
+<!--
+  Generated template for the EditarInventarioPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>Editar Inventario</ion-title>
+      <ion-buttons end>
+        <button ion-button (click)="cerrarModal()">Cerrar</button>
+      </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+    <div class="container">
+        <img [src]="theWallImageUrl" alt="Snow">
+        <button ion-button (click)="openeditprofile()" class="btn">Cambiar la Imagen<ion-icon class="icon" name="camera"></ion-icon></button>
+      </div>
+
+      <form class="formEnv" (ngSubmit)="logForm()">
+          <ion-item>
+              <ion-label color="primary" floating>Nombre</ion-label>
+              <ion-input type="text" [(ngModel)]="nombre_mob" name="nombre"></ion-input>
+            </ion-item>
+          <ion-item>
+            <ion-label color="primary" floating>Cantidad</ion-label>
+            <ion-input type="number" [(ngModel)]="cantidad_mob" name="cantidad"></ion-input>
+          </ion-item>
+          <ion-item>
+              <ion-label color="primary" floating>Costo del Articulo</ion-label>
+              <ion-input type="number" [(ngModel)]="costo_mob" name="costo"></ion-input>
+            </ion-item>
+
+        
+
+
+            <ion-item class="itemTop">
+                <ion-label color="primary">Nombre del Extra</ion-label>
+                <ion-input placeholder="Sombrilla de Silla" type="text" [(ngModel)]="extra_mob" name="nombre_extra"></ion-input>
+              </ion-item>
+
+
+            <ion-item >
+                <ion-label color="primary">Precio del Extra</ion-label>
+                <ion-input placeholder="100" type="number" [(ngModel)]="extra_costo_mob" name="precio_extra"></ion-input>
+            </ion-item>
+          
+          <button ion-button type="submit" block>Aceptar Edicion</button>
+        </form>
+
+      
+
+</ion-content>

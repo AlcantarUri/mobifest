@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 import { HttpProvider } from '../../providers/http/http';
 import { TabsPage } from '../tabs/tabs';
+import { LoadingController } from 'ionic-angular';
 
 
 
@@ -29,7 +30,7 @@ export class LoginPage {
   /////Prueba Json
   public items:any;
 
-  constructor(public navCtrl: NavController, public http: HttpProvider, public storage: Storage) {
+  constructor(public navCtrl: NavController, public loadingCtrl:LoadingController, public http: HttpProvider, public storage: Storage) {
 
     
     
@@ -78,6 +79,14 @@ export class LoginPage {
 
 
   someFunction(event: Event) {
+
+   
+  let loading = this.loadingCtrl.create({
+    content: 'Iniciando Sesion...'
+  });
+
+  loading.present();
+
     event.stopPropagation();
 
     if(this.recuerda == true){
@@ -103,11 +112,13 @@ export class LoginPage {
         console.log("ID:  "+this.id);
 
         if(this.id != 0){
+          loading.dismiss();
           this.navCtrl.push(TabsPage, {
             data: this.id
           });
         }else{
           alert("Los Datos no Coinciden")
+          loading.dismiss();
         }
                
           
@@ -123,6 +134,10 @@ export class LoginPage {
 }
 
 inicioSesion(usuario:string, contra:string){
+  let loading = this.loadingCtrl.create({
+    content: 'Iniciando Sesion...'
+  });
+  loading.present();
 
  // console.log(usuario+contra);
   this.http.loginApp(usuario,contra).then(
@@ -137,11 +152,13 @@ inicioSesion(usuario:string, contra:string){
       console.log("ID:  "+this.id);
 
       if(this.id != 0){
+        loading.dismiss();
         this.navCtrl.push(TabsPage, {
           data: this.id
         });
       }else{
-        alert("Los Datos no Coinciden")
+        alert("Los Datos no Coinciden");
+        loading.dismiss();
       }
              
         

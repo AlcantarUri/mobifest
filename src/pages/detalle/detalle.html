@@ -8,6 +8,9 @@
 
   <ion-navbar>
     <ion-title>Detalle</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="EditarItem()">Editar</button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -22,10 +25,10 @@
     
       <ion-card >
           <ion-card-header>
-            Total: {{det.cantidad_mob}}
+            <h1 align="left">En el Inventario: {{det.cantidad_mob}}</h1>
           </ion-card-header>
           <ion-card-content>
-            <div>Costo:  ${{det.costo_mob}}</div>
+            <div align="left">Costo:  ${{det.costo_mob}}</div>
             <ion-item>
                 <ion-range disabled min="0" max="det.cantidad_mob" [(ngModel)]="det.cantidad_mob" color="secondary">
                     <ion-label range-left>0</ion-label>
@@ -33,13 +36,16 @@
                 </ion-range>
                
               </ion-item>
-              <p>Disponibles : {{det.cantidad_mob}}</p>
+              <p align="left">Disponibles : {{det.cantidad_mob}}</p>
+              <ion-item>
+                <p align="left">Extras: {{det.extra_mob}}</p>
+              </ion-item>
+              <ion-item>
+                <p align="left">Costo Extra: {{det.extra_mob_costo}}</p>
+              </ion-item>
           </ion-card-content>
         </ion-card>
   </ion-list>
 
-  <button class="btnEdit" ion-button icon-start full>
-      <ion-icon class="iconEdit" name="hammer"></ion-icon>
-    Editar</button>
-
+  
 </ion-content>

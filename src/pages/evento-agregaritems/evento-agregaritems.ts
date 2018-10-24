@@ -48,12 +48,8 @@ export class EventoAgregaritemsPage {
   searchQuery: string = '';
   
 
-<<<<<<< HEAD
-
-=======
 user=null;
 userId = [];
->>>>>>> 578c067f1a3e3809c86b09fe6d77ee4c7414c480
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
