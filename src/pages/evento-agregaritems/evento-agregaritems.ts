@@ -1,15 +1,21 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
+import { HomePage} from '../home/home';
+import { EventModalPage } from '../event-modal/event-modal';
+import * as moment from 'moment';
+
+
+
 
 
 
 
 
 /**
- * Generated class for the EventoAgregaritemsPage page.
+ * Generated class for the EventoAregaritemsPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.../
@@ -20,6 +26,8 @@ import { Events } from 'ionic-angular';
   selector: 'page-evento-agregaritems',
   templateUrl: 'evento-agregaritems.html',
 })
+
+
 export class EventoAgregaritemsPage {
 
 
@@ -32,6 +40,8 @@ export class EventoAgregaritemsPage {
   tap: number = 0;
 
   items:any;
+  
+  
   
 
 
@@ -48,22 +58,32 @@ export class EventoAgregaritemsPage {
   searchQuery: string = '';
   
 
-<<<<<<< HEAD
-
-=======
 user=null;
 userId = [];
->>>>>>> 578c067f1a3e3809c86b09fe6d77ee4c7414c480
+
+
+//para el total
+public total:number=0;
+arreglodeobjetos = [];
+
 
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: HttpProvider,
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
-    public events: Events
-    ) {
+    public events: Events,
+    public modalCtrl: ModalController
+    ) {    
+
+      //para pasar al final de la cotizacion
+      let preselectedDate = moment(this.navParams.get('selectedDay')).format();
+
+      //carga el metodo que trae los items de la abse de datos y lo guarda
+      //en el array inventario []
     
       this.getMessages();
+
     
 
     
@@ -79,18 +99,127 @@ userId = [];
     
    }
 
-   continuarCotizacion(){
+   continuarCotizacion(arreglochido: any){
 
+    //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
+
+    let alert = this.alertCtrl.create({
+      title: 'Confirmar Cotización',
+      message: 'El costo total seria de: '+ this.total,
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Continuar',
+          handler: () => {
+            console.log('Buy clicked');
+          }
+        }
+      ]
+    });
+    alert.present();
 
    }
 
-   presentAlert() {
-  let alert = this.alertCtrl.create({
-    title: 'Low battery',
-    subTitle: '10% of battery remaining',
-    buttons: ['Dismiss']
-  });
-  alert.present();
+
+   regresarpaatras(){
+
+     this.navCtrl.setRoot(HomePage);
+   }
+
+/*
+   abrirSelector(){
+     this.httpcliente.get('http://avisositd.xyz/mobiliaria/ListaMobiliario.php').subscribe(res=>{
+
+      this.selector.show({
+        title: 'Cantidad; ',
+        positiveButtonText: 'Aceptar',
+        negativeButtonText: 'Cancelar',
+        items: [
+          res['inventario']
+        ],
+        displayKey: 'cantidad_mob'
+     }).then(result =>{
+  
+        console.log(result[0]);
+  
+     });
+     
+
+
+
+     });
+    
+   }
+*/
+   presentAlert(nombre: string, cantidad: number, costo: number) {
+
+    
+
+      let alert = this.alertCtrl.create({
+
+        title: 'Selecciona la cantidad',
+        //inputs:[this.inventario.mob]
+        inputs: [
+          {
+            name: 'reservados',
+            placeholder: 'Cantidad',
+            type: 'number',
+            min:"0"
+          }
+          
+         ],
+
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Ok',
+            handler: data => {
+              this.seikoas(data.reservados,costo,nombre);
+              
+              
+            }
+          }
+        ]
+        
+
+        
+        
+      });
+      alert.present();
+
+}
+
+
+
+seikoas(reservados:number, precio: number, nombre: string){
+
+  console.log("dentro del seikoas");
+  console.log(reservados);
+  console.log(precio);
+  console.log(nombre);
+
+    var tot:number;
+    
+    tot=precio*reservados;
+    this.total=tot+this.total;
+
+    this.arreglodeobjetos.push({
+      nombre_mob:nombre, cantidad_mob:reservados, total: tot
+    })
+console.log(this.arreglodeobjetos);
+
 }
 
    getMessages(){

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
+import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
+
 
 @Component({
   selector: 'page-home',
@@ -30,6 +32,7 @@ export class HomePage {
 
     let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.selectedDay});
     modal.present();
+    
 
     modal.onDidDismiss(data=>{
       if (data){

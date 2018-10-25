@@ -12,12 +12,20 @@ import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
 import { DetallePage } from '../pages/detalle/detalle';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
+import { CotizacionrapidaModalPage } from '../pages/cotizacionrapida-modal/cotizacionrapida-modal';
+import { EventModalPage } from '../pages/event-modal/event-modal';
+
 
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { Camera } from '@ionic-native/camera';
+
+
+
+
+
 
 @NgModule({
   declarations: [
@@ -27,7 +35,9 @@ import { Camera } from '@ionic-native/camera';
     MobiliarioPage,
     DetallePage,
     TabsPage,
-    ConfiguracionPage
+    ConfiguracionPage,
+    CotizacionrapidaModalPage,
+    EventModalPage
   ],
   imports: [
     NgCalendarModule,
@@ -36,6 +46,8 @@ import { Camera } from '@ionic-native/camera';
     HttpModule,
     HttpClientModule,
     IonicStorageModule.forRoot()
+    
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,7 +57,9 @@ import { Camera } from '@ionic-native/camera';
     MobiliarioPage,
     DetallePage,
     TabsPage,
-    ConfiguracionPage
+    ConfiguracionPage,
+    CotizacionrapidaModalPage,
+    EventModalPage
   ],
   providers: [
     StatusBar,
@@ -54,7 +68,6 @@ import { Camera } from '@ionic-native/camera';
     HttpProvider,
     Camera,
     IonicStorageModule
-    
   ]
 })
 export class AppModule {}

@@ -4,10 +4,18 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-<ion-header>
 
+<ion-header class="header">
+    
   <ion-navbar color="primary">
-    <ion-title>Selección</ion-title>
+      <div class="spacer" color="primary" style="height: 15px;"></div>  
+    
+      <ion-title>
+          <button ion-button small (click)="regresarpaatras()">
+            Atrás
+          </button>
+      </ion-title>
+      
     <ion-toolbar>
         <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
     </ion-toolbar>
@@ -22,11 +30,13 @@
 <ion-content>
 
 
-  
-    <ion-card (click)="presentAlert()" *ngFor="let movil of inventario">
+
+    
+
+ 
+    <ion-card 
+    (click)="presentAlert(movil.nombre_mob, movil.cantidad_mob, movil.costo_mob)" *ngFor="let movil of inventario">
        
-       
-      
     <ion-card-content>
       <ion-card-title>
           {{movil.nombre_mob}}
@@ -38,35 +48,18 @@
         Costo: {{movil.costo_mob}}
       </p>
     </ion-card-content>
-
-    <!--
-    <ion-item>
-        <ion-segment [(ngModel)]="relationship" color="primary">
-            <button ion-button  color="secondary" value="restaruno" (ionSelect)="restaruno()">
-              -
-            </button>
-            <ion-item (tap)="tapEvent($event)">
-            <ion-badge item-end> {{tap}} </ion-badge>
-          </ion-item>
-            <button ion-button color="secondary" value="agregaruno" (ionSelect)="agregaruno()">
-              +
-            </button>
-          </ion-segment>
-        
-    </ion-item>
-        -->
-        
-
-        
+     
     </ion-card>
   
-
 </ion-content>
 
 <ion-footer no-border>
 
   <ion-toolbar>
-    
+      <ion-item>
+          <ion-label color="primary">Total: </ion-label>
+          <ion-input readonly="true" [value]="total"></ion-input>
+        </ion-item>
     <button ion-button full (click)="continuarCotizacion()">Aceptar</button>
   </ion-toolbar>
 
