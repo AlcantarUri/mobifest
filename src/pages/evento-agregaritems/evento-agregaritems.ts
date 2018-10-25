@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, ToastController, ModalController, ViewController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import 'rxjs/add/operator/map';
 import { Events } from 'ionic-angular';
@@ -72,7 +72,8 @@ arreglodeobjetos = [];
     public alertCtrl: AlertController,
     public toastCtrl: ToastController,
     public events: Events,
-    public modalCtrl: ModalController
+    public modalCtrl: ModalController,
+    public view: ViewController
     ) {    
 
       //para pasar al final de la cotizacion
@@ -98,6 +99,14 @@ arreglodeobjetos = [];
     
    }
 
+
+
+   cerrarModal(){
+
+    this.view.dismiss();
+
+   }
+   
    continuarCotizacion(arreglochido: any){
 
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
