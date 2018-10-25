@@ -147,6 +147,22 @@ export class HttpProvider {
     }
 
 
+    revisarClientes(){
+ 
+      //alert(usuario+contra);
+     
+     var url = 'http://avisositd.xyz/mobiliaria/ListaClientes.php';
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
+
+
 
   
 

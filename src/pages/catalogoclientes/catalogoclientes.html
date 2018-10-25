@@ -7,15 +7,34 @@
 <ion-header>
 
   <ion-navbar color="primary">
+    
     <ion-title>Catalogo de Clientes</ion-title>
     <ion-buttons end>
         <button ion-button (click)="cerrarModal()">Cerrar</button>
       </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+
+
+    <ion-list class="mobList-class" *ngFor="let item of inventario"  >
+        <ion-item (click)="openModal(item.id_cliente)">
+          <h2 class="h1Nomb">{{item.nombre_cliente}}</h2>
+          <p>    Telefono  {{item.telefono_cliente}} </p>
+          <p align="center"> {{item.correo_cliente}}</p>
+          
+        </ion-item>
+      </ion-list>
+
 
 </ion-content>
+
+<ion-footer>
+    <ion-toolbar color="primary">
+        <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    </ion-toolbar>
+</ion-footer>
