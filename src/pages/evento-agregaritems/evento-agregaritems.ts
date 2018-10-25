@@ -61,6 +61,11 @@ export class EventoAgregaritemsPage {
 user=null;
 userId = [];
 
+//para el total
+public total:number=0;
+arreglodeobjetos = [];
+
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: HttpProvider,
