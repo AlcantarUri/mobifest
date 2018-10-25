@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+import { ModalController } from 'ionic-angular';
+
 
 /**
  * Generated class for the DetallePage page.
@@ -17,13 +19,15 @@ import { HttpProvider } from '../../providers/http/http';
 export class DetallePage {
 
   nombre:string;
+ 
   detainv:string[];
  
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpProvider,  public modCtrl:ModalController) {
 
     this.nombre = navParams.get('data');
+   
     console.log(this.nombre);
 
     var i = 0, strLength = this.nombre.length;
@@ -36,7 +40,7 @@ export class DetallePage {
     }
  
 
-   // console.log(this.nombre);
+ //  console.log(this.nombre);
 
     this.detalle(this.nombre);
 
@@ -77,6 +81,12 @@ export class DetallePage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetallePage');
+  }
+
+  EditarItem(){
+    const myAnadir = this.modCtrl.create('EditarInventarioPage', {nombre:this.nombre});
+
+    myAnadir.present();
   }
 
 }
