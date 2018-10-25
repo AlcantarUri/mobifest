@@ -4,6 +4,8 @@ import { Storage } from '@ionic/storage';
 import { HttpProvider } from '../../providers/http/http';
 import { TabsPage } from '../tabs/tabs';
 import { LoadingController } from 'ionic-angular';
+import { ToastController } from 'ionic-angular';
+
 
 
 
@@ -30,7 +32,7 @@ export class LoginPage {
   /////Prueba Json
   public items:any;
 
-  constructor(public navCtrl: NavController, public loadingCtrl:LoadingController, public http: HttpProvider, public storage: Storage) {
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController, public loadingCtrl:LoadingController, public http: HttpProvider, public storage: Storage) {
 
     
     
@@ -58,11 +60,15 @@ export class LoginPage {
      
     });
 
+    
+
    
     
 
     
   }
+
+
 
   ionViewDidLoad() {
     
@@ -117,7 +123,9 @@ export class LoginPage {
             data: this.id
           });
         }else{
-          alert("Los Datos no Coinciden")
+
+          this.presentToast();
+         
           loading.dismiss();
         }
                
@@ -126,12 +134,34 @@ export class LoginPage {
       },
       (error) =>{
         console.log("Error"+JSON.stringify(error));
-        alert("Verifica que cuentes con internet");
+        this.internetToast();
       }
     );
 
    // alert("Usuario:"+this.usuario+"       Contraseña:"+this.contra);
 }
+
+presentToast() {
+  let toast = this.toastCtrl.create({
+    message: 'El Usuario y/o la Contraseña no existen',
+    duration: 3000,
+    position: 'top'
+  });
+
+  toast.present();
+}
+
+
+internetToast() {
+  let toast = this.toastCtrl.create({
+    message: 'Verifica que cuentes con Internet',
+    duration: 3000,
+    position: 'top'
+  });
+
+  toast.present();
+}
+
 
 inicioSesion(usuario:string, contra:string){
   let loading = this.loadingCtrl.create({
@@ -157,7 +187,7 @@ inicioSesion(usuario:string, contra:string){
           data: this.id
         });
       }else{
-        alert("Los Datos no Coinciden");
+        this.presentToast();
         loading.dismiss();
       }
              
@@ -166,7 +196,7 @@ inicioSesion(usuario:string, contra:string){
     },
     (error) =>{
       console.log("Error"+JSON.stringify(error));
-      alert("Verifica que cuentes con internet");
+      this.internetToast();
     }
   );
 }
