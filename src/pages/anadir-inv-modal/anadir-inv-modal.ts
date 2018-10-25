@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import { IonicPage, ViewController, ActionSheetController } from 'ionic-angular';
+import { IonicPage, ViewController, ActionSheetController, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 
 /**
@@ -35,7 +35,8 @@ export class AnadirInvModalPage {
               public actionSheetCtrl: 
               ActionSheetController, 
               private view: ViewController,
-              public http: HttpProvider) {
+              public http: HttpProvider,
+              public toastCtrl: ToastController) {
 
     this.nombre_extra_item = true;
     this.precio_extra_item = true;
@@ -57,6 +58,27 @@ export class AnadirInvModalPage {
     console.log('ionViewDidLoad AnadirInvModalPage');
   }
 
+  internetToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Registro Exitoso',
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.present();
+  }
+
+  verificaToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Verifica tu Conexion a Internet',
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.present();
+  }
+
+
   logForm() {
     console.log(this.todo);
 
@@ -66,15 +88,15 @@ export class AnadirInvModalPage {
         console.log(res["registro"]);
 
         if(res["registro"] == "registrado"){
-          alert("Registro Existoso");
+          this.internetToast();
           this.view.dismiss();
         }else if(res["registro"] == "noregistrado"){
-          alert("No Registrado Asegurate de Cntar con Internet");
+          this.verificaToast();
         }
       },
       (error) =>{
         console.error(error);
-        alert("No Registrado Asegurate de Cntar con Internet"+error);
+        this.verificaToast();
       }
     )
     

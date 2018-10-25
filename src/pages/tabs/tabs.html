@@ -10,5 +10,6 @@
 <ion-tabs  color="primary" #myTabs>
     <ion-tab [root]="calendario" tabTitle="Calendario" tabIcon="calendar"></ion-tab>
     <ion-tab [root]="inventario" tabTitle="Inventario" tabIcon="ios-archive-outline"></ion-tab>
-    <ion-tab [root]="configuracion" tabTitle="Configuracion" tabIcon="ios-settings"></ion-tab>
+    <ion-tab [root]="configuracion" tabTitle="Otros" tabIcon="ios-more"></ion-tab>
+    <ion-tab tabTitle="Cerrar Sesion" (ionSelect)="showConfirm()" tabIcon="md-exit"></ion-tab>
 </ion-tabs>
