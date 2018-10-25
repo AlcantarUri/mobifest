@@ -112,8 +112,7 @@ export class EditarInventarioPage {
   }
 
   logForm() {
-    console.log(this.todo);
-
+    
 
     this.http.modificarInventario(this.id_mob,this.nombre_mob,this.cantidad_mob,this.costo_mob, this.extra_mob, this.extra_costo_mob).then(
       (res) => { 

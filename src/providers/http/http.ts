@@ -129,12 +129,14 @@ export class HttpProvider {
 
       let datos = { id:id, nombre:nombre, cantidad:cantidad, costo:costo, nombre_extra:nombre_exta, precio_extra:extra_costo}
   
+      console.log("Saliente      ");
+      console.log(datos);
        let options = {
          headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
         }
        };
-       var url = 'http://avisositd.xyz/mobiliaria/AgregarMobiliario.php/';
+       var url = 'http://avisositd.xyz/mobiliaria/modificarInventario.php';
         return new Promise(resolve => {
         this.http.post(url,JSON.stringify(datos),options)
           .subscribe(data => {
