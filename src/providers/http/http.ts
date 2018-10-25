@@ -29,9 +29,26 @@ export class HttpProvider {
     return this.http.get(this.url);
     //.map(res=>res.json())
   }
+/*
 
+  ingresarEvent(nombre_evento:string, tipo_evento:string, fecha_evento: Date, fecha_envio_evento: Date, fecha_recoleccion_evento: Date,
+    pagado_evento: boolean, nombre_titular_evento: string, direccion:string){
+
+   
+    
+      return new Promise((resolve,reject)=>{
+        let sql="INSERT INTO res (nombre, descripcion, direccion, costo, score, tipo, ruta_imagen, horario) values(?,?,?,?,?,?,?,?)";
+        this.http.get(sql, [nombre, descripcion, direccion, costo, score, tipo, ruta_imagen, horario]).then((data)=>{
+          resolve(data);
+          //alert("Recinto añadido correctamente");
+        }, (error)=>{
+          alert("Contacte al adminsitrador");
+          reject(error);
+        });
+      });
+   }
   
-
+*/
 
 ///////////////////////////Troca////////////////////////////////77
 
