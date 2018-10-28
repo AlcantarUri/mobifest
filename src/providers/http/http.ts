@@ -179,8 +179,45 @@ export class HttpProvider {
      });
     }
 
+    eliminarCliente(id:string){
 
+      var url = 'http://avisositd.xyz/mobiliaria/eliminarCliente.php?id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
 
-  
+     anadirCliente(nombre:string,telefono:string,correo:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/agregarCliente.php?nombre='+nombre+'&telefono='+telefono+'&correo='+correo;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
+
+     editarCliente(nombre:string,telefono:string,correo:string, id:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/editarCliente.php?nombre='+nombre+'&telefono='+telefono+'&correo='+correo+'&id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
 
 }

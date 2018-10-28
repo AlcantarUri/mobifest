@@ -22,13 +22,25 @@
 
 
     <ion-list class="mobList-class" *ngFor="let item of inventario"  >
-        <ion-item (click)="openModal(item.id_cliente)">
+        <ion-item-sliding #slidingItem>  
+        <ion-item>
           <h2 class="h1Nomb">{{item.nombre_cliente}}</h2>
           <p>    Telefono  {{item.telefono_cliente}} </p>
           <p align="center"> {{item.correo_cliente}}</p>
+
           
         </ion-item>
+        <ion-item-options>
+            <button ion-button (click)="abrirEditar(item.nombre_cliente, item.telefono_cliente, item.correo_cliente, item.id_cliente, slidingItem)">Editar</button>
+            <button ion-button (click)="abrirEliminar(item.id_cliente, slidingItem)" color="danger">Eliminar</button>
+          </ion-item-options>
+        </ion-item-sliding>
       </ion-list>
+
+      <ion-fab bottom right>
+          <button ion-fab (click)="presentPrompt()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+     
 
 
 </ion-content>
