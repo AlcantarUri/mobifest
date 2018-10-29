@@ -30,13 +30,13 @@
 
     <ion-list>
       <ion-item>
-        <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombreEvento" [(ngModel)]="event.title"></ion-input>
+        <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombre_evento" [(ngModel)]="event.title"></ion-input>
       </ion-item>
   
      
       <ion-item>
           <ion-label>Tipo de Evento</ion-label>
-          <ion-select [(ngModel)]="tipodePeda">
+          <ion-select [(ngModel)]="tipo_evento">
             <ion-option value="boda">Boda</ion-option>
             <ion-option value="cumpleaños">Cumpleaños</ion-option>
             <ion-option value="quinceañeras">Quinceañera</ion-option>
@@ -47,36 +47,36 @@
 
           <ion-item>
             <ion-label>Dia del evento:</ion-label>
-            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fechaInicio" [(ngModel)]="event.startDate"></ion-datetime>
+            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_evento" [(ngModel)]="event.startDate"></ion-datetime>
           </ion-item>
 
           <ion-item>
               <ion-label>Fecha de Entraga: </ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="deliveryDate"></ion-datetime>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_envio_evento"></ion-datetime>
             </ion-item>
   
           
               <ion-item>
                   <ion-label>Fecha de recoleccion </ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fechaRecoleccion" [(ngModel)]="event.endTime"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_recoleccion_evento" [(ngModel)]="event.endTime"></ion-datetime>
               </ion-item>
   
              
                   <ion-item>
-                    <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombretitular"></ion-input>
+                    <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento"></ion-input>
                   </ion-item>
             
                   
                   <ion-item>
-                        <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion"></ion-input>
+                        <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion_evento"></ion-input>
                       </ion-item>
 
                       <ion-item>
                           <ion-label>Se realizo pago: </ion-label>
-                          <ion-toggle [(ngModel)]="pepperoni"></ion-toggle>
+                          <ion-toggle [(ngModel)]="pagado_evento"></ion-toggle>
                         </ion-item>
 
-                        <ion-item [hidden]="!pepperoni">
+                        <ion-item [hidden]="!pagado_evento">
                             <ion-input type = "text" placeholder="Cantidad Pagada" [(ngModel)]="anticipo"></ion-input>
                           </ion-item>
   
@@ -138,7 +138,7 @@
   <ion-toolbar>
       <ion-item>
           <ion-label color="primary">Total: </ion-label>
-          <ion-input readonly="true" [value]="total"></ion-input>
+          <ion-input readonly="true" [value]="costo_total"></ion-input>
         </ion-item>
         
     <button [hidden]="hideCards" ion-button full (click)="continuarCotizacion()">Continuar</button>

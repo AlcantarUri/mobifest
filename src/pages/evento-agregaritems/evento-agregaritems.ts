@@ -64,11 +64,14 @@ export class EventoAgregaritemsPage {
   searchQuery: string = '';
   
 
+
+  todo={};
+
 user=null;
 userId = [];
 
 //para el total
-public total:number=0;
+public costo_total:number=0;
 arreglodeobjetos = [];
 
 //para la fecha
@@ -76,17 +79,19 @@ public event = { startTime: new Date().toISOString(), endTime: new Date().toISOS
 
 
 //para la base de datos
-nombreEvento: string;
-tipodePeda: string;
-fechaInicio: Date;
-deliveryDate: Date;
-fechaRecoleccion: Date;
-pepperoni;
-nombretitular: string;
-direccion: string;
+nombre_evento: string;
+tipo_evento: string;
+fecha_evento: any;
+fecha_envio_evento: any;
+fecha_recoleccion_evento: any;
+pagado_evento: any;
+nombre_titular_evento: string;
+direccion_evento: string;
 cantidad: number;
 anticipo: number;
 saldo: number;
+
+
 //id del evento
 idEvento: number = 9999;
 
@@ -105,7 +110,8 @@ idEvento: number = 9999;
         //inician los cards visibles y ls fechas ocultas
     this.hideCards=false;
     this.hideDates=true;
-    this.pepperoni=false;
+    this.pagado_evento=false;
+    this.anticipo = 0;
       //para pasar al final de la cotizacion
       
 
@@ -134,7 +140,7 @@ idEvento: number = 9999;
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
     let alert = this.alertCtrl.create({
       title: 'Confirmar Cotización',
-      message: 'El costo total seria de: '+ this.total+'<br> Desea agregar IVA?',
+      message: 'El costo total seria de: '+ this.costo_total+'<br> Desea agregar IVA?',
       
       
       buttons: [
@@ -151,6 +157,7 @@ idEvento: number = 9999;
           handler: () => {
             console.log('Ño');
             this.tgExtras();
+            
           }
         },
         {
@@ -165,38 +172,57 @@ idEvento: number = 9999;
     alert.present();
    }
 
-   prepararArray(){
-     this.haciaeventos.push({
-      nombre_evento: this.nombreEvento,
-      tipo_evento: this.tipodePeda,
-      fecha_evento: this.fechaInicio,
-      fecha_envio_evento: this.deliveryDate,
-      fecha_recoleccion_evento: this.fechaRecoleccion,
-      pagado_evento:  this.pepperoni,
-      nombre_titular_evento: this.nombretitular,
-      direccion_evento: this.direccion
-     })
-     console.log(this.haciaeventos);
+   
 
-this.saldo = this.total-this.anticipo;
+   agregaraInventario(){
+    console.log(this.costo_total);
+    console.log(this.anticipo);
+    
 
-     this.haciapagos.push({
-      id_evento:this.idEvento,
-      costo_total: this.total,
-      saldo:this.saldo,
-      //plazos es el anticipo URI
-      plasos: this.anticipo
-     })
-     console.log(this.haciapagos);
+    this.saldo=this.costo_total-this.anticipo;
+
+    console.log(this.saldo);
+
+    this.http.insertarEvento(
+      this.nombre_evento,
+      this.tipo_evento,
+      this.fecha_evento,
+      this.fecha_envio_evento, 
+      this.fecha_recoleccion_evento, 
+      this.pagado_evento, 
+      this.nombre_titular_evento, 
+      this.direccion_evento,
+      this.costo_total,
+      this.anticipo,
+      this.saldo).then(
+      (res) => { 
+        console.log(res["registro"]);
+
+        if(res["registro"] == "registrado"){
+          alert("Registro Existoso");
+          this.view.dismiss();
+        }else if(res["registro"] == "noregistrado"){
+          alert("No Registrado Asegurate de Cntar con Internet");
+        }
+      },
+      (error) =>{
+        console.error(error);
+        alert("No Registrado Asegurate de Cntar con Internet"+error);
+      }
+    )
+    
+    
 
    }
+
+   
 
 
   pasaraCotizacionconIva() {
     
     this.hideCards=true;
     this.hideDates=false;
-    this.total= this.total+(this.total*.16);
+    this.costo_total= this.costo_total+(this.costo_total*.16);
 
   }
    regresarpaatras(){
@@ -245,6 +271,7 @@ this.saldo = this.total-this.anticipo;
   tgExtras(){
     this.hideCards=true;
     this.hideDates=false;
+    //console.log(this.todo);
     
   }
 
@@ -259,7 +286,7 @@ seikoas(reservados:number, precio: number, nombre: string){
     var tot:number;
     
     tot=precio*reservados;
-    this.total=tot+this.total;
+    this.costo_total=tot+this.costo_total;
 
     this.arreglodeobjetos.push({
       nombre_mob:nombre, cantidad_mob:reservados, total: tot
@@ -302,16 +329,20 @@ console.log(this.arreglodeobjetos);
  
    save(){
 
+    this.agregaraInventario();
    // this.haciaeventos.push({nombre_evento: event.title})
+
+   /*
    let loading  = this.loadingCtrl.create({
-    content: 'Iniciando Sesion...'
+    content: 'Agregando Evento...'
   });
-  loading.present();
-  this.prepararArray();
+  loading.present();*/
+
+ 
 
     this.view.dismiss(this.event);
-    //console.log(this.event)
-    console.log(this.fechaInicio);
+    
+    
   }
 
  

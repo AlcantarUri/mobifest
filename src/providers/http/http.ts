@@ -50,6 +50,44 @@ export class HttpProvider {
   
 */
 
+insertarEvento(nombre_evento: string, 
+  tipo_evento: string, 
+  fecha_evento: any, 
+  fecha_envio_evento: any, 
+  fecha_recoleccion_evento: any,
+  pagado_evento: any, 
+  nombre_titular_evento: string, 
+  direccion:string,
+  costo_total: number,
+  anticipo: number,
+  saldo: number){
+
+  let datos = { nombre_evento:nombre_evento,
+     tipo_evento:tipo_evento,
+     fecha_evento:fecha_evento, 
+     fecha_envio_evento:fecha_envio_evento, 
+     fecha_recoleccion_evento:fecha_recoleccion_evento, 
+     pagado_evento:pagado_evento,
+     nombre_titular_evento:nombre_titular_evento,
+     direccion:direccion,
+     costo_total:costo_total,
+     anticipo:anticipo,
+     saldo:saldo   }
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/agregarEventos.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
 ///////////////////////////Troca////////////////////////////////77
 
   loginApp(usuario:string, contra:string){
