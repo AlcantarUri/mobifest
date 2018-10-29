@@ -16,6 +16,44 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
+
+
+     <ion-card *ngFor="let item of inventario" >
+      <ion-item>
+          <ion-avatar item-start>
+            <img src="../../assets/img/ic_admin.jpg">
+          </ion-avatar>
+          <h2>{{item.nombre_comp}}</h2>
+          <p>Creacion {{item.fecha_creacion}}</p>
+        </ion-item>
+
+        <ion-card-content>
+            <h1 class="h1Content">Usuario:     {{item.usuario}}</h1>
+            <p>Contraseña:    {{item.contrasena}}</p>
+          </ion-card-content>
+        
+          <ion-row>
+            <ion-col>
+              <ion-item icon-start clear small>
+                <p>Rol del usuario</p>
+                <p class="h1Content">{{item.rol_usuario}}</p>
+              </ion-item>
+            </ion-col>
+            <ion-col  class="colElim">
+              <button ion-button  icon-start color="danger" (click)="eliminarTrabjador(item.id_usuario)" round>
+                <ion-icon name="ios-close"></ion-icon>
+                Eliminar
+              </button>
+            </ion-col>
+           
+          </ion-row>
+       </ion-card>
+
+       <ion-fab bottom right>
+          <button ion-fab (click)="presentPrompt()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab>
+
+  
 
 </ion-content>

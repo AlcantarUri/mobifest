@@ -220,4 +220,48 @@ export class HttpProvider {
 
      }
 
+
+     revisarTrabajadores(){
+ 
+      //alert(usuario+contra);
+     
+     var url = 'http://avisositd.xyz/mobiliaria/ListaTrabajadores.php';
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
+
+    eliminarTrabajador(id:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/eliminarTrabajador.php?id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
+
+     anadirUsuario(nombre:string,usuario:string,contrasena:string,rol:string,fecha:string){
+ 
+      var url = 'http://avisositd.xyz/mobiliaria/agregarUsuario.php?nombre='+nombre+'&usuario='+usuario+'&contrasena='+contrasena+'&rol='+rol+'&fecha='+fecha;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
+
 }
