@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, ViewController, ActionSheetController, NavParams } from 'ionic-angular';
+import { IonicPage, ViewController, ActionSheetController, NavParams, ToastController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
 import { Platform } from 'ionic-angular';
@@ -45,7 +45,8 @@ export class EditarInventarioPage {
     ActionSheetController, 
     private view: ViewController,
     public http: HttpProvider,
-    public params: NavParams) {
+    public params: NavParams,
+    public toastCtrl: ToastController) {
 
       this.theWallImageUrl = "../assets/img/ic_card.jpg";
 
@@ -111,24 +112,43 @@ export class EditarInventarioPage {
 
   }
 
-  logForm() {
-    console.log(this.todo);
+  internetToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Registro Exitoso',
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.present();
+  }
 
+  verificaToast() {
+    let toast = this.toastCtrl.create({
+      message: 'Verifica tu Conexion a Internet',
+      duration: 3000,
+      position: 'top'
+    });
+  
+    toast.present();
+  }
+
+  logForm() {
+    
 
     this.http.modificarInventario(this.id_mob,this.nombre_mob,this.cantidad_mob,this.costo_mob, this.extra_mob, this.extra_costo_mob).then(
       (res) => { 
         console.log(res["registro"]);
 
         if(res["registro"] == "registrado"){
-          alert("Registro Existoso");
+          this.internetToast();
           this.view.dismiss();
         }else if(res["registro"] == "noregistrado"){
-          alert("No Registrado Asegurate de Cntar con Internet");
-        }
+          this.verificaToast();       
+         }
       },
       (error) =>{
         console.error(error);
-        alert("No Registrado Asegurate de Cntar con Internet"+error);
+        this.verificaToast();       
       }
     )
     

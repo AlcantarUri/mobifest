@@ -23,6 +23,7 @@ export class LoginPage {
   respuesta:string;
   id:any;
   guard:any;
+  rol:any;
  
 
   mobiliarioPage = TabsPage;
@@ -111,23 +112,53 @@ export class LoginPage {
         console.log(data)  
 
 
-        var result = data["Usuario"];
-        this.id = result["id_usuario"];
+        //var result = data["Usuario"];
+        
 
-        //console.log("Result"+result);
-        console.log("ID:  "+this.id);
+       // console.log(data["rol"]);
 
-        if(this.id != 0){
-          loading.dismiss();
-          this.navCtrl.push(TabsPage, {
-            data: this.id
-          });
-        }else{
+       var json = data["Usuario"];
 
-          this.presentToast();
-         
-          loading.dismiss();
-        }
+       for (var i = 0; i < json.length; i++) {
+       // console.log(json[i].nombre_mob);
+       this.rol = json[i].rol;
+       this.id=json[i].id_usuario;
+       }
+
+      // console.log(this.id+this.rol);
+
+      
+     
+      //console.log("Result"+result);
+      console.log("ID:  "+this.id);
+
+      if(this.id != 0){
+        loading.dismiss();
+        if(this.rol == "Administrador"){
+
+        this.navCtrl.push(TabsPage, {
+          data: this.id
+        });
+
+      }else{
+
+        let toast = this.toastCtrl.create({
+          message: 'Este Usuario no tiene los Privilegios necesarios',
+          duration: 3000,
+          position: 'top'
+        });
+      
+        toast.present();
+  
+        
+      }
+      }else{
+
+        this.presentToast();
+       
+        loading.dismiss();
+      }
+   
                
           
          
@@ -175,21 +206,54 @@ inicioSesion(usuario:string, contra:string){
       console.log(data)  
 
 
-      var result = data["Usuario"];
-      this.id = result["id_usuario"];
+     
+        //var result = data["Usuario"];
+        
 
+       // console.log(data["rol"]);
+
+       var json = data["Usuario"];
+
+       for (var i = 0; i < json.length; i++) {
+       // console.log(json[i].nombre_mob);
+       this.rol = json[i].rol;
+       this.id=json[i].id_usuario;
+       }
+
+      // console.log(this.id+this.rol);
+
+      
+     
       //console.log("Result"+result);
       console.log("ID:  "+this.id);
 
       if(this.id != 0){
         loading.dismiss();
+        if(this.rol == "Administrador"){
+
         this.navCtrl.push(TabsPage, {
           data: this.id
         });
+
       }else{
+
+        let toast = this.toastCtrl.create({
+          message: 'Este Usuario no tiene los Privilegios necesarios',
+          duration: 3000,
+          position: 'top'
+        });
+      
+        toast.present();
+  
+        
+      }
+      }else{
+
         this.presentToast();
+       
         loading.dismiss();
       }
+   
              
         
        

@@ -184,12 +184,14 @@ insertarEvento(nombre_evento: string,
 
       let datos = { id:id, nombre:nombre, cantidad:cantidad, costo:costo, nombre_extra:nombre_exta, precio_extra:extra_costo}
   
+      console.log("Saliente      ");
+      console.log(datos);
        let options = {
          headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
         }
        };
-       var url = 'http://avisositd.xyz/mobiliaria/AgregarMobiliario.php/';
+       var url = 'http://avisositd.xyz/mobiliaria/modificarInventario.php';
         return new Promise(resolve => {
         this.http.post(url,JSON.stringify(datos),options)
           .subscribe(data => {
@@ -200,7 +202,104 @@ insertarEvento(nombre_evento: string,
     }
 
 
+    revisarClientes(){
+ 
+      //alert(usuario+contra);
+     
+     var url = 'http://avisositd.xyz/mobiliaria/ListaClientes.php';
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
 
-  
+    eliminarCliente(id:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/eliminarCliente.php?id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
+
+     anadirCliente(nombre:string,telefono:string,correo:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/agregarCliente.php?nombre='+nombre+'&telefono='+telefono+'&correo='+correo;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
+
+     editarCliente(nombre:string,telefono:string,correo:string, id:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/editarCliente.php?nombre='+nombre+'&telefono='+telefono+'&correo='+correo+'&id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
+
+
+     revisarTrabajadores(){
+ 
+      //alert(usuario+contra);
+     
+     var url = 'http://avisositd.xyz/mobiliaria/ListaTrabajadores.php';
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
+
+    eliminarTrabajador(id:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/eliminarTrabajador.php?id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
+
+     anadirUsuario(nombre:string,usuario:string,contrasena:string,rol:string,fecha:string){
+ 
+      var url = 'http://avisositd.xyz/mobiliaria/agregarUsuario.php?nombre='+nombre+'&usuario='+usuario+'&contrasena='+contrasena+'&rol='+rol+'&fecha='+fecha;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+     }
 
 }
