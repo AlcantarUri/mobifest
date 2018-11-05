@@ -16,6 +16,40 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content >
+
+    <ion-card *ngFor="let item of pagos" >
+        <ion-item>
+            <ion-avatar item-start>
+              <img src="../../assets/img/ic_logo.png">
+            </ion-avatar>
+            <h2>{{item.nombre_titular_evento}}</h2>
+            <p>Creacion {{item.nombre_evento}}</p>
+          </ion-item>
+
+          <ion-card-content>
+              <h1 class="h1Content">Saldo Pendiente:    {{item.saldo}}</h1>
+              <p>Anticipo:     {{item.anticipo}}</p>
+              <p>Costo Total:    {{item.costo_total}}</p>
+
+            </ion-card-content>
+          
+            <ion-row>
+              <ion-col>
+                <ion-item icon-start clear small>
+                  <p>Fecha del Evento</p>
+                  <p class="h1Content">{{item.fecha_evento}}</p>
+                </ion-item>
+              </ion-col>
+              <ion-col  class="colElim">
+                <button ion-button  icon-start color="primary"  round>
+                  <ion-icon name="ios-close"></ion-icon>
+                  Abono
+                </button>
+              </ion-col>
+             
+            </ion-row>
+         </ion-card>
+  
 
 </ion-content>

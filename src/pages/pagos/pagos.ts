@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { HttpProvider } from '../../providers/http/http';
 
 /**
  * Generated class for the PagosPage page.
@@ -15,7 +16,12 @@ import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angul
 })
 export class PagosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  pagos:any;
+
+  constructor(public navCtrl: NavController, public http: HttpProvider, public navParams: NavParams, public view: ViewController) {
+
+    this.sacarPagos();
+
   }
 
   ionViewDidLoad() {
@@ -24,6 +30,26 @@ export class PagosPage {
 
   cerrarModal(){
     this.view.dismiss();
+  }
+
+  sacarPagos(){
+    
+    this.http.revisarSaldos().then(
+      (inv) => { 
+       console.log(inv)     
+        
+
+       this.pagos= inv["pago"];
+
+       console.log(this.pagos);
+      
+         
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
   }
 
 }
