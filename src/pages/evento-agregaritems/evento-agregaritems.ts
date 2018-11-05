@@ -302,7 +302,8 @@ console.log(this.arreglodeobjetos);
        //this.mobiliarios = this.inventario;     
        this.moviles = inv["inventario"];
        //this.nombres = JSON.parse(JSON.stringify(this.moviles));
-       this.items = this.mobiliarios;       
+       this.items = this.mobiliarios;    
+       
          
       },
       (error) =>{

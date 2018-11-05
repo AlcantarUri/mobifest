@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
-import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
+import { HttpProvider } from '../../providers/http/http';
+import { ToastController } from 'ionic-angular';
 
 
 @Component({
@@ -14,8 +15,10 @@ export class HomePage {
   viewTitle: string;
   selectedDay = new Date();
 
+  eventosChidos: any;
   modo : string;
-  
+  fecha: string;
+  mesmasuno: number;
 
   calendar = {
     mode : 'month',
@@ -24,7 +27,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
           private modalCtrl: ModalController,
-          private alertCtrl: AlertController) {
+          private alertCtrl: AlertController,
+          private http: HttpProvider,
+          private toastCtrl: ToastController
+          ) {
 
   }
 
@@ -39,6 +45,7 @@ export class HomePage {
         let eventData = data;
         eventData.startTime = new Date(data.startTime);
         eventData.endTime = new Date(data.endTime);
+        
         
         let events = this.eventSource;
         events.push(eventData);
@@ -57,7 +64,32 @@ export class HomePage {
 
   onTimeSelected(ev){
     this.selectedDay = ev.selectedTime;
+    
+    this.mostrarEventosDelDia();
 
+  }
+
+
+
+  mostrarEventosDelDia(){
+
+    this.mesmasuno = this.selectedDay.getMonth() + 1;
+
+    this.fecha = this.selectedDay.getFullYear()+"-"+this.mesmasuno+"-"+this.selectedDay.getDate();
+    console.log(this.fecha);
+    
+    this.http.obtenerEventosdelDia(this.fecha).then(
+      (res)=>{
+
+      this.eventosChidos = res["eventodelDia"];
+      console.log(this.eventosChidos);
+
+    },(error)=>{
+      console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+    })
+
+    
   }
 
   onEventSelected(event){
@@ -70,6 +102,7 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
+    
 
   }
 

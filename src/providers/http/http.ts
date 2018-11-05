@@ -29,26 +29,7 @@ export class HttpProvider {
     return this.http.get(this.url);
     //.map(res=>res.json())
   }
-/*
 
-  ingresarEvent(nombre_evento:string, tipo_evento:string, fecha_evento: Date, fecha_envio_evento: Date, fecha_recoleccion_evento: Date,
-    pagado_evento: boolean, nombre_titular_evento: string, direccion:string){
-
-   
-    
-      return new Promise((resolve,reject)=>{
-        let sql="INSERT INTO res (nombre, descripcion, direccion, costo, score, tipo, ruta_imagen, horario) values(?,?,?,?,?,?,?,?)";
-        this.http.get(sql, [nombre, descripcion, direccion, costo, score, tipo, ruta_imagen, horario]).then((data)=>{
-          resolve(data);
-          //alert("Recinto añadido correctamente");
-        }, (error)=>{
-          alert("Contacte al adminsitrador");
-          reject(error);
-        });
-      });
-   }
-  
-*/
 
 insertarEvento(nombre_evento: string, 
   tipo_evento: string, 
@@ -86,6 +67,18 @@ insertarEvento(nombre_evento: string,
        resolve(data);
        });
          });
+}
+
+
+obtenerEventosdelDia(fecha_evento: string){
+  var url ='http://avisositd.xyz/mobiliaria/eventodelDia.php?fecha_evento='+fecha_evento;
+  return new Promise((resolve, reject)=>{
+    this.http.get(url).subscribe(data =>{
+      resolve(data);
+    },(error)=>{
+      reject(error);
+    });
+  });
 }
 
 ///////////////////////////Troca////////////////////////////////77

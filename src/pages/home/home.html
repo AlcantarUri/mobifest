@@ -18,14 +18,17 @@
 <ion-select [(ngModel)]="modo">
     <ion-option value="month">Mes</ion-option>
   <ion-option value="weekly">Semana</ion-option>
-</ion-select>-->
+</ion-select>
+event source del calendario
+[eventSource]="eventSource"
+-->
 
   </ion-navbar>
 </ion-header>
 
 <ion-content>
 
-  <calendar [eventSource]="eventSource"
+  <calendar 
   [calendarMode]="calendar.mode"
   [currentDate]="calendar.currentDate"
   (onEventSelected)="onEventSelected($event)"
@@ -34,5 +37,121 @@
   step="30"
   class="calendar">
   </calendar>
+
+
+  <div class="ocultarnoevents"></div>
+  <div class="eventos">
+    <ion-list>
+    <ion-card  (click)="mostrarEvento()">
+      <ion-card-header>12AM | Evento 1</ion-card-header>
+      <ion-card-content>Contenido</ion-card-content>    
+    </ion-card>
+    <ion-card>
+        <ion-card-header>1AM | Evento 1</ion-card-header>
+        <ion-card-content>Contenido</ion-card-content>    
+      </ion-card>
+      <ion-card>
+          <ion-card-header>2AM | Evento 1</ion-card-header>
+          <ion-card-content>Contenido</ion-card-content>    
+        </ion-card>
+        <ion-card>
+            <ion-card-header>3AM | Evento 1</ion-card-header>
+            <ion-card-content>Contenido</ion-card-content>    
+          </ion-card>
+          <ion-card>
+              <ion-card-header>4AM | Evento 1</ion-card-header>
+              <ion-card-content>Contenido</ion-card-content>    
+            </ion-card>
+            <ion-card>
+                <ion-card-header>5AM | Evento 1</ion-card-header>
+                <ion-card-content>Contenido</ion-card-content>    
+              </ion-card>
+              <ion-card>
+                  <ion-card-header>6AM | Evento 1</ion-card-header>
+                  <ion-card-content>Contenido</ion-card-content>    
+                </ion-card>
+                <ion-card>
+                    <ion-card-header>7AM | Evento 1</ion-card-header>
+                    <ion-card-content>Contenido</ion-card-content>    
+                  </ion-card>
+                  <ion-card>
+                      <ion-card-header>8AM | Evento 1</ion-card-header>
+                      <ion-card-content>Contenido</ion-card-content>    
+                    </ion-card>
+                    <ion-card>
+                        <ion-card-header>9AM | Evento 1</ion-card-header>
+                        <ion-card-content>Contenido</ion-card-content>    
+                      </ion-card>
+                      <ion-card>
+                          <ion-card-header>10AM | Evento 1</ion-card-header>
+                          <ion-card-content>Contenido</ion-card-content>    
+                        </ion-card>
+                        <ion-card>
+                            <ion-card-header>11AM | Evento 1</ion-card-header>
+                            <ion-card-content>Contenido</ion-card-content>    
+                          </ion-card>
+    <ion-card>
+      <ion-card-header>12PM | Evento 1</ion-card-header>
+      <ion-card-content>Contenido</ion-card-content>    
+    </ion-card>
+    <ion-card>
+        <ion-card-header>1PM | Evento 1</ion-card-header>
+        <ion-card-content>Contenido</ion-card-content>    
+      </ion-card>
+      <ion-card>
+          <ion-card-header>2PM | Evento 1</ion-card-header>
+          <ion-card-content>Contenido</ion-card-content>    
+        </ion-card>
+        <ion-card>
+            <ion-card-header>3PM | Evento 1</ion-card-header>
+            <ion-card-content>Contenido</ion-card-content>    
+          </ion-card>
+          <ion-card>
+              <ion-card-header>4PM | Evento 1</ion-card-header>
+              <ion-card-content>Contenido</ion-card-content>    
+            </ion-card>
+            <ion-card>
+                <ion-card-header>5PM | Evento 1</ion-card-header>
+                <ion-card-content>Contenido</ion-card-content>    
+              </ion-card>
+              <ion-card>
+                  <ion-card-header>6PM | Evento 1</ion-card-header>
+                  <ion-card-content>Contenido</ion-card-content>    
+                </ion-card>
+                 <ion-card>
+                    <ion-card-header>7PM | Evento 1</ion-card-header>
+                    <ion-card-content>Contenido</ion-card-content>    
+                  </ion-card>
+                  <ion-card>
+                      <ion-card-header>8PM | Evento 1</ion-card-header>
+                      <ion-card-content>Contenido</ion-card-content>    
+                    </ion-card>
+                    <ion-card>
+                        <ion-card-header>9PM | Evento 1</ion-card-header>
+                        <ion-card-content>Contenido</ion-card-content>    
+                      </ion-card>
+                      <ion-card>
+                          <ion-card-header>10PM | Evento 1</ion-card-header>
+                          <ion-card-content>Contenido</ion-card-content>    
+                        </ion-card>
+                        <ion-card>
+                            <ion-card-header>11PM | Evento 1</ion-card-header>
+                            <ion-card-content>Contenido</ion-card-content>    
+                          </ion-card>
+                          <ion-card>
+                              <ion-card-header>12PM | Evento 1</ion-card-header>
+                              <ion-card-content>Contenido</ion-card-content>    
+                            </ion-card>
+    </ion-list>
+    
+      
+    
+      
+
+  </div>
+  
+  
+
+  
 
 </ion-content>
