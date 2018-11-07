@@ -33,9 +33,10 @@ export class HttpProvider {
 
 insertarEvento(nombre_evento: string, 
   tipo_evento: string, 
-  fecha_evento: any, 
   fecha_envio_evento: any, 
+  hora_envio_evento: any,
   fecha_recoleccion_evento: any,
+  hora_recoleccion_evento:any,
   pagado_evento: any, 
   nombre_titular_evento: string, 
   direccion:string,
@@ -45,9 +46,10 @@ insertarEvento(nombre_evento: string,
 
   let datos = { nombre_evento:nombre_evento,
      tipo_evento:tipo_evento,
-     fecha_evento:fecha_evento, 
      fecha_envio_evento:fecha_envio_evento, 
+     hora_envio_evento:hora_envio_evento, 
      fecha_recoleccion_evento:fecha_recoleccion_evento, 
+     hora_recoleccion_evento:hora_recoleccion_evento,
      pagado_evento:pagado_evento,
      nombre_titular_evento:nombre_titular_evento,
      direccion:direccion,
@@ -70,8 +72,8 @@ insertarEvento(nombre_evento: string,
 }
 
 
-obtenerEventosdelDia(fecha_evento: string){
-  var url ='http://avisositd.xyz/mobiliaria/eventodelDia.php?fecha_evento='+fecha_evento;
+obtenerEventosdelDia(fecha_envio_evento: string){
+  var url ='http://avisositd.xyz/mobiliaria/eventodelDia.php?fecha_envio_evento='+fecha_envio_evento;
   return new Promise((resolve, reject)=>{
     this.http.get(url).subscribe(data =>{
       resolve(data);

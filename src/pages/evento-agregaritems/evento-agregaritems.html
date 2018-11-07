@@ -45,20 +45,27 @@
         </ion-item>
 
 
-          <ion-item>
-            <ion-label>Dia del evento:</ion-label>
-            <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_evento" [(ngModel)]="event.startDate"></ion-datetime>
-          </ion-item>
+          
 
           <ion-item>
-              <ion-label>Fecha de Entraga: </ion-label>
-              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_envio_evento"></ion-datetime>
+              <ion-label>Fecha de Entrega: </ion-label>
+              <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY"  min="2017" max="2050-10-17" [(ngModel)]="fecha_envio_evento"></ion-datetime>
             </ion-item>
+
+            <ion-item>
+                <ion-label>Hora de Entrega: </ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormtat="HH:mm" [(ngModel)]="hora_envio_evento"></ion-datetime>
+              </ion-item>
   
-          
+        
               <ion-item>
                   <ion-label>Fecha de recoleccion </ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" pickerFormtat="DD/MM/YYYY" [(ngModel)]="fecha_recoleccion_evento" [(ngModel)]="event.endTime"></ion-datetime>
+                <ion-datetime displayFormat="DD/MM/YYYY"  pickerFormat="DD/MM/YYYY"  min="2017" max="2050-10-17" [(ngModel)]="fecha_recoleccion_evento" [(ngModel)]="event.endTime"></ion-datetime>
+              </ion-item>
+
+              <ion-item>
+                  <ion-label>Hora de recoleccion </ion-label>
+                <ion-datetime displayFormat="HH:mm" pickerFormtat="HH:mm" [(ngModel)]="hora_recoleccion_evento"></ion-datetime>
               </ion-item>
   
              
