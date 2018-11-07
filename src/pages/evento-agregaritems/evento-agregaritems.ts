@@ -81,9 +81,10 @@ public event = { startTime: new Date().toISOString(), endTime: new Date().toISOS
 //para la base de datos
 nombre_evento: string;
 tipo_evento: string;
-fecha_evento: any;
 fecha_envio_evento: any;
+hora_envio_evento: any;
 fecha_recoleccion_evento: any;
+hora_recoleccion_evento:any;
 pagado_evento: any;
 nombre_titular_evento: string;
 direccion_evento: string;
@@ -175,8 +176,12 @@ idEvento: number = 9999;
    
 
    agregaraInventario(){
-    console.log(this.costo_total);
-    console.log(this.anticipo);
+    //console.log(this.costo_total);
+   // console.log(this.anticipo);
+
+  
+
+    
     
 
     this.saldo=this.costo_total-this.anticipo;
@@ -186,9 +191,10 @@ idEvento: number = 9999;
     this.http.insertarEvento(
       this.nombre_evento,
       this.tipo_evento,
-      this.fecha_evento,
       this.fecha_envio_evento, 
+      this.hora_envio_evento,
       this.fecha_recoleccion_evento, 
+      this.hora_recoleccion_evento,
       this.pagado_evento, 
       this.nombre_titular_evento, 
       this.direccion_evento,
@@ -200,14 +206,17 @@ idEvento: number = 9999;
 
         if(res["registro"] == "registrado"){
           alert("Registro Existoso");
+          console.log("Registro Exitoso");
           this.view.dismiss();
         }else if(res["registro"] == "noregistrado"){
           alert("No Registrado Asegurate de Cntar con Internet");
+          console.log("Registro NO Exitoso");
         }
       },
       (error) =>{
         console.error(error);
         alert("No Registrado Asegurate de Cntar con Internet"+error);
+        console.log("RegistroError en php Exitoso");
       }
     )
     
@@ -302,7 +311,8 @@ console.log(this.arreglodeobjetos);
        //this.mobiliarios = this.inventario;     
        this.moviles = inv["inventario"];
        //this.nombres = JSON.parse(JSON.stringify(this.moviles));
-       this.items = this.mobiliarios;       
+       this.items = this.mobiliarios;    
+       
          
       },
       (error) =>{

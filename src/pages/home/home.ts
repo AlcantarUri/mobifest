@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
-import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
+import { HttpProvider } from '../../providers/http/http';
+import { ToastController } from 'ionic-angular';
 
 
 @Component({
@@ -14,8 +15,41 @@ export class HomePage {
   viewTitle: string;
   selectedDay = new Date();
 
+  public eventosChidos: any;
   modo : string;
+  fecha: string;
+  mesmasuno: number;
+
+
+
+  //ahora viene lo bueno con las hroas y las declaraciones
+  nombreEvento12am: string ="Sin evento";
+  nombreEvento1am: string ="Sin evento";
+  nombreEvento2am: string ="Sin evento";
+  nombreEvento3am: string ="Sin evento";
+  nombreEvento4am: string ="Sin evento";
+  nombreEvento5am: string ="Sin evento";
+  nombreEvento6am: string ="Sin evento";
+  nombreEvento7am: string ="Sin evento";
+  nombreEvento8am: string ="Sin evento";
+  nombreEvento9am: string ="Sin evento";
+  nombreEvento10am: string ="Sin evento";
+  nombreEvento11am: string ="Sin evento";
   
+  nombreEvento12pm: string ="Sin evento";
+  nombreEvento1pm: string ="Sin evento";
+  nombreEvento2pm: string ="Sin evento";
+  nombreEvento3pm: string ="Sin evento";
+  nombreEvento4pm: string ="Sin evento";
+  nombreEvento5pm: string ="Sin evento";
+  nombreEvento6pm: string ="Sin evento";
+  nombreEvento7pm: string ="Sin evento";
+  nombreEvento8pm: string ="Sin evento";
+  nombreEvento9pm: string ="Sin evento";
+  nombreEvento10pm: string ="Sin evento";
+  nombreEvento11pm: string ="Sin evento";
+
+
 
   calendar = {
     mode : 'month',
@@ -24,7 +58,10 @@ export class HomePage {
 
   constructor(public navCtrl: NavController,
           private modalCtrl: ModalController,
-          private alertCtrl: AlertController) {
+          private alertCtrl: AlertController,
+          private http: HttpProvider,
+          private toastCtrl: ToastController
+          ) {
 
   }
 
@@ -39,6 +76,7 @@ export class HomePage {
         let eventData = data;
         eventData.startTime = new Date(data.startTime);
         eventData.endTime = new Date(data.endTime);
+        
         
         let events = this.eventSource;
         events.push(eventData);
@@ -57,7 +95,44 @@ export class HomePage {
 
   onTimeSelected(ev){
     this.selectedDay = ev.selectedTime;
+    
+    this.mostrarEventosDelDia();
+    this.llenarCards();
+    
 
+  }
+
+llenarCards(){
+  console.log(this.eventosChidos);
+
+  
+}
+
+  mostrarEventosDelDia(){
+
+    this.mesmasuno = this.selectedDay.getMonth() + 1;
+
+    this.fecha = this.selectedDay.getFullYear()+"-"+this.mesmasuno+"-"+this.selectedDay.getDate();
+    console.log(this.fecha);
+    
+    this.http.obtenerEventosdelDia(this.fecha).then(
+      (res)=>{
+
+      
+      this.eventosChidos = res["eventodelDia"];
+      //console.log(this.eventosChidos);
+     
+          
+           
+  
+      
+
+    },(error)=>{
+      console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+    })
+
+    
   }
 
   onEventSelected(event){
@@ -70,6 +145,7 @@ export class HomePage {
       buttons: ['OK']
     });
     alert.present();
+    
 
   }
 
