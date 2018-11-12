@@ -73,6 +73,14 @@
                         </ion-item>
   
                         
+                      <ion-item [hidden]="mostrarfinal">
+                          <ion-label>Se realizo pago: </ion-label>
+                          <ion-toggle [(ngModel)]="pagado_evento"></ion-toggle>
+                        </ion-item>
+
+                        <ion-item [hidden]="!pagado_evento">
+                            <ion-input type = "text" placeholder="Cantidad Pagada" [(ngModel)]="anticipo"></ion-input>
+                          </ion-item>
   
                           
 
@@ -132,7 +140,8 @@
                 <ion-input readonly="true" [value]="costo_total"></ion-input>
               </ion-item>
               
-          <button [hidden]="!hideFechas" ion-button full (click)="save()">Continuar</button>
+          <button [hidden]="!hideFechas" ion-button full (click)="regresarAfinal()">Continuar</button>
+          <button [hidden]="mostrarfinal" ion-button full (click)="save()">Continuar</button>
         
         </ion-toolbar>
       

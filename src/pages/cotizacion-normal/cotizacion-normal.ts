@@ -29,6 +29,7 @@ export class CotizacionNormalPage {
   cantidaddos:any;
   hideFechas;
   hideCards;
+  mostrarfinal;
 
   
   
@@ -73,6 +74,9 @@ public costo_total:number=0;
                 this.event.endTime = preselectedDate;
                 this.hideFechas= false;
                 this.hideCards = true;
+                this.pagado_evento=false;
+                this.anticipo = 0;
+                this.mostrarfinal = true;
                 
                   //metodo principal para el molibiario sin filtro de ocupado
                //this.getMessages();
@@ -351,6 +355,11 @@ this.http.dispoibilidadmob(
   save(){
     this.agregaraInventario();
     this.juntarobjetos();
+    
+  }
+  regresarAfinal(){
+    this.hideFechas= !this.hideFechas;
+    this.mostrarfinal = !this.mostrarfinal;
   }
 
 cerrarModal(){
