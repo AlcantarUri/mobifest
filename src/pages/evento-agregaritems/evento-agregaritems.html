@@ -96,7 +96,7 @@
     <ion-grid>
         <ion-row>
           <ion-col col-6>
-            <button ion-button round icon-end color="danger"(click)="cancelar()">
+            <button ion-button round icon-end color="danger"(click)="cerrarModal()">
                 <ion-icon padding name="close-circle"></ion-icon>Cancelar
             </button>
           </ion-col>
@@ -120,7 +120,8 @@
 <ion-list>
   
     <ion-card
-    (click)="presentAlert(movil.nombre_mob, movil.cantidad_mob, movil.costo_mob)" *ngFor="let movil of inventario">
+    (click)="presentAlert(movil.id_mob,movil.nombre_mob, movil.cantidad_mob, movil.costo_mob)" 
+    *ngFor="let movil of inventario">
        
     <ion-card-content>
       <ion-card-title>
