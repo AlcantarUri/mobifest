@@ -5,6 +5,8 @@ import { HttpProvider } from '../../providers/http/http';
 import { ToastController } from 'ionic-angular';
 
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -19,6 +21,8 @@ export class HomePage {
   modo : string;
   fecha: string;
   mesmasuno: number;
+
+  public dtae: number;
 
 
 
@@ -65,10 +69,70 @@ export class HomePage {
 
   }
 
+
+abrirAlert(){
+  let alert = this.alertCtrl.create({
+    title: 'Seleccione tipo de cotizacion',
+    buttons: [
+      {
+        text: 'Cotizacion Normal',
+        
+        handler: () => {
+          this.addEventNormal();
+          console.log("c presiono bton normal");
+          
+        }
+      },
+      {
+        text: 'Cotizacion Rapida',
+        handler: () => {
+          
+          this.addEvent();
+
+
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+
+addEventNormal(){
+
+
+
+  let modal = this.modalCtrl.create('CotizacionNormalPage', {selectedDay:this.selectedDay});
+  modal.present();
+ 
+
+  modal.onDidDismiss(data=>{
+    if (data){
+      let eventData = data;
+      eventData.startTime = new Date(data.startTime);
+      eventData.endTime = new Date(data.endTime);
+      
+      
+      let events = this.eventSource;
+      events.push(eventData);
+      this.eventSource = [];
+      setTimeout(()=> {
+        this.eventSource = events;
+      }) ;
+    }
+  });
+
+}
+
+
   addEvent(){
+
+
 
     let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.selectedDay});
     modal.present();
+    this.dtae = this.selectedDay.getDate();
+    console.log(this.dtae);
     
 
     modal.onDidDismiss(data=>{
@@ -95,6 +159,8 @@ export class HomePage {
 
   onTimeSelected(ev){
     this.selectedDay = ev.selectedTime;
+
+
     
     this.mostrarEventosDelDia();
     this.llenarCards();
@@ -123,8 +189,7 @@ llenarCards(){
       //console.log(this.eventosChidos);
      
           
-           
-  
+      
       
 
     },(error)=>{
@@ -134,6 +199,15 @@ llenarCards(){
 
     
   }
+
+
+  mostrarEvento(idevento: string){
+
+    console.log(idevento);
+        
+  }
+
+
 
   onEventSelected(event){
     let start = moment(event.startTime).format('LLLL');

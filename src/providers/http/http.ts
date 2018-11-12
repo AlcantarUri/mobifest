@@ -40,9 +40,14 @@ insertarEvento(nombre_evento: string,
   pagado_evento: any, 
   nombre_titular_evento: string, 
   direccion:string,
+  //para saldos_mob
   costo_total: number,
   anticipo: number,
-  saldo: number){
+  saldo: number,
+  //para disponibilidda_mob
+  //id_mob: string,
+
+  ){
 
   let datos = { nombre_evento:nombre_evento,
      tipo_evento:tipo_evento,
@@ -54,8 +59,9 @@ insertarEvento(nombre_evento: string,
      nombre_titular_evento:nombre_titular_evento,
      direccion:direccion,
      costo_total:costo_total,
-     anticipo:anticipo,
-     saldo:saldo   }
+     saldo:saldo,
+     anticipo:anticipo
+        }
   
        let options = {
          headers: {
@@ -82,6 +88,85 @@ obtenerEventosdelDia(fecha_envio_evento: string){
     });
   });
 }
+
+dispoibilidadmob(
+  fecha_evento:string,
+  hora_evento:string,
+  id_mob:number,
+  ocupados:number
+  ){
+  let datos = { 
+    fecha_evento:fecha_evento,
+  hora_evento:hora_evento,
+id_mob:id_mob,
+ocupados:ocupados  }
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/disponibilidadEvento.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
+
+insertarADisponibilidad(
+  arreglo: any
+  ){
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/disponibilidadEvento.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(arreglo),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
+
+revisarDisponibilidadDia(fecha_envio_evento:string){
+
+   
+  var url = 'http://avisositd.xyz/mobiliaria/sumammobiliarioPrueba.php?fecha_envio_evento='+fecha_envio_evento;
+  return new Promise((resolve, reject) => {
+   this.http.get(url)
+      .subscribe(data => {
+        resolve(data);
+       }, (err) =>{
+         reject(err);
+       });
+  });
+ }
+
+
+ yanosequehaceesta(fecha_envio_evento: string){
+ 
+  //alert(usuario+contra);
+ 
+ var url = 'http://avisositd.xyz/mobiliaria/sacarDisponiblesDelDia.php?fecha_envio_evento='+fecha_envio_evento;
+ return new Promise((resolve, reject) => {
+  this.http.get(url)
+     .subscribe(data => {
+       resolve(data);
+      }, (err) =>{
+        reject(err);
+      });
+ });
+}
+
+
+
 
 ///////////////////////////Troca////////////////////////////////77
 

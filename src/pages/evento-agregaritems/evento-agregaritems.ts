@@ -31,11 +31,13 @@ import { LoadedModule } from 'ionic-angular/umd/util/module-loader';
 
 export class EventoAgregaritemsPage {
 
+prueba: any;
+
 
 
   id: string;
   inventario: any;
-  
+  cantidadisponible: any;
   totalnombres:string[];
   public nombres:string[];
 
@@ -70,9 +72,10 @@ export class EventoAgregaritemsPage {
 user=null;
 userId = [];
 
-//para el total
-public costo_total:number=0;
+
+arreglodefecha = [];
 arreglodeobjetos = [];
+arreglofinal =[];
 
 //para la fecha
 public event = { startTime: new Date().toISOString(), endTime: new Date().toISOString()}
@@ -91,7 +94,10 @@ direccion_evento: string;
 cantidad: number;
 anticipo: number;
 saldo: number;
-
+public costo_total:number=0;
+fecha_evento: string;
+hora_evento:string;
+ocupados: number;
 
 //id del evento
 idEvento: number = 9999;
@@ -153,7 +159,7 @@ idEvento: number = 9999;
           }
         },
         {
-          text: 'Ño',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Ño');
@@ -174,19 +180,17 @@ idEvento: number = 9999;
    }
 
    
+   
+
+
+
 
    agregaraInventario(){
     //console.log(this.costo_total);
    // console.log(this.anticipo);
-
-  
-
-    
-    
-
     this.saldo=this.costo_total-this.anticipo;
 
-    console.log(this.saldo);
+    console.log("este es el saldo: "+this.saldo);
 
     this.http.insertarEvento(
       this.nombre_evento,
@@ -199,8 +203,9 @@ idEvento: number = 9999;
       this.nombre_titular_evento, 
       this.direccion_evento,
       this.costo_total,
-      this.anticipo,
-      this.saldo).then(
+      this.saldo,
+      this.anticipo
+      ).then(
       (res) => { 
         console.log(res["registro"]);
 
@@ -242,65 +247,105 @@ idEvento: number = 9999;
 
 //alert para pedir numero de items de mobiliario
 
-   presentAlert(nombre: string, cantidad: number, costo: number) {
-      let alert = this.alertCtrl.create({
+    presentAlert(id_mob: number, nombre: string, cantidad: number, costo: number) {
+        let alert = this.alertCtrl.create({
 
-        title: 'Selecciona la cantidad',
-        //inputs:[this.inventario.mob]
-        inputs: [
-          {
-            name: 'reservados',
-            placeholder: 'Cantidad',
-            type: 'number',
-            min:"0"
-          }
+          title: 'Selecciona la cantidad',
+          //inputs:[this.inventario.mob]
+          inputs: [
+            {
+              name: 'reservados',
+              placeholder: 'Cantidad',
+              type: 'number',
+              min:"0"
+            }
+            
+          ],
+
+          buttons: [
+            {
+              text: 'Cancel',
+              role: 'cancel',
+              handler: () => {
+                console.log('Cancel clicked');
+              }
+            },
+            {
+              text: 'Ok',
+              handler: data => {
+                this.seikoas(id_mob,data.reservados,costo);
+                //this.agregarDisponibilidad(id_mob, data.reservados);
+
+              }
+            }
+          ] 
           
-         ],
+        });
+        alert.present();
 
-        buttons: [
-          {
-            text: 'Cancel',
-            role: 'cancel',
-            handler: () => {
-              console.log('Cancel clicked');
-            }
-          },
-          {
-            text: 'Ok',
-            handler: data => {
-              this.seikoas(data.reservados,costo,nombre);
-            }
-          }
-        ] 
-        
-      });
-      alert.present();
-
-}
+  }
   tgExtras(){
     this.hideCards=true;
     this.hideDates=false;
+    //this.arreglodefecha =[];
+    //this.arreglodeobjetos=[];
+    //this.arreglofinal=[];
     //console.log(this.todo);
     
   }
 
 
-seikoas(reservados:number, precio: number, nombre: string){
+seikoas(id_mob: number, reservados:number, precio: number){
  
-  console.log("dentro del seikoas");
-  console.log(reservados);
-  console.log(precio);
-  console.log(nombre);
+  
 
-    var tot:number;
+  var tot:number;
     
-    tot=precio*reservados;
-    this.costo_total=tot+this.costo_total;
+  tot=precio*reservados;
+  this.costo_total=tot+this.costo_total;
 
     this.arreglodeobjetos.push({
-      nombre_mob:nombre, cantidad_mob:reservados, total: tot
+      id_mob: id_mob,ocupados:reservados
     })
 console.log(this.arreglodeobjetos);
+
+}
+
+juntarobjetos(){
+
+  
+
+  for (var i = 0; i < this.arreglodeobjetos.length; i++) {
+    // console.log(json[i].nombre_mob);
+    this.arreglodefecha.push({
+      fecha_evento: this.fecha_envio_evento, hora_evento: this.hora_envio_evento, 
+      
+    })
+    
+    }
+
+    for (var i = 0; i < this.arreglodeobjetos.length; i++) {
+      // console.log(json[i].nombre_mob);
+      //this.arreglofinal.push({
+        
+      
+
+this.http.dispoibilidadmob(
+  this.arreglodefecha[i].fecha_evento,
+  this.arreglodefecha[i].hora_evento,
+  this.arreglodeobjetos[i].id_mob,
+  this.arreglodeobjetos[i].ocupados,
+).then((inv)=>{
+
+},(error)=>{
+  console.log("Error"+JSON.stringify(error));
+})
+      
+      
+      }
+
+    
+    
 
 }
 
@@ -339,14 +384,15 @@ console.log(this.arreglodeobjetos);
  
    save(){
 
+    this.juntarobjetos();
     this.agregaraInventario();
+  //this.agregarDisponibilidad();
+  
+ 
+
    // this.haciaeventos.push({nombre_evento: event.title})
 
-   /*
-   let loading  = this.loadingCtrl.create({
-    content: 'Agregando Evento...'
-  });
-  loading.present();*/
+
 
  
 
