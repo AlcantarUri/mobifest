@@ -355,6 +355,7 @@ this.http.dispoibilidadmob(
   save(){
     this.agregaraInventario();
     this.juntarobjetos();
+    this.view.dismiss();
     
   }
   regresarAfinal(){

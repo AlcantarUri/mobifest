@@ -1,7 +1,7 @@
 
-<ion-header>
+<ion-header class="spacer">
     <div class="spacer" style="height: 10px;"></div>   
-  <ion-navbar>
+  <ion-navbar class="spacer">
       
     <ion-title>
       {{ viewTitle }}
@@ -12,19 +12,11 @@
       <ion-icon name="add"></ion-icon>
   </button>
 </ion-buttons>
-
-
-<!--
-<ion-select [(ngModel)]="modo">
-    <ion-option value="month">Mes</ion-option>
-  <ion-option value="weekly">Semana</ion-option>
-</ion-select>
-event source del calendario
-[eventSource]="eventSource"
--->
-
   </ion-navbar>
 </ion-header>
+
+
+
 
 <ion-content>
 
@@ -44,9 +36,16 @@ event source del calendario
 
 
       <ion-list>
+        
           <ion-card  (click)="mostrarEvento(evento.id)" *ngFor="let evento of eventosChidos">
-            <ion-card-header>{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
-            <ion-card-content>{{evento.tipo_evento}}</ion-card-content>    
+                <div *ngIf="evento.saldo != 0; else pagado" class="cardnopadaga">
+                    <ion-card-header color="light">{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
+                    <ion-card-content color="light">{{evento.tipo_evento}}</ion-card-content>   
+                  </div>
+                  <ng-template #pagado class="cardpadaga">
+                      <ion-card-header>{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
+                      <ion-card-content>{{evento.tipo_evento}}</ion-card-content>   
+                  </ng-template>
           </ion-card>
       </ion-list>
 
