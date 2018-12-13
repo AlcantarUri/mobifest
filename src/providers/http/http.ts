@@ -4,6 +4,7 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/do';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/toPromise';
+import { identifierModuleUrl } from '@angular/compiler';
 
 
 
@@ -396,5 +397,29 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
       });
 
      }
+
+
+     ////////detalle pago
+
+
+     detallePago(id:string){
+
+      
+       var url = 'http://avisositd.xyz/mobiliaria/pagos/seguimientopago.php?id_evento='+id;
+       console.log(url);
+       
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+ 
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+
+
+    }
+
 
 }

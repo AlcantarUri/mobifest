@@ -14,6 +14,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
 import { CotizacionrapidaModalPage } from '../pages/cotizacionrapida-modal/cotizacionrapida-modal';
 import { EventModalPage } from '../pages/event-modal/event-modal';
+import { SeguimientopagodetallePage } from '../pages/seguimientopagodetalle/seguimientopagodetalle';
 
 
 import { NgCalendarModule } from 'ionic2-calendar';
@@ -37,7 +38,8 @@ import { Camera } from '@ionic-native/camera';
     TabsPage,
     ConfiguracionPage,
     CotizacionrapidaModalPage,
-    EventModalPage
+    EventModalPage,
+    SeguimientopagodetallePage
   ],
   imports: [
     NgCalendarModule,
@@ -59,7 +61,8 @@ import { Camera } from '@ionic-native/camera';
     TabsPage,
     ConfiguracionPage,
     CotizacionrapidaModalPage,
-    EventModalPage
+    EventModalPage,
+    SeguimientopagodetallePage
   ],
   providers: [
     StatusBar,

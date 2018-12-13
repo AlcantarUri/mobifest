@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimientopagodetalle';
 
 /**
  * Generated class for the PagosPage page.
@@ -50,6 +51,12 @@ export class PagosPage {
         alert("Verifica que cuentes con internet");
       }
     );
+  }
+
+  abono(id:string){
+    this.navCtrl.push(SeguimientopagodetallePage, {
+      data: id
+    });
   }
 
 }
