@@ -92,7 +92,7 @@ export class SeguimientopagodetallePage {
           toast.present(); 
         
          }else{
-          this.navCtrl.push(PagosPage);
+          this.navCtrl.setRoot(PagosPage);
          }
 
 
