@@ -399,7 +399,7 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
      }
 
 
-     ////////detalle pago
+     ////////detalle pago/////////////////////////////////////////////////////////////////////////////7
 
 
      detallePago(id:string){
@@ -420,6 +420,20 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
 
 
     }
+
+    abonarEvento(id:string, abono:string){
+
+   
+      var url = 'http://avisositd.xyz/mobiliaria/pagos/abonar.php?id='+id;
+      return new Promise((resolve, reject) => {
+       this.http.get(url+'&abono='+abono)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
 
 
 }
