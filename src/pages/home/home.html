@@ -37,7 +37,7 @@
 
       <ion-list>
         
-          <ion-card  (click)="mostrarEvento(evento.id)" *ngFor="let evento of eventosChidos">
+          <ion-card *ngFor="let evento of eventosChidos" (click)="mostrarEvento(evento.id_evento)">
                 <div *ngIf="evento.saldo != 0; else pagado" class="cardnopadaga">
                     <ion-card-header color="light">{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
                     <ion-card-content color="light">{{evento.tipo_evento}}</ion-card-content>   

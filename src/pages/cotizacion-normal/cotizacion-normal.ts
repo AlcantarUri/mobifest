@@ -51,6 +51,7 @@ fecha_recoleccion_evento: any;
 hora_recoleccion_evento:any;
 pagado_evento: any;
 nombre_titular_evento: string;
+telefono_titular_evento: string;
 direccion_evento: string;
 cantidad: number;
 anticipo: number;
@@ -108,7 +109,8 @@ public costo_total:number=0;
       this.fecha_envio_evento,
       this.hora_envio_evento,
       id_mob,
-      reservados
+      reservados,
+      this.fecha_recoleccion_evento
     ).then(
       (inv) => { 
 
@@ -142,6 +144,7 @@ public costo_total:number=0;
       this.hora_recoleccion_evento,
       this.pagado_evento, 
       this.nombre_titular_evento, 
+      this.telefono_titular_evento,
       this.direccion_evento,
       this.costo_total,
       this.anticipo,
@@ -196,23 +199,7 @@ public costo_total:number=0;
     );
   }
   
-  /*getMessages(){    
-    this.http.revisarBase().then(
-      (inv) => { 
-       this.inventario = inv["inventario"];
-       //this.mobiliarios = this.inventario;     
-       this.moviles = inv["inventario"];
-       //this.nombres = JSON.parse(JSON.stringify(this.moviles));
-       this.items = this.mobiliarios;    
-       
-         
-      },
-      (error) =>{
-        console.log("Error"+JSON.stringify(error));
-        alert("Verifica que cuentes con internet");
-      }
-    );
-   }*/
+  
    
    continuarCotizacion(arreglochido: any){
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
@@ -311,7 +298,11 @@ public costo_total:number=0;
 seikoas(id_mob: number, reservados:number){
 
   this.arreglodeobjetos.push({
-    fecha_evento: this.fecha_envio_evento, hora_evento: this.hora_envio_evento, id_mob: id_mob,ocupados:reservados
+    fecha_evento: this.fecha_envio_evento, 
+    hora_evento: this.hora_envio_evento, 
+    id_mob: id_mob,
+    ocupados:reservados,
+    hora_recoleccion_evento: this.hora_recoleccion_evento
   })
   console.log(this.arreglodeobjetos);
 
@@ -330,6 +321,7 @@ this.http.dispoibilidadmob(
   this.arreglodeobjetos[i].hora_evento,
   this.arreglodeobjetos[i].id_mob,
   this.arreglodeobjetos[i].ocupados,
+  this.arreglodeobjetos[i].hora_recoleccion_evento
 ).then((inv)=>{
 
 },(error)=>{

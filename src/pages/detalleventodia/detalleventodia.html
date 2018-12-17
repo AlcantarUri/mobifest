@@ -1,0 +1,72 @@
+<!--
+  Generated template for the DetalleventodiaPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>detalleventodia</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-list>
+        
+    <ion-card *ngFor="let evento of evento">
+      
+       
+        <ion-card>
+
+          <ion-card-content>
+            <ion-card-title>
+              {{evento.nombre_evento}}
+            </ion-card-title>
+            <p>
+             {{evento.fecha_envio_evento}}
+            </p>
+            <p>
+              {{evento.direccion_evento}}
+             </p>
+          </ion-card-content>
+    
+      
+        </ion-card>
+      </ion-card>
+
+</ion-list>
+
+</ion-content>
+
+<ion-content class="cardsflipping">
+
+
+    <ion-list>
+        <div class="spacer" style="height: 4px;"></div> 
+              <ion-item-sliding #item *ngFor="let item of items">
+        <ion-item>
+          <h2>{{item.nombre_mob}}</h2>
+		
+        </ion-item>
+        <ion-item-options side="right">
+          
+          <button ion-button color="danger" (click)="share(item)">
+              <ion-icon name="trash">
+            Eliminar 
+              </ion-icon>
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+      <div class="spacer" style="height: 3px;"></div>    
+
+     </ion-list>
+
+      
+  
+</ion-content>
+

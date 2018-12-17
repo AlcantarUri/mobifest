@@ -90,6 +90,7 @@ fecha_recoleccion_evento: any;
 hora_recoleccion_evento:any;
 pagado_evento: any;
 nombre_titular_evento: string;
+telefono_titular_evento: string;
 direccion_evento: string;
 cantidad: number;
 anticipo: number;
@@ -202,6 +203,7 @@ idEvento: number = 9999;
       this.pagado_evento, 
       this.nombre_titular_evento, 
       this.direccion_evento,
+      this.telefono_titular_evento,
       this.costo_total,
       this.saldo,
       this.anticipo
@@ -318,7 +320,9 @@ juntarobjetos(){
   for (var i = 0; i < this.arreglodeobjetos.length; i++) {
     // console.log(json[i].nombre_mob);
     this.arreglodefecha.push({
-      fecha_evento: this.fecha_envio_evento, hora_evento: this.hora_envio_evento, 
+      fecha_evento: this.fecha_envio_evento, 
+      hora_evento: this.hora_envio_evento, 
+      hora_recoleccion_evento: this.hora_recoleccion_evento
       
     })
     
@@ -335,6 +339,7 @@ this.http.dispoibilidadmob(
   this.arreglodefecha[i].hora_evento,
   this.arreglodeobjetos[i].id_mob,
   this.arreglodeobjetos[i].ocupados,
+  this.arreglodefecha[i].hora_recoleccion_evento
 ).then((inv)=>{
 
 },(error)=>{

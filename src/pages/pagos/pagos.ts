@@ -18,7 +18,7 @@ import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimient
 export class PagosPage {
 
   pagos:any;
-
+  
   constructor(public navCtrl: NavController, public http: HttpProvider, public navParams: NavParams, public view: ViewController) {
 
     this.sacarPagos();
