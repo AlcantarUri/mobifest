@@ -223,7 +223,7 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
  
    sacarDetalles(nombre_mob:string){
  
-      //console.log("llega al http");
+      console.log(nombre_mob);
      
      var url = 'http://avisositd.xyz/mobiliaria/detalles.php?nombre_mob='+nombre_mob;
      return new Promise((resolve, reject) => {
@@ -246,6 +246,7 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
 
       let datos = { nombre:todo["nombre"],cantidad:todo["cantidad"], costo:todo["costo"],nombre_extra:todo["nombre_extra"], precio_extra:todo["precio_extra"]}
   
+      console.log(todo["precio_extra"]);  
        let options = {
          headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
