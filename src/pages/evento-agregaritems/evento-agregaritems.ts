@@ -128,7 +128,6 @@ idEvento: number = 9999;
       //carga el metodo que trae los items de la abse de datos y lo guarda
       //en el array inventario []
     
-      this.getMessages();
     this.initializeItems();
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
 
@@ -139,6 +138,7 @@ idEvento: number = 9999;
     console.log(this.solo_fecha);
     
 
+    this.getMessages();
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
    
@@ -365,13 +365,14 @@ this.http.dispoibilidadmob(
 }
 
    getMessages(){    
-    this.http.yanosequehaceesta(this.pre).then(
+    this.http.yanosequehaceesta(this.solo_fecha).then(
       (inv) => { 
        this.inventario = inv["inventario"];
        //this.mobiliarios = this.inventario;     
        this.moviles = inv["inventario"];
        //this.nombres = JSON.parse(JSON.stringify(this.moviles));
        this.items = this.mobiliarios;    
+       console.log(this.inventario);
        
          
       },

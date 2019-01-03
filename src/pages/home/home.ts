@@ -133,7 +133,7 @@ addEventNormal(){
     let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:data});
     modal.present();
     
-    console.log(data);
+    
     
 
     modal.onDidDismiss(data=>{
