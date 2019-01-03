@@ -28,7 +28,7 @@ export class SeguimientopagodetallePage {
 
     this.id = navParams.get('data');
 
-    this.sacarPago();
+    this.sacarPago();  
    
     console.log(this.id);
   }

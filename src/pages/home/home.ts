@@ -3,6 +3,7 @@ import { NavController, ModalController, AlertController } from 'ionic-angular';
 import * as moment from 'moment';
 import { HttpProvider } from '../../providers/http/http';
 import { ToastController } from 'ionic-angular';
+import { DetalleventodiaPage } from '../detalleventodia/detalleventodia';
 
 
 
@@ -201,9 +202,10 @@ llenarCards(){
   }
 
 
-  mostrarEvento(idevento: string){
+  mostrarEvento(id_evento: string){
 
-    console.log(idevento);
+    console.log(id_evento);
+    this.navCtrl.push(DetalleventodiaPage,{data: id_evento});
         
   }
 

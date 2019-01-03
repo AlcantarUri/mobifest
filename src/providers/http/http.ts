@@ -40,6 +40,7 @@ insertarEvento(nombre_evento: string,
   hora_recoleccion_evento:any,
   pagado_evento: any, 
   nombre_titular_evento: string, 
+  telefono_titular_evento:string,
   direccion:string,
   //para saldos_mob
   costo_total: number,
@@ -58,6 +59,7 @@ insertarEvento(nombre_evento: string,
      hora_recoleccion_evento:hora_recoleccion_evento,
      pagado_evento:pagado_evento,
      nombre_titular_evento:nombre_titular_evento,
+     telefono_titular_evento:telefono_titular_evento,
      direccion:direccion,
      costo_total:costo_total,
      saldo:saldo,
@@ -94,13 +96,15 @@ dispoibilidadmob(
   fecha_evento:string,
   hora_evento:string,
   id_mob:number,
-  ocupados:number
+  ocupados:number,
+  fecha_recoleccion_evento: string
   ){
   let datos = { 
     fecha_evento:fecha_evento,
   hora_evento:hora_evento,
 id_mob:id_mob,
-ocupados:ocupados  }
+ocupados:ocupados,
+fecha_recoleccion_evento:fecha_recoleccion_evento  }
   
        let options = {
          headers: {
@@ -166,6 +170,34 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
  });
 }
 
+detallesdeleventodeldia(id_evento: string){
+
+  var url = 'http://avisositd.xyz/mobiliaria/DetalleDelEventoDelDiaConItems.php?id_evento='+id_evento;
+ return new Promise((resolve, reject) => {
+  this.http.get(url)
+     .subscribe(data => {
+       resolve(data);
+      }, (err) =>{
+        reject(err);
+      });
+ });
+
+}
+
+
+sacarItemsporEventos(id_evento:string){
+
+   
+  var url = 'http://avisositd.xyz/mobiliaria/ItemsDelEventoDelDia.php?id_evento='+id_evento;
+  return new Promise((resolve, reject) => {
+   this.http.get(url)
+      .subscribe(data => {
+        resolve(data);
+       }, (err) =>{
+         reject(err);
+       });
+  });
+ }
 
 
 
@@ -401,7 +433,6 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
 
 
      ////////detalle pago/////////////////////////////////////////////////////////////////////////////7
-
 
      detallePago(id:string){
 
