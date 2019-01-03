@@ -67,6 +67,12 @@ export class DetalleventodiaPage {
         alert("Verifica que cuentes con internet");
     })
   }
+
+  borrar(id_evento, id_mob){
+
+    console.log(id_evento,id_mob);
+
+  }
   
 
 }

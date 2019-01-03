@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import * as moment from 'moment';
 import { Events } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
@@ -66,7 +66,8 @@ public costo_total:number=0;
               public navParams: NavParams,
               public http : HttpProvider,
               public view: ViewController,
-              public alertCtrl: AlertController
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController
 
               ) {
 
@@ -90,6 +91,9 @@ public costo_total:number=0;
     //this.mobiliarios = this.inventario;
     this.items=this.inventario;
     this.inventario=this.moviles;
+
+    this.arreglodeobjetos= [];
+
    }
 
    
@@ -133,7 +137,7 @@ public costo_total:number=0;
 
     this.saldo=this.costo_total-this.anticipo;
 
-    console.log(this.saldo);
+    console.log("El saldo final es de"+this.saldo);
 
     this.http.insertarEvento(
       this.nombre_evento,
@@ -144,8 +148,8 @@ public costo_total:number=0;
       this.hora_recoleccion_evento,
       this.pagado_evento, 
       this.nombre_titular_evento, 
-      this.telefono_titular_evento,
       this.direccion_evento,
+      this.telefono_titular_evento,
       this.costo_total,
       this.anticipo,
       this.saldo).then(
@@ -217,11 +221,12 @@ public costo_total:number=0;
           }
         },
         {
-          text: 'Ño',
+          text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Ño');
-            this.view.dismiss();
+            //this.view.dismiss();
+            this.regresarAfinal();
             
           }
         },
@@ -239,6 +244,7 @@ public costo_total:number=0;
 
    pasaraCotizacionconIva(){
    this.costo_total= this.costo_total+(this.costo_total*.16);
+   this.regresarAfinal();
   }
   
    getItems(ev: any) {
@@ -346,11 +352,30 @@ this.http.dispoibilidadmob(
 
   save(){
     this.agregaraInventario();
-    this.juntarobjetos();
+
+    this.presentLoadingCustom();
+
+    
     this.view.dismiss();
     
   }
+
+
+  presentLoadingCustom() {
+    let loading = this.loadingCtrl.create({
+      content: 'Agregando Evento por favor espere...',
+      duration: 2000
+    });
+  
+    loading.onDidDismiss(() => {
+      this.juntarobjetos();
+    });
+  
+    loading.present();
+  }
+
   regresarAfinal(){
+    console.log("regresaralfinal");
     this.hideFechas= !this.hideFechas;
     this.mostrarfinal = !this.mostrarfinal;
   }
