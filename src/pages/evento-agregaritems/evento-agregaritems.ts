@@ -72,6 +72,8 @@ prueba: any;
 user=null;
 userId = [];
 
+public fecha_tentativa: string;
+public solo_fecha: string;
 
 arreglodefecha = [];
 arreglodeobjetos = [];
@@ -129,6 +131,14 @@ idEvento: number = 9999;
       this.getMessages();
     this.initializeItems();
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
+
+
+    this.fecha_tentativa = this.navParams.get('selectedDay');
+    console.log(this.fecha_tentativa);
+    this.solo_fecha = this.fecha_tentativa['title'];
+    console.log(this.solo_fecha);
+    
+
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
    
@@ -355,7 +365,7 @@ this.http.dispoibilidadmob(
 }
 
    getMessages(){    
-    this.http.revisarBase().then(
+    this.http.yanosequehaceesta(this.pre).then(
       (inv) => { 
        this.inventario = inv["inventario"];
        //this.mobiliarios = this.inventario;     
@@ -389,21 +399,26 @@ this.http.dispoibilidadmob(
  
    save(){
 
-    this.juntarobjetos();
+    
     this.agregaraInventario();
-  //this.agregarDisponibilidad();
-  
- 
-
-   // this.haciaeventos.push({nombre_evento: event.title})
-
-
-
- 
+    this.presentLoadingCustom();
 
     this.view.dismiss(this.event);
     
-    
+  }
+
+
+  presentLoadingCustom() {
+    let loading = this.loadingCtrl.create({
+      content: 'Agregando Evento por favor espere...',
+      duration: 2000
+    });
+  
+    loading.onDidDismiss(() => {
+      this.juntarobjetos();
+    });
+  
+    loading.present();
   }
 
  

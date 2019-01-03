@@ -40,8 +40,9 @@ insertarEvento(nombre_evento: string,
   hora_recoleccion_evento:any,
   pagado_evento: any, 
   nombre_titular_evento: string, 
-  telefono_titular_evento:string,
   direccion:string,
+  telefono_titular_evento:string,
+  
   //para saldos_mob
   costo_total: number,
   anticipo: number,
@@ -59,8 +60,8 @@ insertarEvento(nombre_evento: string,
      hora_recoleccion_evento:hora_recoleccion_evento,
      pagado_evento:pagado_evento,
      nombre_titular_evento:nombre_titular_evento,
-     telefono_titular_evento:telefono_titular_evento,
      direccion:direccion,
+     telefono_titular_evento:telefono_titular_evento,
      costo_total:costo_total,
      saldo:saldo,
      anticipo:anticipo
@@ -200,6 +201,19 @@ sacarItemsporEventos(id_evento:string){
  }
 
 
+ borraritemsdelEvento(id_evento:string, id_mob: string){
+
+   
+  var url = 'http://avisositd.xyz/mobiliaria/borrarmoviliario.php?id_evento='+id_evento+'&id_mob'+id_mob;
+  return new Promise((resolve, reject) => {
+   this.http.get(url)
+      .subscribe(data => {
+        resolve(data);
+       }, (err) =>{
+         reject(err);
+       });
+  });
+ }
 
 ///////////////////////////Troca////////////////////////////////77
 

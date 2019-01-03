@@ -18,8 +18,9 @@
 
 
 
-<ion-content>
-
+<ion-content >
+    
+      <div  scrollY="false">
   <calendar 
   [calendarMode]="calendar.mode"
   [currentDate]="calendar.currentDate"
@@ -29,12 +30,13 @@
   step="30"
   class="calendar">
   </calendar>
-
+</div>
 
   <div class="ocultarnoevents"></div>
-  <div class="eventos">
+  
 
 
+    <div class="eventos">
       <ion-list>
         
           <ion-card *ngFor="let evento of eventosChidos" (click)="mostrarEvento(evento.id_evento)">
@@ -49,15 +51,6 @@
           </ion-card>
       </ion-list>
 
-  
-      
-    
-      
-
   </div>
   
-  
-
-  
-
 </ion-content>

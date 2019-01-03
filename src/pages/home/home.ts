@@ -87,8 +87,8 @@ abrirAlert(){
       {
         text: 'Cotizacion Rapida',
         handler: () => {
-          
-          this.addEvent();
+          this.alarm();
+          // pasar a cotizacion rapida
 
 
         }
@@ -126,14 +126,14 @@ addEventNormal(){
 }
 
 
-  addEvent(){
+  addEvent(data: any){
 
 
 
-    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.selectedDay});
+    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:data});
     modal.present();
-    this.dtae = this.selectedDay.getDate();
-    console.log(this.dtae);
+    
+    console.log(data);
     
 
     modal.onDidDismiss(data=>{
@@ -224,5 +224,39 @@ llenarCards(){
     
 
   }
+
+  //prueba
+alarm() {
+  let prompt = this.alertCtrl.create({
+    title: 'Seleccione fecha Tentativa',
+    inputs: [
+      {
+        name: 'title',
+        placeholder: 'Title',
+        type: 'date'
+      },
+    ],
+    buttons: [
+      {
+        text: 'Cancelar',
+        handler: data => {
+          console.log('Cancel clicked');
+        }
+      },
+      {
+        text: 'Aceptar',
+        handler: data => {
+          console.log('Saved clicked');
+          console.log(data);
+          this.addEvent(data);
+
+        }
+      }
+    ]
+  });
+  prompt.present();
+}
+
+//termina prueba
 
 }

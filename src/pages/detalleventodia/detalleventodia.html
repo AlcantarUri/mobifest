@@ -7,13 +7,13 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detalleventodia</ion-title>
+    <ion-title>Detalles</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="cardsdetalles">
 
 
   <ion-list>
@@ -21,22 +21,25 @@
     <ion-card *ngFor="let evento of evento">
       
        
-        <ion-card>
+        
 
           <ion-card-content>
             <ion-card-title>
-              {{evento.nombre_evento}}
+              EVENTO: {{evento.nombre_evento}}
             </ion-card-title>
             <p>
-             {{evento.fecha_envio_evento}}
+             Fecha: {{evento.fecha_envio_evento}}
             </p>
             <p>
-              {{evento.direccion_evento}}
+                Hora: {{evento.hora_envio_evento}}
+               </p>
+            <p>
+              Dirección: {{evento.direccion_evento}}
              </p>
           </ion-card-content>
     
       
-        </ion-card>
+        
       </ion-card>
 
 </ion-list>
@@ -45,17 +48,19 @@
 
 <ion-content class="cardsflipping">
 
-
+    
+      
     <ion-list>
         <div class="spacer" style="height: 4px;"></div> 
-              <ion-item-sliding #item *ngFor="let item of items">
+              <ion-item-sliding #slidingItem *ngFor="let item of items">
         <ion-item>
           <h2>{{item.nombre_mob}}</h2>
-		
+          <p>{{item.ocupados}} </p>
+          
         </ion-item>
         <ion-item-options side="right">
           
-          <button ion-button color="danger" (click)="share(item)">
+          <button ion-button color="danger" (click)="borrar(id_evento,item.id_mob)">
               <ion-icon name="trash">
             Eliminar 
               </ion-icon>
@@ -67,6 +72,6 @@
      </ion-list>
 
       
-  
+    
 </ion-content>
 
