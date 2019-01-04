@@ -16,6 +16,8 @@ import { CotizacionrapidaModalPage } from '../pages/cotizacionrapida-modal/cotiz
 import { EventModalPage } from '../pages/event-modal/event-modal';
 import { SeguimientopagodetallePage } from '../pages/seguimientopagodetalle/seguimientopagodetalle';
 import { DetalleventodiaPage } from '../pages/detalleventodia/detalleventodia';
+import { SeguimientopagodosPage } from '../pages/seguimientopagodos/seguimientopagodos';
+
 
 
 import { NgCalendarModule } from 'ionic2-calendar';
@@ -41,7 +43,8 @@ import { Camera } from '@ionic-native/camera';
     CotizacionrapidaModalPage,
     EventModalPage,
     SeguimientopagodetallePage,
-    DetalleventodiaPage
+    DetalleventodiaPage,
+    SeguimientopagodosPage
   ],
   imports: [
     NgCalendarModule,
@@ -65,7 +68,8 @@ import { Camera } from '@ionic-native/camera';
     CotizacionrapidaModalPage,
     EventModalPage,
     SeguimientopagodetallePage,
-    DetalleventodiaPage
+    DetalleventodiaPage,
+    SeguimientopagodosPage
   ],
   providers: [
     StatusBar,

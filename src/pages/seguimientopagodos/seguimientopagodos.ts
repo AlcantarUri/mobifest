@@ -1,15 +1,9 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
-import { PagosPage } from '../pagos/pagos';
-import { ToastController } from 'ionic-angular';
-
-
-
-
 
 /**
- * Generated class for the SeguimientopagodetallePage page.
+ * Generated class for the SeguimientopagodosPage page.
  *
  * See https://ionicframework.com/docs/components/#navigation for more info on
  * Ionic pages and navigation.
@@ -17,18 +11,20 @@ import { ToastController } from 'ionic-angular';
 
 @IonicPage()
 @Component({
-  selector: 'page-seguimientopagodetalle',
-  templateUrl: 'seguimientopagodetalle.html',
+  selector: 'page-seguimientopagodos',
+  templateUrl: 'seguimientopagodos.html',
 })
-export class SeguimientopagodetallePage {
-
+export class SeguimientopagodosPage {
   id:string;
   pagos:any;
 
-  constructor(public navCtrl: NavController, private toastCtrl: ToastController, 
-            public http: HttpProvider, public navParams: NavParams) {
 
-    this.id = navParams.get('data');
+  constructor(public navCtrl: NavController, 
+              private toastCtrl: ToastController, 
+              public http: HttpProvider, 
+              public navParams: NavParams) {
+
+                this.id = navParams.get('data');
 
     this.sacarPago();  
    
@@ -52,10 +48,6 @@ export class SeguimientopagodetallePage {
         alert("Verifica que cuentes con internet");
       }
     );
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SeguimientopagodetallePage');
   }
 
   abonar(abono:string){

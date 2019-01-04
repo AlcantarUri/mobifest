@@ -134,8 +134,8 @@ idEvento: number = 9999;
 
     this.fecha_tentativa = this.navParams.get('selectedDay');
     console.log(this.fecha_tentativa);
-    this.solo_fecha = this.fecha_tentativa['title'];
-    console.log(this.solo_fecha);
+    this.fecha_envio_evento = this.fecha_tentativa['title'];
+    console.log(this.fecha_envio_evento);
     
 
     this.getMessages();
@@ -365,7 +365,7 @@ this.http.dispoibilidadmob(
 }
 
    getMessages(){    
-    this.http.yanosequehaceesta(this.solo_fecha).then(
+    this.http.yanosequehaceesta(this.fecha_envio_evento).then(
       (inv) => { 
        this.inventario = inv["inventario"];
        //this.mobiliarios = this.inventario;     

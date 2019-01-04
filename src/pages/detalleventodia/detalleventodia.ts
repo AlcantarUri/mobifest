@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
+import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimientopagodetalle';
+import { SeguimientopagodosPage } from '../seguimientopagodos/seguimientopagodos';
 
 /**
  * Generated class for the DetalleventodiaPage page.
@@ -27,7 +29,8 @@ export class DetalleventodiaPage {
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
-              public http: HttpProvider) {
+              public http: HttpProvider,
+              public toastCtrl : ToastController) {
 
                 this.id_evento= navParams.get('data');
 
@@ -72,6 +75,51 @@ export class DetalleventodiaPage {
 
     console.log(id_evento,id_mob);
 
+
+    this.http.borraritemsdelEvento(id_evento,id_mob).then(
+      (inv) => { 
+        
+          
+        if(inv["cliente"] == "eliminado"){
+
+          
+
+          let toast = this.toastCtrl.create({
+            message: 'Moviliario Eliminado',
+            duration: 2000,
+            position: 'top'
+          });
+        
+          toast.present();
+          this.sacarItems(id_evento);
+
+
+        }else{
+
+          let toast = this.toastCtrl.create({
+            message: 'Fallo la eliminacion Contacta Administrador',
+            duration: 2000,
+            position: 'top'
+          });
+        
+          toast.present();
+
+        }
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+
+  }
+
+
+  abono(){
+    this.navCtrl.push(SeguimientopagodosPage, {
+      data: this.id_evento
+    });
+    
   }
   
 

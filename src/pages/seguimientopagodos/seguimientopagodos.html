@@ -1,0 +1,54 @@
+<!--
+  Generated template for the SeguimientopagodetallePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+      <ion-title>Detalle</ion-title>
+    </ion-navbar>
+  
+  </ion-header>
+  
+  
+  <ion-content >
+  
+      <ion-card *ngFor="let item of pagos" >
+          <ion-item class="center">
+              <h1 class="h1Content">{{item.nombre_titular_evento}}</h1>
+              <h2>Evento {{item.nombre_evento}} </h2>
+            </ion-item>
+  
+            <ion-card-content>
+                
+                <div class = "row">
+                    <div class = "col">Costo Total</div>
+                    <div class = "col">{{item.costo_total}}</div>
+                  </div>
+                <div class = "row">
+                    <div class = "col">Pagado</div>
+                    <div class = "col">{{item.anticipo}}</div>
+                  </div>
+                <div class = "row">
+                    <div class = "col" class="hdContent">Saldo Pendiente</div>
+                    <div class = "col" class="hddContent">{{item.saldo}}</div>
+                  </div>
+  
+                  <p>
+                      <ion-item>
+                          <ion-label color="primary" stacked>Cantidad a Abonar</ion-label>
+                          <ion-input type="number" [(ngModel)]="abono" placeholder="{{item.saldo}}"></ion-input>
+                        </ion-item>
+                         
+                  </p>
+                  <button ion-button (click)="abonar(abono)" full>Abonar</button>
+  
+    
+  
+              </ion-card-content>
+           </ion-card>
+  
+  </ion-content>
+  

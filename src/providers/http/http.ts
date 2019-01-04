@@ -202,9 +202,9 @@ sacarItemsporEventos(id_evento:string){
 
 
  borraritemsdelEvento(id_evento:string, id_mob: string){
-
+console.log("dentro del provder"+id_evento,id_mob);
    
-  var url = 'http://avisositd.xyz/mobiliaria/borrarmoviliario.php?id_evento='+id_evento+'&id_mob'+id_mob;
+  var url = 'http://avisositd.xyz/mobiliaria/uri/borrarmoviliario.php?id_evento='+id_evento+'&id_mob='+id_mob;
   return new Promise((resolve, reject) => {
    this.http.get(url)
       .subscribe(data => {
