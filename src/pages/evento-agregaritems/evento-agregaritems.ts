@@ -79,6 +79,8 @@ arreglodefecha = [];
 arreglodeobjetos = [];
 arreglofinal =[];
 
+wakawaka : number;
+
 //para la fecha
 public event = { startTime: new Date().toISOString(), endTime: new Date().toISOString()}
 
@@ -106,6 +108,9 @@ ocupados: number;
 idEvento: number = 9999;
 
 
+
+
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: HttpProvider,
@@ -122,6 +127,7 @@ idEvento: number = 9999;
     this.hideDates=true;
     this.pagado_evento=false;
     this.anticipo = 0;
+    
       //para pasar al final de la cotizacion
       
 
@@ -136,11 +142,17 @@ idEvento: number = 9999;
     console.log(this.fecha_tentativa);
     this.fecha_envio_evento = this.fecha_tentativa['title'];
     console.log(this.fecha_envio_evento);
+
+
+    
     
 
     this.getMessages();
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
+
+    this.fecha_recoleccion_evento = this.fecha_envio_evento
+
    
   }
 
@@ -260,6 +272,7 @@ idEvento: number = 9999;
 //alert para pedir numero de items de mobiliario
 
     presentAlert(id_mob: number, nombre: string, cantidad: number, costo: number) {
+      this.wakawaka = cantidad; 
         let alert = this.alertCtrl.create({
 
           title: 'Selecciona la cantidad',
@@ -285,9 +298,21 @@ idEvento: number = 9999;
             {
               text: 'Ok',
               handler: data => {
-                this.seikoas(id_mob,data.reservados,costo);
+                
                 //this.agregarDisponibilidad(id_mob, data.reservados);
-
+                if(this.wakawaka<data.reservados){
+                  let toast = this.toastCtrl.create({
+                    message: 'No hay cantidad suficiente',
+                    duration: 3000,
+                    position: 'top'
+                  });
+                  toast.present();
+                }else{
+                  console.log("Agregando a seikoas");
+                  this.seikoas(id_mob,data.reservados,costo);
+                  this.wakawaka = 0;
+                }
+                  
               }
             }
           ] 
@@ -296,6 +321,9 @@ idEvento: number = 9999;
         alert.present();
 
   }
+
+
+  
   tgExtras(){
     this.hideCards=true;
     this.hideDates=false;

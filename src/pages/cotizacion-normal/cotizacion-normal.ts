@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController, ToastController } from 'ionic-angular';
 import * as moment from 'moment';
 import { Events } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
@@ -56,6 +56,7 @@ direccion_evento: string;
 cantidad: number;
 anticipo: number;
 saldo: number;
+wakawaka : number = 0;
 
 diponible_en_inventario: number;
 
@@ -67,7 +68,8 @@ public costo_total:number=0;
               public http : HttpProvider,
               public view: ViewController,
               public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController
+              public loadingCtrl: LoadingController,
+              public toastCtrl : ToastController
 
               ) {
 
@@ -96,6 +98,11 @@ public costo_total:number=0;
 
    }
 
+
+   changed(){
+    
+    this.fecha_recoleccion_evento=this.fecha_envio_evento;
+   }
    
 
 
@@ -151,8 +158,8 @@ public costo_total:number=0;
       this.direccion_evento,
       this.telefono_titular_evento,
       this.costo_total,
-      this.anticipo,
-      this.saldo).then(
+      this.saldo,
+      this.anticipo).then(
       (res) => { 
         console.log(res["registro"]);
 
@@ -263,6 +270,7 @@ public costo_total:number=0;
   }
 
   presentAlert(id_mob: number, nombre: string, cantidad: number, costo: number) {
+    this.wakawaka = cantidad;
     let alert = this.alertCtrl.create({
 
       title: 'Selecciona la cantidad',
@@ -289,8 +297,20 @@ public costo_total:number=0;
           text: 'Ok',
           handler: data => {
             //this.seikoas(id_mob,data.reservados,costo,nombre);
-            this.seikoas(id_mob, data.reservados);
-            this.calcularTotal(data.reservados, costo);
+            if(this.wakawaka<data.reservados){
+              let toast = this.toastCtrl.create({
+                message: 'No hay cantidad suficiente',
+                duration: 3000,
+                position: 'top'
+              });
+              toast.present();
+            }else{
+              console.log("Agregando a seikoas");
+              this.seikoas(id_mob, data.reservados);
+              this.calcularTotal(data.reservados, costo);
+              this.wakawaka = 0;
+            }
+            
             
           }
         }
