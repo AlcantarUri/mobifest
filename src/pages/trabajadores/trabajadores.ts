@@ -136,6 +136,10 @@ export class TrabajadoresPage {
         {
           name: 'contrasena',
           placeholder: 'Contraseña'
+        },
+        {
+          name: 'correo',
+          placeholder: 'Correo Electronico'
         }
       ],
       buttons: [
@@ -150,7 +154,7 @@ export class TrabajadoresPage {
           text: 'Añadir',
           handler: data => {
 
-            this.decidirRol(data.nombre_comp, data.usuario, data.contrasena);
+            this.decidirRol(data.nombre_comp, data.usuario, data.contrasena, data.correo);
            
           }
         }
@@ -159,7 +163,7 @@ export class TrabajadoresPage {
     alert.present();
   }
 
-  decidirRol(nombre:string, usuario:string, contrasena:string){
+  decidirRol(nombre:string, usuario:string, contrasena:string, correo:string){
 
     let alert = this.alertCtrl.create({
       title: 'Decide rol al nuevo Usuario',
@@ -169,13 +173,13 @@ export class TrabajadoresPage {
           text: 'Administrador',
           role: 'cancel',
           handler: () => {
-            this.anadirUsuario(nombre, usuario, contrasena, "Administrador");
+            this.anadirUsuario(nombre, usuario, contrasena, correo, "Administrador");
           }
         },
         {
           text: 'Repartidor',
           handler: () => {
-            this.anadirUsuario(nombre, usuario, contrasena, "Trabajador");
+            this.anadirUsuario(nombre, usuario, contrasena, correo, "Trabajador");
           }
         }
       ]
@@ -184,11 +188,11 @@ export class TrabajadoresPage {
   }
 
 
-  anadirUsuario(nombre:string, usuario:string, contrasena:string, rol:string){
+  anadirUsuario(nombre:string, usuario:string, contrasena:string, correo:string, rol:string){
 
   //  console.log(nombre+usuario+contrasena+rol+this.currentDate);
 
-    this.http.anadirUsuario(nombre,usuario,contrasena,rol,this.currentDate).then(
+    this.http.anadirUsuario(nombre,usuario,contrasena,correo,rol,this.currentDate).then(
       (inv) => { 
         console.log(inv)     
         

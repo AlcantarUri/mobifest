@@ -416,9 +416,9 @@ console.log("dentro del provder"+id_evento,id_mob);
       });
      }
 
-     anadirUsuario(nombre:string,usuario:string,contrasena:string,rol:string,fecha:string){
+     anadirUsuario(nombre:string,usuario:string,contrasena:string,correo:string,rol:string,fecha:string){
  
-      var url = 'http://avisositd.xyz/mobiliaria/agregarUsuario.php?nombre='+nombre+'&usuario='+usuario+'&contrasena='+contrasena+'&rol='+rol+'&fecha='+fecha;
+      var url = 'http://avisositd.xyz/mobiliaria/agregarUsuario.php?nombre='+nombre+'&usuario='+usuario+'&contrasena='+contrasena+'&corr='+correo+'&rol='+rol+'&fecha='+fecha;
       return new Promise((resolve, reject) => {
        this.http.get(url)
           .subscribe(data => {

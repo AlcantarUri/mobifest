@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { ModalController } from 'ionic-angular';
-import { DetallePage } from '../detalle/detalle';
 
 /**
  * Generated class for the MobiliarioPage page.
@@ -61,9 +60,11 @@ export class MobiliarioPage {
 
   openModal(nombre_mob:string){
 
-    this.navCtrl.push(DetallePage, {
+    this.modCtrl.create('DetallePage',{
       data: nombre_mob
-    });
+    }).present();
+
+    
   }
 
   ionViewWillEnter(){

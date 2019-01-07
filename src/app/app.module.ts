@@ -9,12 +9,10 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
-import { DetallePage } from '../pages/detalle/detalle';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
 import { CotizacionrapidaModalPage } from '../pages/cotizacionrapida-modal/cotizacionrapida-modal';
 import { EventModalPage } from '../pages/event-modal/event-modal';
-import { SeguimientopagodetallePage } from '../pages/seguimientopagodetalle/seguimientopagodetalle';
 import { DetalleventodiaPage } from '../pages/detalleventodia/detalleventodia';
 import { SeguimientopagodosPage } from '../pages/seguimientopagodos/seguimientopagodos';
 
@@ -37,12 +35,10 @@ import { Camera } from '@ionic-native/camera';
     HomePage,
     LoginPage,
     MobiliarioPage,
-    DetallePage,
     TabsPage,
     ConfiguracionPage,
     CotizacionrapidaModalPage,
     EventModalPage,
-    SeguimientopagodetallePage,
     DetalleventodiaPage,
     SeguimientopagodosPage
   ],
@@ -62,12 +58,10 @@ import { Camera } from '@ionic-native/camera';
     HomePage,
     LoginPage,
     MobiliarioPage,
-    DetallePage,
     TabsPage,
     ConfiguracionPage,
     CotizacionrapidaModalPage,
-    EventModalPage,
-    SeguimientopagodetallePage,
+    EventModalPage,   
     DetalleventodiaPage,
     SeguimientopagodosPage
   ],

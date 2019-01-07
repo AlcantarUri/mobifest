@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { PagosPage } from '../pagos/pagos';
 import { ToastController } from 'ionic-angular';
@@ -26,7 +26,7 @@ export class SeguimientopagodetallePage {
   pagos:any;
 
   constructor(public navCtrl: NavController, private toastCtrl: ToastController, 
-            public http: HttpProvider, public navParams: NavParams) {
+            public http: HttpProvider, public view: ViewController, public navParams: NavParams) {
 
     this.id = navParams.get('data');
 
@@ -34,6 +34,12 @@ export class SeguimientopagodetallePage {
    
     console.log(this.id);
   }
+
+
+  cerrarModal(){
+    this.view.dismiss();
+  }
+
 
   sacarPago(){
     this.http.detallePago(this.id).then(

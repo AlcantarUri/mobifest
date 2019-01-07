@@ -11,7 +11,7 @@
     <ion-title>Inventario</ion-title>
 
 <ion-toolbar>
-    <ion-searchbar (ionInput)="getItems($event)"></ion-searchbar>
+    <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar por nombre"></ion-searchbar>
 </ion-toolbar>
 
   </ion-navbar>
@@ -24,10 +24,11 @@
   
  
       <ion-list class="mobList-class" *ngFor="let item of inventario">
-          <ion-item (click)="openModal(item.nombre_mob)">
+          <ion-item>
             <h2 class="h1Nomb">{{item.nombre_mob}}</h2>
             <p>{{item.cantidad_mob}} Piezas </p>
             <p> ${{item.costo_mob}} c/u</p>
+            <button ion-button clear  (click)="openModal(item.nombre_mob)" item-end>Detalles</button>
             
           </ion-item>
         </ion-list>

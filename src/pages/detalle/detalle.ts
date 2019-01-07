@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { ModalController } from 'ionic-angular';
 
@@ -24,7 +24,7 @@ export class DetallePage {
  
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public http: HttpProvider,  public modCtrl:ModalController) {
+  constructor(public navCtrl: NavController, public view: ViewController, public navParams: NavParams, public http: HttpProvider,  public modCtrl:ModalController) {
 
     this.nombre = navParams.get('data');
    
@@ -78,6 +78,11 @@ export class DetallePage {
 
 
   }
+
+  cerrarModal(){
+    this.view.dismiss();
+  }
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetallePage');
