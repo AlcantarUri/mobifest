@@ -23,14 +23,13 @@
           </button>
       </ion-fab>
 
+      
 
 
   <ion-list>
         
     <ion-card *ngFor="let evento of evento">
       
-       
-        
 
           <ion-card-content>
             <ion-card-title>
@@ -53,21 +52,9 @@
       
 </ion-list>
 
-</ion-content>
-
-
-
-<ion-content class="cardsflipping">
-
-    
-
-      
-      
-              
-          
       
     <ion-list>
-        <div class="spacer" style="height: 2px;"></div> 
+        <div class="spacer" style="height: 4px;"></div> 
               <ion-item-sliding #slidingItem *ngFor="let item of items">
         <ion-item>
           <h2>{{item.nombre_mob}}</h2>
@@ -83,10 +70,20 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
-      <div class="spacer" style="height: 3px;"></div>    
+      <div class="spacer" style="height: 2px;"></div>    
 
      </ion-list>
 
+     <ion-fab right bottom>
+      <button ion-fab color="secondary"><ion-icon name="construct"></ion-icon></button>
+      <ion-fab-list side="top">
+        <button ion-fab color ="third" (click)="addmob()"><ion-icon name="add"></ion-icon></button>
+      </ion-fab-list>
+      <ion-fab-list side="left">
+        <button ion-fab color ="third" ><ion-icon name="brush"></ion-icon></button>
+      </ion-fab-list>
+      
+    </ion-fab>
       
     
 </ion-content>

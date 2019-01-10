@@ -3,11 +3,17 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+
+  ESTA PAGINA ES PARA AÑADIR INVENTAIOR NO TIENE NADA QUE VER CON LA COTIZACION RAPIDA!!!!!!!
+  
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>Cotización</ion-title>
+  <ion-navbar color="primary">
+      <button ion-button small (click)="atras()">
+          Atrás
+        </button>
+    <ion-title>Agregar a Inventario</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -15,37 +21,39 @@
 
 <ion-content>
 
+  <ion-list>
   
-    <ion-card>
+    <ion-card
+    (click)="presentAlert(movil.id_mob, movil.nombre_mob, movil.cantidad_mob, movil.costo_mob)" 
+    *ngFor="let movil of inventario">
        
-        <img [src]=""/>
-      
     <ion-card-content>
       <ion-card-title>
-         Silla Deco
+          {{movil.nombre_mob}}
         </ion-card-title>
       <p>
-          Silla Deco
+        Cantidad en el Inventario: {{movil.cantidad_mob}}
+      </p>
+      <p>
+        Costo: {{movil.costo_mob}}
       </p>
     </ion-card-content>
-
-    <ion-item>
-        <ion-segment [(ngModel)]="relationship" color="primary">
-            <ion-segment-button value="friends" (ionSelect)="selectedFriends()">
-              -
-            </ion-segment-button>
-            <ion-badge item-end>260k</ion-badge>
-            <ion-segment-button value="enemies" (ionSelect)="selectedEnemies()">
-              +
-            </ion-segment-button>
-          </ion-segment>
-        
-    </ion-item>
-        
-        
-
-        
+     
     </ion-card>
+  </ion-list>
 
 
 </ion-content>
+<ion-footer no-border>
+
+  <ion-toolbar>
+      <ion-item>
+          <ion-label color="primary">Subtotal: </ion-label>
+          <ion-input readonly="true" [value]="costo_total"></ion-input>
+        </ion-item>
+        
+    <button [hidden]="hideCards" ion-button full (click)="continuarCotizacion()">Continuar</button>
+  
+  </ion-toolbar>
+
+</ion-footer>

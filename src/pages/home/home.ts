@@ -202,10 +202,10 @@ llenarCards(){
   }
 
 
-  mostrarEvento(id_evento: string){
+  mostrarEvento(id_evento: string, fecha_envio_evento: string){
 
-    console.log(id_evento);
-    this.navCtrl.push(DetalleventodiaPage,{data: id_evento});
+    console.log(id_evento, fecha_envio_evento);
+    this.navCtrl.push(DetalleventodiaPage,{data: id_evento, date: fecha_envio_evento});
         
   }
 

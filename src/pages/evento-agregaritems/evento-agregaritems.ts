@@ -66,7 +66,7 @@ prueba: any;
   searchQuery: string = '';
   
 
-
+wakawaka:string;
   todo={};
 
 user=null;
@@ -79,7 +79,8 @@ arreglodefecha = [];
 arreglodeobjetos = [];
 arreglofinal =[];
 
-wakawaka : number;
+comparaelegidos : Number;
+comparadsiponibles : Number;
 
 //para la fecha
 public event = { startTime: new Date().toISOString(), endTime: new Date().toISOString()}
@@ -271,8 +272,10 @@ idEvento: number = 9999;
 
 //alert para pedir numero de items de mobiliario
 
-    presentAlert(id_mob: number, nombre: string, cantidad: number, costo: number) {
-      this.wakawaka = cantidad; 
+    presentAlert(id_mob: number, nombre: string, cantidad: Number, costo: number) {
+      
+      this.wakawaka = cantidad.toString();
+
         let alert = this.alertCtrl.create({
 
           title: 'Selecciona la cantidad',
@@ -281,12 +284,11 @@ idEvento: number = 9999;
             {
               name: 'reservados',
               placeholder: 'Cantidad',
-              type: 'number',
-              min:"0"
+              type: 'Number',
+              min:"0",
+              max:this.wakawaka
             }
-            
           ],
-
           buttons: [
             {
               text: 'Cancel',
@@ -300,18 +302,28 @@ idEvento: number = 9999;
               handler: data => {
                 
                 //this.agregarDisponibilidad(id_mob, data.reservados);
-                if(this.wakawaka<data.reservados){
+                if(parseInt(data.reservados) > cantidad ){
+                  console.log("---------------------------------------------------");
+                  console.log("Disponibles2: "+cantidad);
+                  console.log("Elgidos2:     "+parseInt(data.reservados));
                   let toast = this.toastCtrl.create({
                     message: 'No hay cantidad suficiente',
                     duration: 3000,
                     position: 'top'
+                    
                   });
                   toast.present();
                 }else{
                   console.log("Agregando a seikoas");
                   this.seikoas(id_mob,data.reservados,costo);
-                  this.wakawaka = 0;
+                  console.log("Nombre "+nombre+ " ID "+id_mob);
+                  
+                  console.log("La fecha es: "+this.fecha_envio_evento);
+                  
+                
+                  
                 }
+                
                   
               }
             }

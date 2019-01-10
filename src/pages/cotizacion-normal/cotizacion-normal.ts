@@ -31,6 +31,7 @@ export class CotizacionNormalPage {
   hideCards;
   mostrarfinal;
 
+  wakawaka : string;
   
   
   cantidadisponible : any; 
@@ -56,7 +57,7 @@ direccion_evento: string;
 cantidad: number;
 anticipo: number;
 saldo: number;
-wakawaka : number = 0;
+
 
 diponible_en_inventario: number;
 
@@ -270,7 +271,10 @@ public costo_total:number=0;
   }
 
   presentAlert(id_mob: number, nombre: string, cantidad: number, costo: number) {
-    this.wakawaka = cantidad;
+
+
+    this.wakawaka = cantidad.toString();
+
     let alert = this.alertCtrl.create({
 
       title: 'Selecciona la cantidad',
@@ -280,7 +284,8 @@ public costo_total:number=0;
           name: 'reservados',
           placeholder: 'Cantidad',
           type: 'number',
-          min:"0"
+          min:"0",
+          max: this.wakawaka
         }
         
        ],
@@ -297,18 +302,23 @@ public costo_total:number=0;
           text: 'Ok',
           handler: data => {
             //this.seikoas(id_mob,data.reservados,costo,nombre);
-            if(this.wakawaka<data.reservados){
+            if(parseInt(data.reservados) > cantidad ){
+              console.log("---------------------------------------------------");
+              console.log("Disponibles2: "+cantidad);
+              console.log("Elgidos2:     "+parseInt(data.reservados));
               let toast = this.toastCtrl.create({
                 message: 'No hay cantidad suficiente',
                 duration: 3000,
                 position: 'top'
+                
               });
               toast.present();
             }else{
               console.log("Agregando a seikoas");
               this.seikoas(id_mob, data.reservados);
               this.calcularTotal(data.reservados, costo);
-              this.wakawaka = 0;
+            
+              
             }
             
             

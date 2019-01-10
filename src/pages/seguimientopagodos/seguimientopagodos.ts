@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ViewController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 
 /**
@@ -22,7 +22,8 @@ export class SeguimientopagodosPage {
   constructor(public navCtrl: NavController, 
               private toastCtrl: ToastController, 
               public http: HttpProvider, 
-              public navParams: NavParams) {
+              public navParams: NavParams,
+              public viewCtrl: ViewController) {
 
                 this.id = navParams.get('data');
 
@@ -100,6 +101,9 @@ export class SeguimientopagodosPage {
 
 
 
+  }
+  atras(){
+    this.viewCtrl.dismiss();
   }
 
 }

@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimientopagodetalle';
 import { SeguimientopagodosPage } from '../seguimientopagodos/seguimientopagodos';
+import { CotizacionrapidaModalPage } from '../cotizacionrapida-modal/cotizacionrapida-modal';
+import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
+
 
 /**
  * Generated class for the DetalleventodiaPage page.
@@ -26,16 +29,27 @@ export class DetalleventodiaPage {
   public evento: any;
   public items:any;
 
+  fecha_envio_evento: any;
+  hora_envio_evento: any;
+  hora_recoleccion_evento: any;
+
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               public http: HttpProvider,
-              public toastCtrl : ToastController) {
+              public toastCtrl : ToastController,
+              public modalCtrl: ModalController) {
 
                 this.id_evento= navParams.get('data');
+                this.fecha_envio_evento = navParams.get('date');
+
+                
 
                 this.sacardetalles(this.id_evento);
                 this.sacarItems(this.id_evento);
+
+                
+                
   }
 
   sacardetalles(id_evento: string){
@@ -46,6 +60,18 @@ export class DetalleventodiaPage {
         
        
         this.evento = res["evento"];
+
+
+for(let entry of this.evento){
+
+  this.hora_envio_evento= entry.hora_envio_evento;
+  this.hora_recoleccion_evento = entry.hora_recoleccion_evento;
+
+  console.log("this is:   "+this.hora_recoleccion_evento);
+
+  
+
+}
 
         
         console.log(this.evento);
@@ -121,6 +147,24 @@ export class DetalleventodiaPage {
     });
     
   }
-  
 
+
+  addmob(){
+    
+    console.log(this.fecha_envio_evento);
+    
+    let modal = this.modalCtrl.create('CotizacionrapidaModalPage', {
+      data:this.fecha_envio_evento,
+      horae: this.hora_envio_evento,
+      horar: this.hora_recoleccion_evento,
+      id: this.id_evento});
+    
+  modal.onDidDismiss(data=>{
+
+this.sacarItems(this.id_evento);
+  }
+    );
+  modal.present();
+
+}
 }

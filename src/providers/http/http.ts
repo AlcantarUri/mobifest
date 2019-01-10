@@ -81,6 +81,41 @@ insertarEvento(nombre_evento: string,
          });
 }
 
+addInventorytoEvent(
+  
+  fecha_evento: any,
+  hora_evento: any,
+  id_mob: any,
+  ocupados: any,
+  id_evento: any,
+  hora_recoleccion: any
+
+  ){
+
+  let datos = { 
+    fecha_evento:fecha_evento,
+    hora_evento: hora_evento,
+  id_mob: id_mob,
+  ocupados: ocupados,
+  id_evento: id_evento,
+  hora_recoleccion: hora_recoleccion
+
+        }
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/uri/agregarmobiliariodos.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
 
 obtenerEventosdelDia(fecha_envio_evento: string){
   var url ='http://avisositd.xyz/mobiliaria/eventodelDia.php?fecha_envio_evento='+fecha_envio_evento;
@@ -214,6 +249,41 @@ console.log("dentro del provder"+id_evento,id_mob);
        });
   });
  }
+
+
+ //sacarCostoTotal.php
+
+ sacarTotalCosto(id_evento:string){     
+    var url = 'http://avisositd.xyz/mobiliaria/uri/sacarCostoTotal.php?id_evento='+id_evento;
+    return new Promise((resolve, reject) => {
+     this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+         }, (err) =>{
+           reject(err);
+         });
+    });
+   }
+
+   actualizarPagosacarTotalCosto(costo_total:number,saldo:number,id_evento:string){ 
+      let datos = { 
+        costo_total:costo_total,
+        saldo: saldo,
+        id_evento: id_evento
+            }
+           let options = {
+             headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+            }
+           };
+           var url = 'http://avisositd.xyz/mobiliaria/uri/actualizarPago.php/';
+            return new Promise(resolve => {
+            this.http.post(url,JSON.stringify(datos),options)
+              .subscribe(data => {
+           resolve(data);
+           });
+             });
+    }
 
 ///////////////////////////Troca////////////////////////////////77
 

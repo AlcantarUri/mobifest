@@ -4,6 +4,7 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -11,7 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
-import { CotizacionrapidaModalPage } from '../pages/cotizacionrapida-modal/cotizacionrapida-modal';
+
 import { EventModalPage } from '../pages/event-modal/event-modal';
 import { DetalleventodiaPage } from '../pages/detalleventodia/detalleventodia';
 import { SeguimientopagodosPage } from '../pages/seguimientopagodos/seguimientopagodos';
@@ -37,7 +38,6 @@ import { Camera } from '@ionic-native/camera';
     MobiliarioPage,
     TabsPage,
     ConfiguracionPage,
-    CotizacionrapidaModalPage,
     EventModalPage,
     DetalleventodiaPage,
     SeguimientopagodosPage
@@ -60,7 +60,6 @@ import { Camera } from '@ionic-native/camera';
     MobiliarioPage,
     TabsPage,
     ConfiguracionPage,
-    CotizacionrapidaModalPage,
     EventModalPage,   
     DetalleventodiaPage,
     SeguimientopagodosPage
@@ -71,7 +70,8 @@ import { Camera } from '@ionic-native/camera';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     HttpProvider,
     Camera,
-    IonicStorageModule
+    IonicStorageModule,
+    ScreenOrientation
   ]
 })
 export class AppModule {}

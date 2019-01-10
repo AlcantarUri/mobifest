@@ -21,7 +21,7 @@
 <ion-content >
 
     <ion-fab top right edge>
-        <button ion-fab mini (click)="abrirAlert()"><ion-icon name="add"></ion-icon>
+        <button ion-fab mini (click)="abrirAlert()" color="secondary"><ion-icon name="add"></ion-icon>
         </button>
         
       </ion-fab>
@@ -45,14 +45,14 @@
     <div class="eventos">
       <ion-list>
         
-          <ion-card *ngFor="let evento of eventosChidos" (click)="mostrarEvento(evento.id_evento)">
+          <ion-card *ngFor="let evento of eventosChidos" (click)="mostrarEvento(evento.id_evento, evento.fecha_envio_evento)">
                 <div *ngIf="evento.saldo != 0; else pagado" class="cardnopadaga">
                     <ion-card-header color="light">{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
-                    <ion-card-content color="light">{{evento.tipo_evento}}</ion-card-content>   
+                    <ion-card-content color="light">{{evento.direccion_evento}}</ion-card-content>   
                   </div>
                   <ng-template #pagado class="cardpadaga">
                       <ion-card-header>{{evento.hora_envio_evento}} | {{evento.nombre_evento}}</ion-card-header>
-                      <ion-card-content>{{evento.tipo_evento}}</ion-card-content>   
+                      <ion-card-content>{{evento.direccion_evento}}</ion-card-content>   
                   </ng-template>
           </ion-card>
       </ion-list>
