@@ -187,8 +187,7 @@ llenarCards(){
 
       
       this.eventosChidos = res["eventodelDia"];
-      //console.log(this.eventosChidos);
-     
+     console.log(this.eventosChidos);
           
       
       

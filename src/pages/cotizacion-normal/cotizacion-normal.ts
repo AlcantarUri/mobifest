@@ -30,6 +30,7 @@ export class CotizacionNormalPage {
   hideFechas;
   hideCards;
   mostrarfinal;
+  arreglodos: any;
 
   wakawaka : string;
   
@@ -141,11 +142,62 @@ public costo_total:number=0;
   
   }
 
+  aNuevoMetodoparaPagos(){
+  
+    this.saldo=this.costo_total-this.anticipo;
+
+   
+
+    this.http.addPagosMetodoNuevo(
+      this.costo_total,
+      this.saldo,
+      this.anticipo
+      ).then(
+      (res) => { 
+
+        this.arreglodos = res['registro'];
+        console.log("El ID encontrado es:   "+this.arreglodos);
+        console.log(this.costo_total);
+        console.log(this.saldo);
+        console.log(this.anticipo);
+      },
+      (error) =>{
+        console.error(error);
+        alert("No Registrado Asegurate de Cntar con Internet"+error);
+        
+      }
+    )
+    
+    
+
+   }
+
+
    agregaraInventario(){
 
     this.saldo=this.costo_total-this.anticipo;
 
     console.log("El saldo final es de"+this.saldo);
+
+    if(this.nombre_evento==null){
+      this.nombre_evento="Pendiente";
+    }
+    if(this.tipo_evento==null){
+      this.tipo_evento="Otro";
+    }
+    if(this.hora_envio_evento==null){
+      this.hora_envio_evento="00:00:00";
+      console.log(this.hora_envio_evento);
+    }
+    if(this.hora_recoleccion_evento==null){
+      this.hora_recoleccion_evento="00:00:00";
+    }
+    if(this.direccion_evento==null){
+      this.direccion_evento="Pendiente";
+    }
+    if(this.telefono_titular_evento==null){
+      this.telefono_titular_evento="Pendiente";
+    }
 
     this.http.insertarEvento(
       this.nombre_evento,
@@ -157,10 +209,7 @@ public costo_total:number=0;
       this.pagado_evento, 
       this.nombre_titular_evento, 
       this.direccion_evento,
-      this.telefono_titular_evento,
-      this.costo_total,
-      this.saldo,
-      this.anticipo).then(
+      this.telefono_titular_evento).then(
       (res) => { 
         console.log(res["registro"]);
 
@@ -399,6 +448,7 @@ this.http.dispoibilidadmob(
   
     loading.onDidDismiss(() => {
       this.juntarobjetos();
+      this.aNuevoMetodoparaPagos();
     });
   
     loading.present();

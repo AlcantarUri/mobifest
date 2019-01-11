@@ -19,6 +19,7 @@ import { SeguimientopagodosPage } from '../pages/seguimientopagodos/seguimientop
 
 
 
+
 import { NgCalendarModule } from 'ionic2-calendar';
 import { HttpProvider } from '../providers/http/http';
 import { HttpClientModule } from '@angular/common/http';

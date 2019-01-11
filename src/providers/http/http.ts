@@ -42,15 +42,9 @@ insertarEvento(nombre_evento: string,
   nombre_titular_evento: string, 
   direccion:string,
   telefono_titular_evento:string,
-  
-  //para saldos_mob
-  costo_total: number,
-  anticipo: number,
-  saldo: number,
-  //para disponibilidda_mob
-  //id_mob: string,
-
+ 
   ){
+
 
   let datos = { nombre_evento:nombre_evento,
      tipo_evento:tipo_evento,
@@ -61,10 +55,8 @@ insertarEvento(nombre_evento: string,
      pagado_evento:pagado_evento,
      nombre_titular_evento:nombre_titular_evento,
      direccion:direccion,
-     telefono_titular_evento:telefono_titular_evento,
-     costo_total:costo_total,
-     saldo:saldo,
-     anticipo:anticipo
+     telefono_titular_evento:telefono_titular_evento
+     
         }
   
        let options = {
@@ -73,6 +65,29 @@ insertarEvento(nombre_evento: string,
         }
        };
        var url = 'http://avisositd.xyz/mobiliaria/agregarEventos.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
+addPagosMetodoNuevo(costo_total:number, saldo: number, anticipo: number){
+
+  let datos = { 
+    costo_total:costo_total,
+    saldo: saldo,
+    anticipo: anticipo
+
+        }
+  
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/uri/insertarPagos.php/';
         return new Promise(resolve => {
         this.http.post(url,JSON.stringify(datos),options)
           .subscribe(data => {
@@ -140,7 +155,7 @@ dispoibilidadmob(
   hora_evento:hora_evento,
 id_mob:id_mob,
 ocupados:ocupados,
-fecha_recoleccion_evento:fecha_recoleccion_evento  }
+fecha_recoleccion_evento:fecha_recoleccion_evento }
   
        let options = {
          headers: {
@@ -285,6 +300,47 @@ console.log("dentro del provder"+id_evento,id_mob);
              });
     }
 
+    actualizarEvento(
+      id_evento:string,
+      nombre_evento: string, 
+      tipo_evento: string, 
+      fecha_envio_evento: any, 
+      hora_envio_evento: any,
+      fecha_recoleccion_evento: any,
+      hora_recoleccion_evento:any,
+      nombre_titular_evento: string, 
+      direccion:string,
+      telefono_titular_evento:string,
+     
+      ){
+    
+    
+      let datos = { 
+        id_evento:id_evento,
+        nombre_evento:nombre_evento,
+         tipo_evento:tipo_evento,
+         fecha_envio_evento:fecha_envio_evento, 
+         hora_envio_evento:hora_envio_evento, 
+         fecha_recoleccion_evento:fecha_recoleccion_evento, 
+         hora_recoleccion_evento:hora_recoleccion_evento,
+         nombre_titular_evento:nombre_titular_evento,
+         direccion:direccion,
+         telefono_titular_evento:telefono_titular_evento
+            }
+      
+           let options = {
+             headers: {
+          'Content-Type': 'application/x-www-form-urlencoded'
+            }
+           };
+           var url = 'http://avisositd.xyz/mobiliaria/uri/actualizarEventos.php/';
+            return new Promise(resolve => {
+            this.http.post(url,JSON.stringify(datos),options)
+              .subscribe(data => {
+           resolve(data);
+           });
+             });
+    }
 ///////////////////////////Troca////////////////////////////////77
 
   loginApp(usuario:string, contra:string){

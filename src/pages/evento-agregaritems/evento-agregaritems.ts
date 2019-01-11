@@ -44,6 +44,8 @@ prueba: any;
   tap: number = 0;
 
   items:any;
+
+  arreglodos: any;
   
   //para ocultar el buscador
  hideDates;
@@ -212,9 +214,29 @@ idEvento: number = 9999;
    agregaraInventario(){
     //console.log(this.costo_total);
    // console.log(this.anticipo);
-    this.saldo=this.costo_total-this.anticipo;
+    
 
-    console.log("este es el saldo: "+this.saldo);
+
+   if(this.nombre_evento==null){
+    this.nombre_evento="Pendiente";
+  }
+  if(this.tipo_evento==null){
+    this.tipo_evento="Otro";
+  }
+  if(this.hora_envio_evento==null){
+    this.hora_envio_evento="00:00:00";
+    console.log(this.hora_envio_evento);
+  }
+  if(this.hora_recoleccion_evento==null){
+    this.hora_recoleccion_evento="00:00:00";
+  }
+  if(this.direccion_evento==null){
+    this.direccion_evento="Pendiente";
+  }
+  if(this.telefono_titular_evento==null){
+    this.telefono_titular_evento="Pendiente";
+  }
+    
 
     this.http.insertarEvento(
       this.nombre_evento,
@@ -227,26 +249,21 @@ idEvento: number = 9999;
       this.nombre_titular_evento, 
       this.direccion_evento,
       this.telefono_titular_evento,
-      this.costo_total,
-      this.saldo,
-      this.anticipo
+
       ).then(
       (res) => { 
-        console.log(res["registro"]);
 
-        if(res["registro"] == "registrado"){
-          alert("Registro Existoso");
-          console.log("Registro Exitoso");
-          this.view.dismiss();
-        }else if(res["registro"] == "noregistrado"){
-          alert("No Registrado Asegurate de Cntar con Internet");
-          console.log("Registro NO Exitoso");
-        }
+        this.arreglodos = res['registro'];
+
+        console.log(this.arreglodos);
+       
+
+        
       },
       (error) =>{
         console.error(error);
         alert("No Registrado Asegurate de Cntar con Internet"+error);
-        console.log("RegistroError en php Exitoso");
+        
       }
     )
     
@@ -255,6 +272,35 @@ idEvento: number = 9999;
    }
 
    
+   aNuevoMetodoparaPagos(){
+  
+    this.saldo=this.costo_total-this.anticipo;
+
+   
+
+    this.http.addPagosMetodoNuevo(
+      this.costo_total,
+      this.saldo,
+      this.anticipo
+      ).then(
+      (res) => { 
+
+        this.arreglodos = res['registro'];
+        console.log("El ID encontrado es:   "+this.arreglodos);
+        console.log(this.costo_total);
+        console.log(this.saldo);
+        console.log(this.anticipo);
+      },
+      (error) =>{
+        console.error(error);
+        alert("No Registrado Asegurate de Cntar con Internet"+error);
+        
+      }
+    )
+    
+    
+
+   }
 
 
   pasaraCotizacionconIva() {
@@ -317,14 +363,8 @@ idEvento: number = 9999;
                   console.log("Agregando a seikoas");
                   this.seikoas(id_mob,data.reservados,costo);
                   console.log("Nombre "+nombre+ " ID "+id_mob);
-                  
-                  console.log("La fecha es: "+this.fecha_envio_evento);
-                  
-                
-                  
-                }
-                
-                  
+
+                }                 
               }
             }
           ] 
@@ -457,6 +497,7 @@ this.http.dispoibilidadmob(
   
     loading.onDidDismiss(() => {
       this.juntarobjetos();
+      this.aNuevoMetodoparaPagos();
     });
   
     loading.present();

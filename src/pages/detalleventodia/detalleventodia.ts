@@ -7,6 +7,8 @@ import { CotizacionrapidaModalPage } from '../cotizacionrapida-modal/cotizacionr
 import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
 
 
+
+
 /**
  * Generated class for the DetalleventodiaPage page.
  *
@@ -81,6 +83,8 @@ for(let entry of this.evento){
         alert("Verifica que cuentes con internet");
     })
   }
+
+  
   sacarItems(id_evento: string){
     
     this.http.sacarItemsporEventos(id_evento).then(
@@ -167,4 +171,25 @@ this.sacarItems(this.id_evento);
   modal.present();
 
 }
+
+
+edit(){
+
+
+    
+    let modal = this.modalCtrl.create('EditarPage', {
+      id: this.id_evento});
+    
+  modal.onDidDismiss(data=>{
+
+this.sacardetalles(this.id_evento);
+  }
+    );
+  modal.present();
+
+
+
+}
+
+
 }
