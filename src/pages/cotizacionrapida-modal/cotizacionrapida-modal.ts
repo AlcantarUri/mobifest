@@ -381,6 +381,21 @@ actualizarpago(){
   
 }
 
+getItems(ev: any) {
+  // Reset items back to all of the items
+  this.initializeItems();
+
+  // set val to the value of the searchbar
+  const val = ev.target.value;
+
+  // if the value is an empty string don't filter the items
+  if (val && val.trim() != '') {
+    this.inventario = this.inventario.filter((item) => {
+      return (item.nombre_mob.toLowerCase().indexOf(val.toLowerCase()) > -1);
+    })
+  }
+}
+
 atras(){
   this.navCtrl.pop();
 }

@@ -6,7 +6,6 @@
 
   ESTA PAGINA ES PARA AÑADIR INVENTAIOR NO TIENE NADA QUE VER CON LA COTIZACION RAPIDA!!!!!!!
   
--->
 <ion-header>
 
   <ion-navbar color="primary">
@@ -18,6 +17,22 @@
 
 </ion-header>
 
+-->
+<ion-header class="header">
+    
+    <ion-navbar color="primary">
+        <div class="spacer" color="primary" style="height: 15px;"></div>  
+      
+         <ion-toolbar [hidden]="hideCards">
+          <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
+          <ion-buttons left>
+              <button ion-button icon-only (click)="atras()">
+                <ion-icon name="arrow-round-back"></ion-icon>
+              </button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-navbar>
+  </ion-header>
 
 <ion-content>
 
