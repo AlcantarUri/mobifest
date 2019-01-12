@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimientopagodetalle';
 import { SeguimientopagodosPage } from '../seguimientopagodos/seguimientopagodos';
@@ -30,6 +30,7 @@ export class DetalleventodiaPage {
   
   public evento: any;
   public items:any;
+  public observ: any;
 
   fecha_envio_evento: any;
   hora_envio_evento: any;
@@ -40,7 +41,8 @@ export class DetalleventodiaPage {
               public navParams: NavParams,
               public http: HttpProvider,
               public toastCtrl : ToastController,
-              public modalCtrl: ModalController) {
+              public modalCtrl: ModalController,
+              public alertCtrl: AlertController) {
 
                 this.id_evento= navParams.get('data');
                 this.fecha_envio_evento = navParams.get('date');
@@ -54,6 +56,16 @@ export class DetalleventodiaPage {
                 
   }
 
+  patras(){
+    this.navCtrl.pop();
+  }
+
+  actualizar(){
+    this.sacardetalles(this.id_evento);
+    this.sacarItems(this.id_evento);
+
+  }
+
   sacardetalles(id_evento: string){
 
     this.http.detallesdeleventodeldia(id_evento).then(
@@ -62,6 +74,7 @@ export class DetalleventodiaPage {
         
        
         this.evento = res["evento"];
+        this.observ = res["evento"];
 
 
 for(let entry of this.evento){
@@ -175,8 +188,6 @@ this.sacarItems(this.id_evento);
 
 edit(){
 
-
-    
     let modal = this.modalCtrl.create('EditarPage', {
       id: this.id_evento});
     
@@ -187,9 +198,16 @@ this.sacardetalles(this.id_evento);
     );
   modal.present();
 
-
-
 }
 
+
+presentAlert(obs: string) {
+  let alert = this.alertCtrl.create({
+    title: 'Observaciones',
+    subTitle: obs,
+    buttons: ['OK']
+  });
+  alert.present();
+}
 
 }

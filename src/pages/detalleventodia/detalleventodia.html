@@ -3,15 +3,42 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
--->
-<ion-header class="spacerw">
-    <div class="spacerw" style="height: 10px;"></div>
 
+
+
+
+<ion-header class="spacerw">
+    
+
+    <ion-toolbar>
   <ion-navbar color="primary">
     <ion-title>Detalles</ion-title>
   </ion-navbar>
-
+  <button ion-button (click)="actualizar()">
+      <ion-icon icon-only name="refresh"></ion-icon>
+    </button>
+  </ion-toolbar>
 </ion-header>
+
+
+-->
+
+
+<ion-header>
+    <div class="spacerw" style="height: 8px;"></div>
+    <ion-navbar color="primary">
+      
+      <ion-title>Detalles</ion-title>
+      <ion-buttons end>
+        <button ion-button icon-only (click)="actualizar()">
+          <ion-icon name="refresh"></ion-icon>
+        </button>
+      </ion-buttons>
+    </ion-navbar>
+  </ion-header>
+
+
+
 
 
 <ion-content class="cardsdetalles">
@@ -26,14 +53,14 @@
       
 
 
-  <ion-list>
+  <ion-list *ngFor="let evento of evento">
         
-    <ion-card *ngFor="let evento of evento">
+    <ion-card (click)="presentAlert(evento.observaciones)">
       
 
           <ion-card-content>
             <ion-card-title>
-              EVENTO: {{evento.nombre_evento}}
+              {{evento.nombre_evento}}
             </ion-card-title>
             <p>
              Fecha: {{evento.fecha_envio_evento}}
@@ -45,11 +72,45 @@
               Dirección: {{evento.direccion_evento}}
              </p>
           </ion-card-content>
-    
-          
         
       </ion-card>
-      
+          
+          <ion-grid>
+              <ion-row>
+                <ion-col col-6>
+            <div *ngIf="evento.entregado == 0; else entregado">
+                <ion-chip>
+                    <ion-icon  name="sad"></ion-icon>
+                    <ion-label >No entregado</ion-label>
+                  </ion-chip>
+              </div>
+              <ng-template #entregado >
+                  <ion-chip color="secondary">
+                      <ion-label >Entregado</ion-label>
+                      <ion-icon name="bus"></ion-icon>
+                    </ion-chip>  
+              </ng-template>
+          
+                </ion-col>
+                <ion-col col-6>
+                  
+                    <div *ngIf="evento.recolectado == 0; else recolectado">
+                        <ion-chip>
+                            <ion-icon  name="sad"></ion-icon>
+                            <ion-label >No recolectado</ion-label>
+                          </ion-chip>
+                      </div>
+                      <ng-template #recolectado >
+                          <ion-chip color="secondary">
+                              <ion-label >Recolectado</ion-label>
+                              <ion-icon name="bus"></ion-icon>
+                            </ion-chip>  
+                      </ng-template>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+
+
 </ion-list>
 
       
@@ -70,7 +131,9 @@
           </button>
         </ion-item-options>
       </ion-item-sliding>
-      <div class="spacer" style="height: 2px;"></div>    
+      <div class="spacer" style="height: 2px;"></div> 
+      
+      
 
      </ion-list>
 

@@ -346,8 +346,29 @@ idEvento: number = 9999;
             {
               text: 'Ok',
               handler: data => {
+
+
                 
-                //this.agregarDisponibilidad(id_mob, data.reservados);
+                if(parseInt(data.reservados)==0){
+
+                  let toast = this.toastCtrl.create({
+                    message: 'No se pueden elegir 0 de '+ nombre,
+                    duration: 2500,
+                    position: 'bottom'
+                    
+                  });
+                  toast.present();
+    
+                }else if(data.reservados==""){
+    
+                  let toast = this.toastCtrl.create({
+                    message: 'Favor de elegir mas de 0',
+                    duration: 2500,
+                    position: 'bottom'
+                    
+                  });
+                  toast.present();
+                } else
                 if(parseInt(data.reservados) > cantidad ){
                   console.log("---------------------------------------------------");
                   console.log("Disponibles2: "+cantidad);

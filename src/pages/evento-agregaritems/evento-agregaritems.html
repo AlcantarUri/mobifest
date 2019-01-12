@@ -10,20 +10,15 @@
   <ion-navbar color="primary">
       <div class="spacer" color="primary" style="height: 15px;"></div>  
     
-      <ion-title>
-          <button ion-button small (click)="cerrarModal()">
-            Atrás
-          </button>
-      </ion-title>
-      
-    <ion-toolbar [hidden]="hideCards">
+       <ion-toolbar [hidden]="hideCards">
         <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
-    </ion-toolbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="cerrarModal()">
+              <ion-icon name="arrow-round-back"></ion-icon>
+            </button>
+          </ion-buttons>
+      </ion-toolbar>
   </ion-navbar>
-
-
-  
-
 </ion-header>
 
 <ion-content [hidden]="hideDates">

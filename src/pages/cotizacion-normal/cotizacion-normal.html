@@ -8,12 +8,15 @@
 
   <ion-navbar color="primary">
       <div class="spacer" color="primary" style="height: 15px;"></div> 
-    <ion-title>Cotizacion Normal</ion-title>
+    
+      
     <ion-toolbar [hidden]="!hideFechas">
-        <button ion-button small (click)="ocultarFormulario()">
-        Atrás
-      </button>
         <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
+        <ion-buttons left>
+            <button ion-button icon-only (click)="ocultarFormulario()">
+              <ion-icon name="arrow-round-back"></ion-icon>
+            </button>
+          </ion-buttons>
     </ion-toolbar>
   </ion-navbar>
 
