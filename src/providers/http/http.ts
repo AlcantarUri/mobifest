@@ -171,6 +171,37 @@ fecha_recoleccion_evento:fecha_recoleccion_evento }
          });
 }
 
+///mobiliaria/uri/eliminarEvento.php
+borrarEvento(id_evento: number){
+ 
+ 
+ var url = 'http://avisositd.xyz/mobiliaria/uri/eliminarEvento.php?id_evento='+id_evento;
+ return new Promise((resolve, reject) => {
+  this.http.get(url)
+     .subscribe(data => {
+       resolve(data);
+      }, (err) =>{
+        reject(err);
+      });
+ });
+}
+
+borrarRemanentes(id_evento: string){
+ 
+ 
+  var url = 'http://avisositd.xyz/mobiliaria/uri/eliminarPagosYMob.php?id_evento='+id_evento;
+  return new Promise((resolve, reject) => {
+   this.http.get(url)
+      .subscribe(data => {
+        resolve(data);
+       }, (err) =>{
+         reject(err);
+       });
+  });
+ }
+
+
+
 
 insertarADisponibilidad(
   arreglo: any
@@ -189,6 +220,9 @@ insertarADisponibilidad(
        });
          });
 }
+
+
+
 
 
 revisarDisponibilidadDia(fecha_envio_evento:string){

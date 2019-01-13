@@ -118,6 +118,7 @@ export class LoginPage {
        // console.log(data["rol"]);
 
        var json = data["Usuario"];
+       console.log("este es el json: "+json);
 
        for (var i = 0; i < json.length; i++) {
        // console.log(json[i].nombre_mob);

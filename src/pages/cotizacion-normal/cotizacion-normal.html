@@ -7,7 +7,7 @@
 <ion-header>
 
   <ion-navbar color="primary">
-      <div class="spacer" color="primary" style="height: 15px;"></div> 
+      
     
       
     <ion-toolbar [hidden]="!hideFechas">
@@ -42,12 +42,9 @@
             </ion-select>
           </ion-item>
   
-  
-            
-  
             <ion-item>
                 <ion-label>Fecha de Entrega: </ion-label>
-                <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY"  min="2017" max="2050-10-17" [(ngModel)]="fecha_envio_evento" (ionChange)="changed()"></ion-datetime>
+                <ion-datetime required displayFormat="DD/MM/YYYY" pickerFormat="DD/MM/YYYY"  min="2017" max="2050-10-17" [(ngModel)]="fecha_envio_evento" (ionChange)="changed()"></ion-datetime>
               </ion-item>
   
               <ion-item>
@@ -68,7 +65,7 @@
     
                
                     <ion-item>
-                      <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento"></ion-input>
+                      <ion-input required type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento"></ion-input>
                     </ion-item>
                     
                     <ion-item>
@@ -99,7 +96,7 @@
                                     </button>
                                   </ion-col>
                                   <ion-col col-6>
-                                    <button ion-button round icon-end (click)="ocultarFormulario()">
+                                    <button type="submit" ion-button round icon-end (click)="ocultarFormulario()">
                                         <ion-icon padding name="checkmark"></ion-icon>Añadir Mov
                                     </button>
                                   </ion-col>
@@ -111,7 +108,7 @@
 </ion-content>
 
 <ion-content [hidden]="!hideFechas" class="eventosDelDia">
-    <div class="spacer" color="primary" style="height: 10px;"></div> 
+    
 
 
     
@@ -148,7 +145,7 @@
               </ion-item>
               
           <button [hidden]="!hideFechas" ion-button full (click)="continuarCotizacion()">Continuar</button>
-          <button [hidden]="mostrarfinal" ion-button full (click)="save()">Continuar</button>
+          <button [hidden]="hideFechas" ion-button full (click)="save()">Agregar Evento</button>
         
         </ion-toolbar>
       

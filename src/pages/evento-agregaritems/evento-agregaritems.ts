@@ -207,7 +207,11 @@ idEvento: number = 9999;
 
    
    
-
+ocultarFormulario(){
+    this.hideDates=!this.hideDates;
+    this.hideCards=!this.hideCards;
+    this.getMessages();
+}
 
 
 
@@ -501,12 +505,23 @@ this.http.dispoibilidadmob(
  
    save(){
 
+    if(this.nombre_titular_evento==null){
+
+
+      let toast = this.toastCtrl.create({
+        message: 'Favor de elegir la titular del evento',
+        duration: 2500,
+        position: 'top'
+      });
     
+      toast.present();
+
+    }else{
     this.agregaraInventario();
     this.presentLoadingCustom();
 
     this.view.dismiss(this.event);
-    
+    }
   }
 
 

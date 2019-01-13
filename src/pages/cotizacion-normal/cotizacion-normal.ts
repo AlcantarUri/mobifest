@@ -214,17 +214,16 @@ public costo_total:number=0;
         console.log(res["registro"]);
 
         if(res["registro"] == "registrado"){
-          alert("Registro Existoso");
-          console.log("Registro Exitoso");
+         
           this.view.dismiss();
         }else if(res["registro"] == "noregistrado"){
-          alert("No Registrado Asegurate de Cntar con Internet");
-          console.log("Registro NO Exitoso");
+          alert("No Registrado Asegurate de Contar con Internet");
+          
         }
       },
       (error) =>{
         console.error(error);
-        alert("No Registrado Asegurate de Cntar con Internet"+error);
+        alert("No Registrado Asegurate de Contar con Internet"+error);
         console.log("RegistroError en php Exitoso");
       }
     )
@@ -236,9 +235,22 @@ public costo_total:number=0;
 
   ocultarFormulario(){
 
+    if(this.fecha_envio_evento==null){
+      
+      let toast = this.toastCtrl.create({
+        message: 'Favor de elegir la fecha del evento',
+        duration: 2500,
+        position: 'top'
+      });
+    
+      toast.present();
+
+
+    }else{
+
     this.hideFechas= !this.hideFechas;
     this.sacarCosas();
-
+  }
 
   }
 
@@ -451,12 +463,27 @@ this.http.dispoibilidadmob(
 
 
   save(){
+
+    if(this.nombre_titular_evento==null){
+
+
+      let toast = this.toastCtrl.create({
+        message: 'Favor de elegir la titular del evento',
+        duration: 2500,
+        position: 'top'
+      });
+    
+      toast.present();
+
+
+    }else{
     this.agregaraInventario();
 
     this.presentLoadingCustom();
 
     
     this.view.dismiss();
+    }
     
   }
 

@@ -5,6 +5,8 @@ import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimient
 import { SeguimientopagodosPage } from '../seguimientopagodos/seguimientopagodos';
 import { CotizacionrapidaModalPage } from '../cotizacionrapida-modal/cotizacionrapida-modal';
 import { EventoAgregaritemsPage } from '../evento-agregaritems/evento-agregaritems';
+import { TabsPage } from '../tabs/tabs';
+import { AnonymousSubject } from 'rxjs/Subject';
 
 
 
@@ -31,6 +33,9 @@ export class DetalleventodiaPage {
   public evento: any;
   public items:any;
   public observ: any;
+
+  eliminado: any;
+  eliminadores: any;
 
   fecha_envio_evento: any;
   hora_envio_evento: any;
@@ -82,9 +87,9 @@ for(let entry of this.evento){
   this.hora_envio_evento= entry.hora_envio_evento;
   this.hora_recoleccion_evento = entry.hora_recoleccion_evento;
 
-  console.log("this is:   "+this.hora_recoleccion_evento);
-
   
+
+
 
 }
 
@@ -208,6 +213,108 @@ presentAlert(obs: string) {
     buttons: ['OK']
   });
   alert.present();
+}
+
+eliminarEvento(){
+  let alert = this.alertCtrl.create({
+    title: '¿Desea eliminar este evento?',
+    message: 'Esta acción no se puede deshacer!!',
+    
+    
+    buttons: [
+      {
+        text: 'No',
+        role: 'cancel',
+        handler: () => {
+
+        
+        }
+      },
+      {
+        text: 'Eliminar',
+        handler: () => {
+          console.log("eligio eliminar evento");
+          this.borrarEvento();
+        }
+      }
+    ]
+  });
+  alert.present();
+}
+
+borrarEvento(){
+  var eventoEntero = parseInt(this.id_evento);
+  this.http.borrarEvento(eventoEntero).then(
+    (inv) => { 
+  
+      this.eliminado= inv['evento'];
+      console.log(this.eliminado);
+
+      for(let entry of this.eliminado){
+
+        this.eliminadores = entry.resulta;
+      }
+      console.log(this.eliminadores);
+
+      if(this.eliminadores == "eliminado"){
+
+        this.borrareventodos();
+
+      }else{
+        let toast = this.toastCtrl.create({
+          message: 'Fallo la eliminacion de Evento',
+          duration: 2000,
+          position: 'top'
+        });  
+      toast.present();
+     }
+     
+       
+    },
+    (error) =>{
+      console.log("Error"+JSON.stringify(error));
+      alert("Verifica que cuentes con internet");
+    }
+  );
+}
+borrareventodos(){
+  this.http.borrarRemanentes(this.id_evento).then(
+    (res)=>{
+
+      var json = res['evento'];
+      
+
+      for(let entry of json){
+
+        var jsondos = entry.resulta;
+      }
+      
+
+      if(jsondos == "eliminado"){
+
+        this.navCtrl.push(TabsPage);
+        let toast = this.toastCtrl.create({
+          message: 'Eliminacion de Evento Exitosa!!!',
+          duration: 2000,
+          position: 'top'
+        });  
+      toast.present();
+       
+
+      }else{
+        let toast = this.toastCtrl.create({
+          message: 'Fallo la eliminacion de Moviliario y Pagos',
+          duration: 2000,
+          position: 'top'
+        });  
+      toast.present();
+     }
+
+    },(error)=>{
+    console.log("Error"+JSON.stringify(error));
+      alert("Verifica que cuentes con internet");
+  })
+
 }
 
 }

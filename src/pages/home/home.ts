@@ -67,7 +67,6 @@ export class HomePage {
           private http: HttpProvider,
           private toastCtrl: ToastController
           ) {
-
   }
 
 

@@ -43,16 +43,6 @@
 
 <ion-content class="cardsdetalles">
 
-
-    <ion-fab top right>
-        <button ion-fab color="dinero" (click)="abono()">
-            <ion-icon name="cash"></ion-icon>  
-          </button>
-      </ion-fab>
-
-      
-
-
   <ion-list *ngFor="let evento of evento">
         
     <ion-card (click)="presentAlert(evento.observaciones)">
@@ -124,7 +114,7 @@
         </ion-item>
         <ion-item-options side="right">
           
-          <button ion-button color="danger" (click)="borrar(id_evento,item.id_mob)">
+          <button ion-button color="danger" (click)="borrar(id_evento,item.id_fecha)">
               <ion-icon name="trash">
             Eliminar 
               </ion-icon>
@@ -137,16 +127,21 @@
 
      </ion-list>
 
-     <ion-fab right bottom>
-      <button ion-fab color="secondary"><ion-icon name="construct"></ion-icon></button>
-      <ion-fab-list side="top">
-        <button ion-fab color ="third" (click)="addmob()"><ion-icon name="add"></ion-icon></button>
-      </ion-fab-list>
+     <ion-fab top right>
+      <button ion-fab mini color="secondary"><ion-icon name="construct"></ion-icon></button>
       <ion-fab-list side="left">
+        <button ion-fab color ="third" (click)="addmob()"><ion-icon name="add"></ion-icon></button>
         <button ion-fab color ="third" (click)="edit()"><ion-icon name="brush"></ion-icon></button>
+        <button ion-fab color="dinero" (click)="abono()"> <ion-icon name="cash"></ion-icon></button>
+      </ion-fab-list>
+      <ion-fab-list side="bottom">
+        <button ion-fab color ="danger" (click)="eliminarEvento()"><ion-icon name="trash"></ion-icon></button>
       </ion-fab-list>
       
     </ion-fab>
+
+
+   
       
     
 </ion-content>
