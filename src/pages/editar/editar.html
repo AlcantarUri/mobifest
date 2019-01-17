@@ -28,7 +28,7 @@
 
     <ion-list>
         <ion-item>
-          <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombre_evento"></ion-input>
+          <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombre_evento" clearInput></ion-input>
         </ion-item>
     
        
@@ -69,15 +69,15 @@
     
                
                     <ion-item>
-                      <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento"></ion-input>
+                      <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento" clearInput></ion-input>
                     </ion-item>
                     
                     <ion-item>
-                      <ion-input type = "number" placeholder="Telefono del titular:" [(ngModel)]="telefono_titular_evento"></ion-input>
+                      <ion-input type = "tel" placeholder="Telefono del titular:" [(ngModel)]="telefono_titular_evento" clearInput></ion-input>
                     </ion-item>
                     
                     <ion-item>
-                          <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion_evento"></ion-input>
+                          <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion_evento" clearInput></ion-input>
                         </ion-item>
                         
 

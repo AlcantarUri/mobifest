@@ -24,6 +24,7 @@ export class HomePage {
   mesmasuno: number;
 
   public dtae: number;
+  fechasTraer:any;
 
 
 
@@ -67,10 +68,67 @@ export class HomePage {
           private http: HttpProvider,
           private toastCtrl: ToastController
           ) {
+            this.eventosTodos();
+  }
+
+
+  eventosTodos(){
+
+    
+
+    this.http.traerFechas().then(
+      (inv) => { 
+        console.log("fechas todas   "+inv);
+        
+        
+        
+        var json = inv["evento"];
+
+       for (var i = 0; i < json.length; i++) {
+       // console.log(json[i].nombre_mob);
+
+       var ano = json[i].ano;
+       var mes = json[i].mes-1;
+       var dia =json[i].dia;
+   
+      
+       console.log("llega en  "+i+"    "+ano+"-"+mes+"-"+dia);
+       ano = new Date(Date.UTC(ano, mes, dia) + (1000 * 60 * 60 * 24));  
+
+            this.eventSource.push({
+                title: json[i].nombre_evento,
+                startTime: ano,
+                endTime: ano,             
+                allDay: false
+            });   
+
+            
+            console.log("cambiado formato"+ano);
+       }
+       
+               
+         
+        
+        
+      
+         
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        
+        alert("Verifica que cuentes con internet");
+      }
+    );
+
+  
+
+    
+
   }
 
 
 abrirAlert(){
+  /*
   let alert = this.alertCtrl.create({
     title: 'Seleccione tipo de cotizacion',
     buttons: [
@@ -86,7 +144,6 @@ abrirAlert(){
       {
         text: 'Cotizacion Rapida',
         handler: () => {
-          this.alarm();
           // pasar a cotizacion rapida
 
 
@@ -94,7 +151,9 @@ abrirAlert(){
       }
     ]
   });
-  alert.present();
+  alert.present();*/
+  this.alarm();
+
 }
 
 

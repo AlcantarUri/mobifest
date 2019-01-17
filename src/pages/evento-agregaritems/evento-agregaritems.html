@@ -3,18 +3,19 @@
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
+  <div class="spacer" color="primary" style="height: 15px;"></div>  
 -->
 
 <ion-header class="header">
     
   <ion-navbar color="primary">
-      <div class="spacer" color="primary" style="height: 15px;"></div>  
+      
     
        <ion-toolbar [hidden]="hideCards">
         <ion-searchbar (ionInput)="getItems($event)" placeholder="Buscar"></ion-searchbar>
         <ion-buttons left>
             <button ion-button icon-only (click)="cerrarModal()">
-              <ion-icon name="arrow-round-back"></ion-icon>
+              <ion-icon name="exit"></ion-icon>
             </button>
           </ion-buttons>
       </ion-toolbar>
@@ -23,9 +24,19 @@
 
 <ion-content [hidden]="hideDates">
 
+
+    <ion-fab top right [hidden]="!hideCards">
+        <button ion-fab mini color="secondary" (click)="descuentos()">
+          <ion-icon name="pricetags"></ion-icon>
+        </button>
+      </ion-fab>
+
+        
+
+
     <ion-list>
       <ion-item>
-        <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombre_evento" [(ngModel)]="event.title"></ion-input>
+        <ion-input type = "text" placeholder="Nombre del Evento" [(ngModel)]="nombre_evento" [(ngModel)]="event.title" clearInput></ion-input>
       </ion-item>
   
      
@@ -66,15 +77,15 @@
   
              
                   <ion-item>
-                    <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento"></ion-input>
+                    <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento" clearInput></ion-input>
                   </ion-item>
                   
                   <ion-item>
-                    <ion-input type = "number" placeholder="Telefono del titular:" [(ngModel)]="telefono_titular_evento"></ion-input>
+                    <ion-input type = "tel" placeholder="Telefono del titular:" [(ngModel)]="telefono_titular_evento" clearInput></ion-input>
                   </ion-item>
                   
                   <ion-item>
-                        <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion_evento"></ion-input>
+                        <ion-input type = "text" placeholder="Direccion" [(ngModel)]="direccion_evento" clearInput></ion-input>
                       </ion-item>
 
                       <ion-item>
@@ -143,13 +154,14 @@
 <ion-footer no-border>
 
   <ion-toolbar>
-      <ion-item>
-          <ion-label color="primary">Total: </ion-label>
-          <ion-input readonly="true" [value]="costo_total"></ion-input>
-        </ion-item>
-        
-    <button [hidden]="hideCards" ion-button full (click)="continuarCotizacion()">Continuar</button>
-    <button [hidden]="!hideCards" ion-button full (click)="save()">Agregar Evento</button>
+      
+              <ion-item>
+                <ion-label color="primary">Total: </ion-label>
+                <ion-input readonly="true" [value]="costo_total"></ion-input>
+              </ion-item>
+           
+    <button [hidden]="hideCards" ion-button full (click)="tgExtras()">Continuar</button>
+    <button [hidden]="!hideCards" ion-button full (click)="continuarCotizacion()">Agregar Evento</button>
   
   </ion-toolbar>
 

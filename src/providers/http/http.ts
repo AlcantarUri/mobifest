@@ -186,6 +186,28 @@ borrarEvento(id_evento: number){
  });
 }
 
+//actualizar observaciones
+
+actualizarObservaciones(id_evento:string,observaciones:string){ 
+  let datos = { 
+    id_evento:id_evento,
+    observaciones: observaciones
+        }
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/uri/actualizarObservaciones.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
+
+
 borrarRemanentes(id_evento: string){
  
  
@@ -639,6 +661,21 @@ console.log("dentro del provder"+id_evento,id_mob);
              reject(err);
            });
       });
+     }
+
+     traerFechas(){
+
+    
+      var url = 'http://avisositd.xyz/mobiliaria/eventosTodos.php';  
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);   
+           }, (err) =>{
+             reject(err);
+           });
+      });
+  
      }
 
 

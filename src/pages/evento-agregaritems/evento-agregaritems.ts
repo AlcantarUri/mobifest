@@ -110,6 +110,9 @@ ocupados: number;
 //id del evento
 idEvento: number = 9999;
 
+porcentaje: number;
+
+
 
 
 
@@ -124,6 +127,7 @@ idEvento: number = 9999;
     public view: ViewController,
     public loadingCtrl: LoadingController
     ) {    
+
     
         //inician los cards visibles y ls fechas ocultas
     this.hideCards=false;
@@ -171,6 +175,20 @@ idEvento: number = 9999;
    
    continuarCotizacion(arreglochido: any){
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
+
+
+    if(this.nombre_titular_evento==null){
+
+
+      let toast = this.toastCtrl.create({
+        message: 'Favor de elegir la titular del evento',
+        duration: 2500,
+        position: 'top'
+      });
+    
+      toast.present();
+
+    }else{
     let alert = this.alertCtrl.create({
       title: 'Confirmar Cotización',
       message: 'El costo total seria de: '+ this.costo_total+'<br> Desea agregar IVA?',
@@ -189,7 +207,8 @@ idEvento: number = 9999;
           role: 'cancel',
           handler: () => {
             console.log('Ño');
-            this.tgExtras();
+            this.descuentos();
+
             
           }
         },
@@ -197,14 +216,52 @@ idEvento: number = 9999;
           text: 'Sí',
           handler: () => {
             console.log('Sí');
-            this.pasaraCotizacionconIva();
+            this.costo_total= this.costo_total+(this.costo_total*.16);
+            this.save();
+
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+   }
+
+
+   descuentos(){
+    let alert = this.alertCtrl.create({
+      title: 'Escriba el Porcentaje de Descuento',
+      inputs: [
+        {
+          name: 'descuento',
+          placeholder: 'Porcentaje de Descuento',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aplicar',
+          handler: data => {
+
+           
+            this.porcentaje= parseInt(data.descuento)/100;
+            this.costo_total = this.costo_total - this.costo_total*this.porcentaje;
+            
+            
+
           }
         }
       ]
     });
     alert.present();
    }
-
    
    
 ocultarFormulario(){
@@ -222,7 +279,7 @@ ocultarFormulario(){
 
 
    if(this.nombre_evento==null){
-    this.nombre_evento="Pendiente";
+    this.nombre_evento="Titular Pendiente";
   }
   if(this.tipo_evento==null){
     this.tipo_evento="Otro";
@@ -235,10 +292,10 @@ ocultarFormulario(){
     this.hora_recoleccion_evento="00:00:00";
   }
   if(this.direccion_evento==null){
-    this.direccion_evento="Pendiente";
+    this.direccion_evento="Dirección Pendiente";
   }
   if(this.telefono_titular_evento==null){
-    this.telefono_titular_evento="Pendiente";
+    this.telefono_titular_evento="Teléfono Pendiente";
   }
     
 
@@ -505,23 +562,12 @@ this.http.dispoibilidadmob(
  
    save(){
 
-    if(this.nombre_titular_evento==null){
-
-
-      let toast = this.toastCtrl.create({
-        message: 'Favor de elegir la titular del evento',
-        duration: 2500,
-        position: 'top'
-      });
     
-      toast.present();
-
-    }else{
     this.agregaraInventario();
     this.presentLoadingCustom();
 
     this.view.dismiss(this.event);
-    }
+    
   }
 
 

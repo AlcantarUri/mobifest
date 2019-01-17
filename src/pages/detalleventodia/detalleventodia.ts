@@ -36,6 +36,8 @@ export class DetalleventodiaPage {
 
   eliminado: any;
   eliminadores: any;
+  camentarios: any;
+  comnets: any;
 
   fecha_envio_evento: any;
   hora_envio_evento: any;
@@ -205,14 +207,87 @@ this.sacardetalles(this.id_evento);
 
 }
 
-
 presentAlert(obs: string) {
+
+  
+ 
   let alert = this.alertCtrl.create({
     title: 'Observaciones',
     subTitle: obs,
-    buttons: ['OK']
+    inputs: [
+      {
+        name: 'observacionesMaster',
+        placeholder: 'Agregar Observaciones'
+      }
+    ],
+    buttons: [
+      {
+        text: 'OK',
+        role: 'cancel',
+        handler: data => {
+
+        }
+        },
+      {
+        text: 'Agregar',
+        handler: data => {
+          if(data.observacionesMaster == ""){
+            let ocservar = obs;
+            this.actualizarComentario(ocservar);
+
+          }else if(data.observacionesMaster != ""){
+
+          let observar = obs+'<br/>'+data.observacionesMaster;
+          this.actualizarComentario(observar);
+        }
+        }
+      }
+    ]
   });
   alert.present();
+}   
+
+actualizarComentario(observaciones: string){
+
+  
+  this.http.actualizarObservaciones(this.id_evento,observaciones).then(
+    (inv) => { 
+  
+      console.log(inv);
+      this.camentarios= inv['resultado'];
+
+      for(let entry of this.camentarios){
+
+        this.comnets = entry.resulta;
+      }
+
+      if(this.comnets == "registra"){
+
+        let toast = this.toastCtrl.create({
+          message: 'Observaciones Actualizadas!',
+          duration: 2000,
+          position: 'top'
+        });  
+      toast.present();
+      this.actualizar();
+
+      }else{
+        let toast = this.toastCtrl.create({
+          message: 'Fallo en la conexión inténtelo de nuevo',
+          duration: 2000,
+          position: 'top'
+        });  
+      toast.present();
+     }
+     
+       
+    },
+    (error) =>{
+      console.log("Error"+JSON.stringify(error));
+      alert("Verifica que cuentes con internet");
+    }
+  );
+
 }
 
 eliminarEvento(){
