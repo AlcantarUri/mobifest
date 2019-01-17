@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController } from 'ionic-angular';
+import { NavController, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import * as moment from 'moment';
 import { HttpProvider } from '../../providers/http/http';
 import { ToastController } from 'ionic-angular';
@@ -13,7 +13,8 @@ import { DetalleventodiaPage } from '../detalleventodia/detalleventodia';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
+  
+  
   eventSource = [];
   viewTitle: string;
   selectedDay = new Date();
@@ -66,23 +67,28 @@ export class HomePage {
           private modalCtrl: ModalController,
           private alertCtrl: AlertController,
           private http: HttpProvider,
-          private toastCtrl: ToastController
+          private toastCtrl: ToastController,
+          private loadingCtrl: LoadingController
           ) {
-            this.eventosTodos();
+            
   }
 
 
-  eventosTodos(){
+  ionViewDidEnter() {
+    this.eventosTodos();
+  }
 
-    
+  
+
+
+  eventosTodos(){
 
     this.http.traerFechas().then(
       (inv) => { 
         console.log("fechas todas   "+inv);
         
-        
-        
         var json = inv["evento"];
+        this.eventSource = [];
 
        for (var i = 0; i < json.length; i++) {
        // console.log(json[i].nombre_mob);
@@ -95,6 +101,7 @@ export class HomePage {
        console.log("llega en  "+i+"    "+ano+"-"+mes+"-"+dia);
        ano = new Date(Date.UTC(ano, mes, dia) + (1000 * 60 * 60 * 24));  
 
+            
             this.eventSource.push({
                 title: json[i].nombre_evento,
                 startTime: ano,
@@ -102,6 +109,7 @@ export class HomePage {
                 allDay: false
             });   
 
+            
             
             console.log("cambiado formato"+ano);
        }
