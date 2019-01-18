@@ -50,6 +50,8 @@ prueba: any;
   //para ocultar el buscador
  hideDates;
  hideCards;
+
+ hideIva;
 //para el ultimo paso donde se va a la base de datos lo guardado
  haciaeventos =[];
  haciapagos =[];
@@ -112,6 +114,7 @@ idEvento: number = 9999;
 
 porcentaje: number;
 
+costo_subtotal: number = 0;
 
 
 
@@ -134,7 +137,7 @@ porcentaje: number;
     this.hideDates=true;
     this.pagado_evento=false;
     this.anticipo = 0;
-    
+    this.hideIva = false;
       //para pasar al final de la cotizacion
       
 
@@ -186,28 +189,25 @@ porcentaje: number;
         position: 'top'
       });
     
-      toast.present();
-
+      toast.present(); 
     }else{
+            this.save();
+      }
+   }
+
+   iva(){
     let alert = this.alertCtrl.create({
-      title: 'Confirmar Cotización',
-      message: 'El costo total seria de: '+ this.costo_total+'<br> Desea agregar IVA?',
+      title: 'IVA',
+      
       
       
       buttons: [
-        {
-          text: 'Cancelar',
-          handler: () => {
-            console.log('Cancelar');
-            
-          }
-        },
         {
           text: 'No',
           role: 'cancel',
           handler: () => {
             console.log('Ño');
-            this.descuentos();
+            
 
             
           }
@@ -217,14 +217,15 @@ porcentaje: number;
           handler: () => {
             console.log('Sí');
             this.costo_total= this.costo_total+(this.costo_total*.16);
-            this.save();
+            this.hideIva= !this.hideIva;
+
+            
 
           }
         }
       ]
     });
     alert.present();
-  }
    }
 
 
@@ -250,9 +251,21 @@ porcentaje: number;
           text: 'Aplicar',
           handler: data => {
 
-           
+           if(data.descuento == ""){
+
+            let toast = this.toastCtrl.create({
+              message: 'Introduzca un número porfavor',
+              duration: 2500,
+              position: 'bottom'
+              
+            });
+            toast.present();
+
+           }else{
             this.porcentaje= parseInt(data.descuento)/100;
             this.costo_total = this.costo_total - this.costo_total*this.porcentaje;
+           }
+            
             
             
 
@@ -279,7 +292,7 @@ ocultarFormulario(){
 
 
    if(this.nombre_evento==null){
-    this.nombre_evento="Titular Pendiente";
+    this.nombre_evento="Nombre de evento Pendiente";
   }
   if(this.tipo_evento==null){
     this.tipo_evento="Otro";
@@ -477,6 +490,7 @@ seikoas(id_mob: number, reservados:number, precio: number){
     
   tot=precio*reservados;
   this.costo_total=tot+this.costo_total;
+  this.costo_subtotal = this.costo_total;
 
     this.arreglodeobjetos.push({
       id_mob: id_mob,ocupados:reservados
