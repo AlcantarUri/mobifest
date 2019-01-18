@@ -186,6 +186,7 @@ addEventNormal(){
       setTimeout(()=> {
         this.eventSource = events;
       }) ;
+      this.eventosTodos;
     }
   });
 

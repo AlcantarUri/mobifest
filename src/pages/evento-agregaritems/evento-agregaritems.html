@@ -19,26 +19,29 @@
             </button>
           </ion-buttons>
       </ion-toolbar>
+
+      <ion-toolbar [hidden]="!hideCards">
+          <ion-title>Datos del Evento</ion-title>
+        </ion-toolbar>
   </ion-navbar>
 </ion-header>
 
 <ion-content [hidden]="hideDates">
 
 
-    <ion-fab top right [hidden]="!hideCards">
-        <button ion-fab color="secondary"><ion-icon name="logo-usd"></ion-icon></button>
-        <ion-fab-list side="left">
+    <ion-fab top right edge [hidden]="!hideCards">
+       
           <button ion-fab mini color="secondary" (click)="descuentos()">
             <ion-icon name="pricetags"></ion-icon>
           </button>
-        </ion-fab-list>
-        <ion-fab-list side="bottom" [hidden]="hideIva">
-          <button ion-fab mini color="secondary" (click)="iva()">
-            IVA
-          </button>
-        </ion-fab-list>
+          <button [hidden]="!hideCards" ion-fab mini color="secondary" (click)="iva()">
+              IVA
+            </button>
         
       </ion-fab>
+
+      
+      
 
       
         

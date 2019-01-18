@@ -7,6 +7,7 @@ import { HomePage} from '../home/home';
 import { EventModalPage } from '../event-modal/event-modal';
 import * as moment from 'moment';
 import { LoadedModule } from 'ionic-angular/umd/util/module-loader';
+import { TabsPage } from '../tabs/tabs';
 
 
 
@@ -580,7 +581,7 @@ this.http.dispoibilidadmob(
     this.agregaraInventario();
     this.presentLoadingCustom();
 
-    this.view.dismiss(this.event);
+    
     
   }
 
@@ -588,12 +589,22 @@ this.http.dispoibilidadmob(
   presentLoadingCustom() {
     let loading = this.loadingCtrl.create({
       content: 'Agregando Evento por favor espere...',
-      duration: 2000
+      duration: 1800
     });
   
     loading.onDidDismiss(() => {
       this.juntarobjetos();
       this.aNuevoMetodoparaPagos();
+      let loading = this.loadingCtrl.create({
+        content: 'Agregando Mobiliario por favor espere...',
+        duration: 400
+      });
+      loading.onDidDismiss(() => {
+      //this.view.dismiss(this.event);
+      this.navCtrl.setRoot(TabsPage);
+    });
+    loading.present();
+
     });
   
     loading.present();

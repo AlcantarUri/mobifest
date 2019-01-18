@@ -367,7 +367,7 @@ borrareventodos(){
 
       if(jsondos == "eliminado"){
 
-        this.navCtrl.push(TabsPage);
+        this.navCtrl.setRoot(TabsPage);
         let toast = this.toastCtrl.create({
           message: 'Eliminacion de Evento Exitosa!!!',
           duration: 2000,
