@@ -25,11 +25,13 @@ import { AnonymousSubject } from 'rxjs/Subject';
 })
 export class DetalleventodiaPage {
   
-
+  costot : number;
+  costo_total: number;
+  saldo: number;
 
   id_evento: string;
 
-  
+  pagos:any;
   public evento: any;
   public items:any;
   public observ: any;
@@ -58,6 +60,7 @@ export class DetalleventodiaPage {
 
                 this.sacardetalles(this.id_evento);
                 this.sacarItems(this.id_evento);
+                this.sacarPago(this.id_evento);
 
                 
                 
@@ -70,6 +73,7 @@ export class DetalleventodiaPage {
   actualizar(){
     this.sacardetalles(this.id_evento);
     this.sacarItems(this.id_evento);
+    this.sacarPago(this.id_evento);
 
   }
 
@@ -121,16 +125,51 @@ for(let entry of this.evento){
     })
   }
 
-  borrar(id_evento, id_mob){
+  sacarPago(id_evento){
+    this.http.detallePago(id_evento).then(
+      (inv) => { 
+          
+        
+
+       this.pagos= inv["pago"];
+
+       for(let entry of this.pagos){
+        var evento = entry.id_evento;
+        this.costo_total = entry.costo_total;
+        this.saldo = entry.saldo;
+        
+      }
+
+       
+      
+         
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+  }
+
+  
+
+  borrar(id_evento, id_mob, ocupados, costo){
 
     console.log(id_evento,id_mob);
 
+    var precio = ocupados*costo;
+    console.log(precio);
+    this.costo_total = this.costo_total - precio;
+    this.saldo = this.saldo - precio;
 
-    this.http.borraritemsdelEvento(id_evento,id_mob).then(
-      (inv) => { 
+    console.log(this.costo_total+"   "+this.saldo);
+
+
+    this.http.borrrarItemsDelevento(id_evento,id_mob, this.costo_total, this.saldo).then(
+      (res) => { 
         
-          
-        if(inv["cliente"] == "eliminado"){
+          this.sacarPago(this.id_evento);
+        if(res["cliente"] == "eliminado"){
 
           
 
@@ -161,6 +200,7 @@ for(let entry of this.evento){
         alert("Verifica que cuentes con internet");
       }
     );
+    
 
   }
 

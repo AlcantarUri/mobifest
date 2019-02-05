@@ -307,10 +307,10 @@ sacarItemsporEventos(id_evento:string){
  }
 
 
- borraritemsdelEvento(id_evento:string, id_mob: string){
-console.log("dentro del provder"+id_evento,id_mob);
+ borraritemsdelEvento(id_evento:string, id_mob: string, costo_total: number){
+
    
-  var url = 'http://avisositd.xyz/mobiliaria/uri/borrarmoviliario.php?id_evento='+id_evento+'&id_mob='+id_mob;
+  var url = 'http://avisositd.xyz/mobiliaria/uri/borrarmoviliario.php?id_evento='+id_evento+'&id_mob='+id_mob+'&costo_mob='+costo_total;
   return new Promise((resolve, reject) => {
    this.http.get(url)
       .subscribe(data => {
@@ -320,6 +320,28 @@ console.log("dentro del provder"+id_evento,id_mob);
        });
   });
  }
+
+ borrrarItemsDelevento(id_evento:string, id_mob: string, costo_total: number, saldo:number){ 
+  let datos = { 
+    id_evento: id_evento,
+    id_mob:id_mob,
+    costo_total:costo_total,
+    saldo: saldo,
+    
+        }
+       let options = {
+         headers: {
+      'Content-Type': 'application/x-www-form-urlencoded'
+        }
+       };
+       var url = 'http://avisositd.xyz/mobiliaria/uri/borrarmoviliario2.php/';
+        return new Promise(resolve => {
+        this.http.post(url,JSON.stringify(datos),options)
+          .subscribe(data => {
+       resolve(data);
+       });
+         });
+}
 
 
  //sacarCostoTotal.php
