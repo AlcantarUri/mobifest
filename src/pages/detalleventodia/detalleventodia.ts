@@ -56,7 +56,9 @@ export class DetalleventodiaPage {
                 this.id_evento= navParams.get('data');
                 this.fecha_envio_evento = navParams.get('date');
 
-                
+                this.costot =0;
+                this.costo_total=0;
+                this.saldo=0;
 
                 this.sacardetalles(this.id_evento);
                 this.sacarItems(this.id_evento);
@@ -171,7 +173,9 @@ for(let entry of this.evento){
           this.sacarPago(this.id_evento);
         if(res["cliente"] == "eliminado"){
 
-          
+                this.costot =0;
+                this.costo_total=0;
+                this.saldo=0;
 
           let toast = this.toastCtrl.create({
             message: 'Moviliario Eliminado',

@@ -57,12 +57,32 @@ export class MobiliarioPage {
   ionViewCanEnter(){
     return this.traerDatos();
   }
-
+/*
   openModal(nombre_mob:string){
 
     this.modCtrl.create('DetallePage',{
       data: nombre_mob
     }).present();
+
+    
+  }*/
+  //cambios hehco por mi a peticion de troka
+  openModal(nombre_mob:string){
+
+    let modal = this.modCtrl.create('DetallePage',{
+      data: nombre_mob
+    });
+
+    modal.onDidDismiss(() => {
+      this.initializeItems();
+    this.traerDatos();
+      
+         console.log('Modal closed');
+      });
+    
+    modal.present();
+
+    
 
     
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, ToastController, AlertController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { ModalController } from 'ionic-angular';
 
@@ -24,7 +24,13 @@ export class DetallePage {
  
 
 
-  constructor(public navCtrl: NavController, public view: ViewController, public navParams: NavParams, public http: HttpProvider,  public modCtrl:ModalController) {
+  constructor(public navCtrl: NavController, 
+              public view: ViewController, 
+              public navParams: NavParams, 
+              public http: HttpProvider,  
+              public modCtrl:ModalController,
+              public toastCtrl: ToastController,
+              public alertCtrl: AlertController) {
 
     this.nombre = navParams.get('data');
    
@@ -44,6 +50,49 @@ export class DetallePage {
 
     this.detalle(this.nombre);
 
+  }
+  EliminarItem(){
+    const confirm = this.alertCtrl.create({
+      title: 'Estas seguro?',
+      message: 'Realmente quieres eliminar este Articulo?',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {
+            console.log('Disagree clicked');
+          }
+        },
+        {
+          text: 'Si',
+          handler: () => {
+            this.eliminarItem();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  eliminarItem(){
+    this.http.eliminarItem(this.nombre).then(
+      (data) => { 
+        console.log(data)  
+
+          this.cerrarModal();
+
+          let toast = this.toastCtrl.create({
+            message: 'el Item ha sido Eliminado',
+            duration: 3000,
+            position: 'top'
+          });
+        
+
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+       
+      }
+    );
   }
 
   detalle(nombre:string){

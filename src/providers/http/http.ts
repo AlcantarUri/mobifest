@@ -700,5 +700,18 @@ sacarItemsporEventos(id_evento:string){
   
      }
 
+     eliminarItem(nombre:string){
+
+      var url = 'http://avisositd.xyz/mobiliaria/eliminarItem.php?nombre='+nombre;
+      return new Promise((resolve, reject) => {
+       this.http.get(url)
+          .subscribe(data => {
+            resolve(data);
+           }, (err) =>{
+             reject(err);
+           });
+      });
+     }
+
 
 }
