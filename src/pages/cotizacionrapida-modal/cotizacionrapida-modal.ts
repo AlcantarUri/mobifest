@@ -368,7 +368,7 @@ actualizarpago(){
     this.id_evento
   ).then(
     (inv) => { 
-     console.log(inv)     
+     console.log(inv);     
       
     },
     (error) =>{

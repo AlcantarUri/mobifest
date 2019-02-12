@@ -229,7 +229,9 @@ for(let entry of this.evento){
     
   modal.onDidDismiss(data=>{
 
+this.sacardetalles(this.id_evento);
 this.sacarItems(this.id_evento);
+this.sacarPago(this.id_evento);
   }
     );
   modal.present();
