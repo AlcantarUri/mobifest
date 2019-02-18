@@ -35,6 +35,8 @@ export class EventoAgregaritemsPage {
 prueba: any;
 
 
+  ivavalor: number;
+  descuento: string;
 
   id: string;
   inventario: any;
@@ -207,8 +209,8 @@ costo_subtotal: number = 0;
           text: 'No',
           role: 'cancel',
           handler: () => {
-            console.log('Ño');
-            
+          this.ivavalor = 0;
+          console.log(this.ivavalor);
 
             
           }
@@ -216,7 +218,8 @@ costo_subtotal: number = 0;
         {
           text: 'Sí',
           handler: () => {
-            console.log('Sí');
+            this.ivavalor = 1;
+            console.log(this.ivavalor);
             this.costo_total= this.costo_total+(this.costo_total*.16);
             this.hideIva= !this.hideIva;
 
@@ -251,6 +254,8 @@ costo_subtotal: number = 0;
         {
           text: 'Aplicar',
           handler: data => {
+            this.descuento=data.descuento;
+            console.log(this.descuento);
 
            if(data.descuento == ""){
 
