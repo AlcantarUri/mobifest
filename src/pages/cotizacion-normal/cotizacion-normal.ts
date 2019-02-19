@@ -41,7 +41,8 @@ export class CotizacionNormalPage {
   public event = { startTime: new Date().toISOString(), endTime: new Date().toISOString()}
 
 
-
+  ivavalor: number = 0;
+  descuento: number = 0;
 
 //para la base de datos
 id_mob: number;
@@ -209,7 +210,9 @@ public costo_total:number=0;
       this.pagado_evento, 
       this.nombre_titular_evento, 
       this.direccion_evento,
-      this.telefono_titular_evento).then(
+      this.telefono_titular_evento,
+      this.ivavalor,
+      this.descuento).then(
       (res) => { 
         console.log(res["registro"]);
 

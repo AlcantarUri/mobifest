@@ -20,6 +20,10 @@ export class CotizacionrapidaModalPage {
 
  fecha_envio_evento: string;
 
+ ivavalor: number;
+ descuento: number;
+ costo_total_chido: number;
+
  inventario: any;
  items:any;
  moviles:any;
@@ -55,14 +59,22 @@ export class CotizacionrapidaModalPage {
     public loadingCtrl: LoadingController,
     public viewCtrl : ViewController) {
 
+      
+
       this.fecha_envio_evento = navParams.get('data');
       this.hora_envio_evento = navParams.get('horae');
       this.hora_recoleccion_evento = navParams.get('horar');
       this.id_evento = navParams.get('id');
+      this.ivavalor=Number(navParams.get('iva'));
+      this.descuento= Number(navParams.get('descuent'));
       this.getMessages();
       this.sacarPago();
 
-      console.log(this.id_evento);
+      
+      
+
+      console.log(this.ivavalor);
+      console.log(this.descuento);
       
   
 
@@ -72,6 +84,11 @@ export class CotizacionrapidaModalPage {
     //this.mobiliarios = this.inventario;
     this.items=this.inventario;
     this.inventario=this.moviles;
+   }
+
+   restablecervalores(){
+     this.ivavalor = 0;
+     this.descuento = 0;
    }
 
    getMessages(){    
@@ -199,7 +216,7 @@ seikoas(id_mob: number, reservados:number, precio: number){
     
   tot=precio*reservados;
   this.costo_total=tot+this.costo_total;
-
+  
     this.arreglodeobjetos.push({
       id_mob: id_mob,ocupados:reservados
     })
@@ -209,10 +226,12 @@ console.log(this.arreglodeobjetos);
 
 
 continuarCotizacion(arreglochido: any){
-  //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
+  
+  this.costo_total_chido = this.costo_total - (this.costo_total*this.descuento);
+  console.log(this.costo_total_chido);
   let alert = this.alertCtrl.create({
     title: 'Confirmar Cotización',
-    message: 'El costo extra seria de: '+ this.costo_total+'<br> Desea agregar IVA?',
+    message: 'El costo extra seria de: $'+ this.costo_total_chido+'<br> ¿Desea agregar el inventario?',
     
     
     buttons: [
@@ -230,8 +249,8 @@ continuarCotizacion(arreglochido: any){
           console.log('Ño');
 
           //añadir a inventario
-          console.log(this.costo_total);
-          this.confirmar();
+          this.viewCtrl.dismiss(this.costo_total);
+          //this.confirmar();
           
 
         }
@@ -240,8 +259,15 @@ continuarCotizacion(arreglochido: any){
         text: 'Sí',
         handler: () => {
           console.log('Sí');
-          this.confirmar();
-          this.pasaraCotizacionconIva();
+          
+          if (this.ivavalor==1){
+            this.costo_total = this.costo_total_chido*1.16;
+            this.presentLoadingCustom();
+          }else if(this.ivavalor==0){
+            this.costo_total=this.costo_total_chido;
+            this.presentLoadingCustom();
+          }
+          
         }
       }
     ]
@@ -249,55 +275,11 @@ continuarCotizacion(arreglochido: any){
   alert.present();
  }
 
- pasaraCotizacionconIva() {
-    
-  
-  this.costo_total= this.costo_total+(this.costo_total*.16);
-  console.log(this.costo_total);
 
-}
-
-confirmar(){
-  let alert = this.alertCtrl.create({
-    title: 'Confirmar Cotización',
-    message: '¿Desea agregar el costo e inventario al evento?',
-    
-    
-    buttons: [
-      {
-        text: 'Cancelar',
-        handler: () => {
-          console.log('Cancelar');
-          
-        }
-      },
-      {
-        text: 'No',
-        role: 'cancel',
-        handler: () => {
-          console.log('Ño');
-
-          //añadir a inventario
-          this.viewCtrl.dismiss(this.costo_total); 
-          
-
-        }
-      },
-      {
-        text: 'Sí',
-        handler: () => {
-          console.log('Sí');
-          this.presentLoadingCustom();
-        }
-      }
-    ]
-  });
-  alert.present();
-}
 
 presentLoadingCustom() {
   let loading = this.loadingCtrl.create({
-    content: 'Agregando Evento por favor espere...',
+    content: 'Agregando mobiliario por favor espere...',
     duration: 2000
   });
 
@@ -305,6 +287,7 @@ presentLoadingCustom() {
     this.juntarobjetos();
     this.actualizarpago();
     this.viewCtrl.dismiss(this.costo_total);   
+    this.restablecervalores();
   });
 
   loading.present();

@@ -98,7 +98,7 @@ export class HomePage {
        var dia =json[i].dia;
    
       
-       console.log("llega en  "+i+"    "+ano+"-"+mes+"-"+dia);
+       //console.log("llega en  "+i+"    "+ano+"-"+mes+"-"+dia);
        ano = new Date(Date.UTC(ano, mes, dia) + (1000 * 60 * 60 * 24));  
 
             
@@ -111,7 +111,7 @@ export class HomePage {
 
             
             
-            console.log("cambiado formato"+ano);
+            //console.log("cambiado formato"+ano);
        }
        
                
@@ -237,7 +237,7 @@ addEventNormal(){
   }
 
 llenarCards(){
-  console.log(this.eventosChidos);
+  //  console.log(this.eventosChidos);
 
   
 }
@@ -247,7 +247,7 @@ llenarCards(){
     this.mesmasuno = this.selectedDay.getMonth() + 1;
 
     this.fecha = this.selectedDay.getFullYear()+"-"+this.mesmasuno+"-"+this.selectedDay.getDate();
-    console.log(this.fecha);
+    //console.log(this.fecha);
     
     this.http.obtenerEventosdelDia(this.fecha).then(
       (res)=>{

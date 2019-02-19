@@ -42,6 +42,9 @@ insertarEvento(nombre_evento: string,
   nombre_titular_evento: string, 
   direccion:string,
   telefono_titular_evento:string,
+  descuento: number,
+  ivavalor: number
+  
  
   ){
 
@@ -55,7 +58,9 @@ insertarEvento(nombre_evento: string,
      pagado_evento:pagado_evento,
      nombre_titular_evento:nombre_titular_evento,
      direccion:direccion,
-     telefono_titular_evento:telefono_titular_evento
+     telefono_titular_evento:telefono_titular_evento,
+     descuento:descuento,
+     ivavalor:ivavalor
      
         }
   
@@ -656,7 +661,7 @@ sacarItemsporEventos(id_evento:string){
 
       
        var url = 'http://avisositd.xyz/mobiliaria/pagos/seguimientopago.php?id_evento='+id;
-       console.log(url);
+       
        
       return new Promise((resolve, reject) => {
        this.http.get(url)

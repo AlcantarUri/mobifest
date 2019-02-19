@@ -36,7 +36,7 @@ prueba: any;
 
 
   ivavalor: number;
-  descuento: string;
+  descuento: number;
 
   id: string;
   inventario: any;
@@ -157,7 +157,9 @@ costo_subtotal: number = 0;
     console.log(this.fecha_envio_evento);
 
 
-    
+    //se inicializan los valores de descuento e iva
+    this.ivavalor=0;
+    this.descuento=0;
     
 
     this.getMessages();
@@ -219,9 +221,10 @@ costo_subtotal: number = 0;
           text: 'Sí',
           handler: () => {
             this.ivavalor = 1;
-            console.log(this.ivavalor);
+    
+            console.log("aplico iva?? "+this.ivavalor);
             this.costo_total= this.costo_total+(this.costo_total*.16);
-            this.hideIva= !this.hideIva;
+            this.hideIva= true;
 
             
 
@@ -295,7 +298,7 @@ ocultarFormulario(){
     //console.log(this.costo_total);
    // console.log(this.anticipo);
     
-
+    console.log("IVA = "+this.ivavalor+" Descuento = "+this.descuento);
 
    if(this.nombre_evento==null){
     this.nombre_evento="Nombre de evento Pendiente";
@@ -329,6 +332,8 @@ ocultarFormulario(){
       this.nombre_titular_evento, 
       this.direccion_evento,
       this.telefono_titular_evento,
+      this.descuento,
+      this.ivavalor
 
       ).then(
       (res) => { 
@@ -336,6 +341,17 @@ ocultarFormulario(){
         this.arreglodos = res['registro'];
 
         console.log(this.arreglodos);
+        if(this.arreglodos =='registrado'){
+          console.log("registro Satisfactorio");
+          this.presentLoadingCustom();
+
+        }else if(this.arreglodos=='noregistrado'){
+          console.log("Contacte al URI");
+
+          
+            this.presentToastWithOptions();
+          
+        }
        
 
         
@@ -351,6 +367,16 @@ ocultarFormulario(){
 
    }
 
+
+   async presentToastWithOptions() {
+    const toast = await this.toastCtrl.create({
+      message: 'Evento NO REGISTRADO verifique la conexión a internet e inténtelo de nuevo.',
+      showCloseButton: true,
+      position: 'top',
+      closeButtonText: 'OK'
+    });
+    toast.present();
+  }
    
    aNuevoMetodoparaPagos(){
   
@@ -584,7 +610,7 @@ this.http.dispoibilidadmob(
 
     
     this.agregaraInventario();
-    this.presentLoadingCustom();
+    //this.presentLoadingCustom();
 
     
     

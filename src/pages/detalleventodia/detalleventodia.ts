@@ -25,6 +25,9 @@ import { AnonymousSubject } from 'rxjs/Subject';
 })
 export class DetalleventodiaPage {
   
+descuento: number;
+ivavalor: number;
+
   costot : number;
   costo_total: number;
   saldo: number;
@@ -65,6 +68,8 @@ export class DetalleventodiaPage {
                 this.sacarPago(this.id_evento);
 
                 
+
+                
                 
   }
 
@@ -84,7 +89,7 @@ export class DetalleventodiaPage {
     this.http.detallesdeleventodeldia(id_evento).then(
       (res)=>{
 
-        
+        this.descuento=0;
        
         this.evento = res["evento"];
         this.observ = res["evento"];
@@ -94,15 +99,19 @@ for(let entry of this.evento){
 
   this.hora_envio_evento= entry.hora_envio_evento;
   this.hora_recoleccion_evento = entry.hora_recoleccion_evento;
+  this.ivavalor = Number(entry.ivavalor);
+  this.descuento = Number(entry.descuento);
 
+  
   
 
 
 
 }
 
+this.descuento = this.descuento/100;
         
-        console.log(this.evento);
+        //console.log(this.ivavalor+"   "+this.descuento);
 
       },(error)=>{
       console.log("Error"+JSON.stringify(error));
@@ -137,8 +146,8 @@ for(let entry of this.evento){
 
        for(let entry of this.pagos){
         var evento = entry.id_evento;
-        this.costo_total = entry.costo_total;
-        this.saldo = entry.saldo;
+        this.costo_total = Number(entry.costo_total);
+        this.saldo = Number(entry.saldo);
         
       }
 
@@ -158,13 +167,32 @@ for(let entry of this.evento){
   borrar(id_evento, id_mob, ocupados, costo){
 
     console.log(id_evento,id_mob);
+    console.log(this.ivavalor);
+    
+    
+    console.log(this.descuento);
+    if(this.ivavalor==1){
+      var precio = Number(((ocupados*costo)-this.descuento*(ocupados*costo))*1.16);
+    console.log(precio);
+    this.costo_total = Number(this.costo_total - precio);
+    this.saldo = Number(this.saldo - precio);
 
-    var precio = ocupados*costo;
+    console.log(this.costo_total+"   "+this.saldo);
+
+    }else if(this.ivavalor==0){
+      var precio = (ocupados*costo)-this.descuento*(ocupados*costo);
     console.log(precio);
     this.costo_total = this.costo_total - precio;
     this.saldo = this.saldo - precio;
 
+    this.costo_total=Number(this.costo_total);
+    this.saldo = Number(this.saldo);
     console.log(this.costo_total+"   "+this.saldo);
+
+    }
+
+    //if(this.costo_total)
+
 
 
     this.http.borrrarItemsDelevento(id_evento,id_mob, this.costo_total, this.saldo).then(
@@ -204,7 +232,7 @@ for(let entry of this.evento){
         alert("Verifica que cuentes con internet");
       }
     );
-    
+   
 
   }
 
@@ -219,13 +247,15 @@ for(let entry of this.evento){
 
   addmob(){
     
-    console.log(this.fecha_envio_evento);
+   
     
     let modal = this.modalCtrl.create('CotizacionrapidaModalPage', {
       data:this.fecha_envio_evento,
       horae: this.hora_envio_evento,
       horar: this.hora_recoleccion_evento,
-      id: this.id_evento});
+      id: this.id_evento,
+      iva: this.ivavalor,
+      descuent: this.descuento});
     
   modal.onDidDismiss(data=>{
 

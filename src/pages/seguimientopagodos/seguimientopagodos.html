@@ -25,21 +25,21 @@
                 
                 <div class = "row">
                     <div class = "col">Costo Total</div>
-                    <div class = "col">{{item.costo_total}}</div>
+                    <div class = "col">{{item.costo_total | number:'1.0-2'}}</div>
                   </div>
                 <div class = "row">
                     <div class = "col">Pagado</div>
-                    <div class = "col">{{item.anticipo}}</div>
+                    <div class = "col">{{item.anticipo | number:'1.0-2'}}</div>
                   </div>
                 <div class = "row">
                     <div class = "col" class="hdContent">Saldo Pendiente</div>
-                    <div class = "col" class="hddContent">{{item.saldo}}</div>
+                    <div class = "col" class="hddContent">{{item.saldo | number:'1.0-2'}}</div>
                   </div>
   
                   <p>
                       <ion-item>
                           <ion-label color="primary" stacked>Cantidad a Abonar</ion-label>
-                          <ion-input type="number" [(ngModel)]="abono" placeholder="{{item.saldo}}"></ion-input>
+                          <ion-input type="number" [(ngModel)]="abono" placeholder="{{item.saldo | number:'1.0-2'}}"></ion-input>
                         </ion-item>
                          
                   </p>
