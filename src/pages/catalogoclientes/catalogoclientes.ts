@@ -133,7 +133,7 @@ export class CatalogoclientesPage {
         },
         {
           name: 'correo',
-          placeholder: 'JoseManuelGdlO@gmail.com'
+          placeholder: 'Escribe la dirección'
         }
       ],
       buttons: [

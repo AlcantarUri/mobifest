@@ -167,6 +167,8 @@ costo_subtotal: number = 0;
     this.event.endTime = preselectedDate;
 
     this.fecha_recoleccion_evento = this.fecha_envio_evento
+    this.traerClientes();
+    this.initializeClientes();
 
    
   }
@@ -184,7 +186,7 @@ costo_subtotal: number = 0;
    continuarCotizacion(arreglochido: any){
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
 
-
+    
     if(this.nombre_titular_evento==null){
 
 
@@ -195,8 +197,17 @@ costo_subtotal: number = 0;
       });
     
       toast.present(); 
-    }else{
+    }else if(this.fecha_envio_evento==""){
+      let toast = this.toastCtrl.create({
+        message: 'No se eligió fecha de Evento!!',
+        duration: 2500,
+        position: 'middle'
+      });
+    
+      toast.present(); 
+    }else {
             this.save();
+            
       }
    }
 
@@ -610,6 +621,7 @@ this.http.dispoibilidadmob(
 
     
     this.agregaraInventario();
+    this.guardarCliente();
     //this.presentLoadingCustom();
 
     
@@ -641,6 +653,80 @@ this.http.dispoibilidadmob(
     loading.present();
   }
 
+  ///////Troca
+
+
+  vistaBoo:boolean =true;
+  complClient: any;
+  inventarioCliente: any;
+  movilesClientes:any;
+  searchQueryClient: string = '';
+
+
+  revisar(){
+    this.vistaBoo=false;
+  }
+
+  guardarCliente(){
+    this.http.anadirCliente(this.nombre_titular_evento,this.telefono_titular_evento ,this.direccion_evento).then(
+      (inv) => { 
+        console.log(inv)     
+        
+
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+  }
+
+  itemClick(nombre:string, telefono:string, direccion:string){
+    this.vistaBoo=true;
+
+    this.telefono_titular_evento = telefono;
+    this.direccion_evento = direccion;
+    this.nombre_titular_evento = nombre;
+  }
+
+  initializeClientes(){
+    this.inventarioCliente = this.complClient;
+
+  }
+
+  getClientes(ev: any) {
+    // Reset items back to all of the items
+    this.initializeClientes();
+
+    // set val to the value of the searchbar
+    const val = ev.target.value;
+
+    // if the value is an empty string don't filter the items
+    if (val && val.trim() != '') {
+      this.inventarioCliente = this.inventarioCliente.filter((item) => {
+        return (item.nombre_cliente.toLowerCase().indexOf(val.toLowerCase()) > -1);
+      })
+    }
+  }
+
+  
+
+  traerClientes(){
+    this.http.revisarClientes().then(
+      (inv) => { 
+       // console.log(inv)     
+        
+
+       this.inventarioCliente = inv["clientes"];
+       this.complClient = inv["clientes"];
+
+      },
+      (error) =>{
+        console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+      }
+    );
+  }
  
 
 }

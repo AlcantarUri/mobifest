@@ -92,10 +92,16 @@
                 <ion-datetime displayFormat="HH:mm" pickerFormtat="HH:mm" [(ngModel)]="hora_recoleccion_evento"></ion-datetime>
               </ion-item>
   
-             
-                  <ion-item>
-                    <ion-input type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento" clearInput></ion-input>
+              <ion-item class="item no-padding">
+                <ion-searchbar animated (ionInput)="getClientes($event)" (click)="revisar()" type = "text" placeholder="Titular del Evento:" [(ngModel)]="nombre_titular_evento" ></ion-searchbar>
+              </ion-item>
+
+              <ion-list [hidden]="vistaBoo">
+                <ion-item *ngFor="let item of inventarioCliente" (click)="itemClick(item.nombre_cliente,item.telefono_cliente, item.correo_cliente)">
+                    <h2 class="h1Nomb">{{item.nombre_cliente}}</h2>                        
                   </ion-item>
+              </ion-list>
+
                   
                   <ion-item>
                     <ion-input type = "tel" placeholder="Telefono del titular:" [(ngModel)]="telefono_titular_evento" clearInput></ion-input>
