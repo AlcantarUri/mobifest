@@ -31,6 +31,7 @@ ivavalor: number;
   costot : number;
   costo_total: number;
   saldo: number;
+  observaciones: string;
 
   id_evento: string;
 
@@ -101,6 +102,7 @@ for(let entry of this.evento){
   this.hora_recoleccion_evento = entry.hora_recoleccion_evento;
   this.ivavalor = Number(entry.ivavalor);
   this.descuento = Number(entry.descuento);
+  this.observaciones = entry.observaciones;
 
   
   
@@ -110,6 +112,10 @@ for(let entry of this.evento){
 }
 
 this.descuento = this.descuento/100;
+if(this.observaciones == null)
+{
+  this.observaciones = "";
+}
         
         //console.log(this.ivavalor+"   "+this.descuento);
 

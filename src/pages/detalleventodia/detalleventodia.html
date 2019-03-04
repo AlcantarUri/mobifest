@@ -50,7 +50,7 @@
 
           <ion-card-content>
             <ion-card-title>
-              {{evento.nombre_evento}}
+              {{evento.nombre_titular_evento}}
             </ion-card-title>
             <p>
              Fecha: {{evento.fecha_envio_evento}}
@@ -66,8 +66,31 @@
       </ion-card>
           
           <ion-grid>
-              <ion-row>
-                <ion-col col-6>
+              <ion-row >
+                  
+
+
+
+
+                  <ion-col size="auto">
+                      <div *ngIf="!evento.observaciones; else leido">
+                          <ion-chip (click)="presentAlert(evento.observaciones)">
+                              <ion-icon  name="mail"></ion-icon>
+                            </ion-chip>
+                        </div>
+                        <ng-template #leido >
+                            <ion-chip (click)="presentAlert(evento.observaciones)">
+                                <ion-icon color="naranja" name="mail"></ion-icon>
+                              </ion-chip>
+                        </ng-template>
+                    
+                          </ion-col>
+
+
+
+
+
+                <ion-col size="auto">
             <div *ngIf="evento.entregado == 0; else entregado">
                 <ion-chip>
                     <ion-icon  name="sad"></ion-icon>
@@ -76,13 +99,13 @@
               </div>
               <ng-template #entregado >
                   <ion-chip color="secondary">
-                      <ion-label >Entregado</ion-label>
+                     <ion-label >Entregado</ion-label>
                       <ion-icon name="bus"></ion-icon>
                     </ion-chip>  
               </ng-template>
           
                 </ion-col>
-                <ion-col col-6>
+                <ion-col size="auto">
                   
                     <div *ngIf="evento.recolectado == 0; else recolectado">
                         <ion-chip>
@@ -103,7 +126,6 @@
 
 </ion-list>
 
-      
     <ion-list>
         <div class="spacer" style="height: 4px;"></div> 
               <ion-item-sliding #slidingItem *ngFor="let item of items">
@@ -124,9 +146,7 @@
       <div class="spacer" style="height: 2px;"></div> 
       
       
-
      </ion-list>
-
      <ion-fab top right>
       <button ion-fab mini color="secondary"><ion-icon name="construct"></ion-icon></button>
       <ion-fab-list side="left">

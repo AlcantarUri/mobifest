@@ -151,10 +151,10 @@ costo_subtotal: number = 0;
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
 
 
-    this.fecha_tentativa = this.navParams.get('selectedDay');
-    console.log(this.fecha_tentativa);
-    this.fecha_envio_evento = this.fecha_tentativa['title'];
+    this.fecha_envio_evento = this.navParams.get('selectedDay');
     console.log(this.fecha_envio_evento);
+    //this.fecha_envio_evento = this.fecha_tentativa['title'];
+    //console.log(this.fecha_envio_evento);
 
 
     //se inicializan los valores de descuento e iva
@@ -685,7 +685,7 @@ this.http.dispoibilidadmob(
     this.vistaBoo=true;
 
     this.telefono_titular_evento = telefono;
-    this.direccion_evento = direccion;
+    //this.direccion_evento = direccion;
     this.nombre_titular_evento = nombre;
   }
 

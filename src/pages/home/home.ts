@@ -19,10 +19,13 @@ export class HomePage {
   viewTitle: string;
   selectedDay = new Date();
 
+  fechados: string;
+
   public eventosChidos: any;
   modo : string;
   fecha: string;
   mesmasuno: number;
+  masmes: string;
 
   public dtae: number;
   fechasTraer:any;
@@ -197,7 +200,7 @@ addEventNormal(){
 
 
 
-    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:data});
+    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.fecha});
     modal.present();
     
     
@@ -245,9 +248,49 @@ llenarCards(){
   mostrarEventosDelDia(){
 
     this.mesmasuno = this.selectedDay.getMonth() + 1;
+    
 
     this.fecha = this.selectedDay.getFullYear()+"-"+this.mesmasuno+"-"+this.selectedDay.getDate();
-    //console.log(this.fecha);
+    console.log(this.fecha);
+
+    if (this.mesmasuno == 1){
+      this.masmes = "Enero"
+    }else 
+    if (this.mesmasuno == 2){
+      this.masmes = "Febrero"
+    }else
+    if (this.mesmasuno == 3){
+      this.masmes = "Marzo"
+    }else
+    if (this.mesmasuno == 4){
+      this.masmes = "Abril"
+    }else
+    if (this.mesmasuno = 5){
+      this.masmes = "Mayo"
+    }else
+    if (this.mesmasuno == 6){
+      this.masmes = "Junio"
+    }else
+    if (this.mesmasuno == 7){
+      this.masmes = "Julio"
+    }else
+    if (this.mesmasuno == 8){
+      this.masmes = "Agosto"
+    }else
+    if (this.mesmasuno == 9){
+      this.masmes = "Septiembre"
+    }else
+    if (this.mesmasuno == 10){
+      this.masmes = "Octubre"
+    }else
+    if (this.mesmasuno == 11){
+      this.masmes = "Noviembre"
+    }else
+    if (this.mesmasuno == 12){
+      this.masmes = "Diciembre"
+    }
+    this.fechados = this.selectedDay.getDate()+" de "+this.masmes+" del "+this.selectedDay.getFullYear();
+    console.log(this.fechados);
     
     this.http.obtenerEventosdelDia(this.fecha).then(
       (res)=>{
@@ -294,14 +337,8 @@ llenarCards(){
   //prueba
 alarm() {
   let prompt = this.alertCtrl.create({
-    title: 'Seleccione fecha Tentativa',
-    inputs: [
-      {
-        name: 'title',
-        placeholder: 'Title',
-        type: 'date'
-      },
-    ],
+    title: 'Atención',
+    subTitle: "Esta a punto de crear un evento el dia: <br/>"+ this.fechados,
     buttons: [
       {
         text: 'Cancelar',
@@ -310,7 +347,7 @@ alarm() {
         }
       },
       {
-        text: 'Aceptar',
+        text: 'Continuar',
         handler: data => {
           console.log('Saved clicked');
           console.log(data);
