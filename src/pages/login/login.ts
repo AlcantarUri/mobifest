@@ -94,10 +94,24 @@ export class LoginPage {
 
   verifivarllenos()
   {
-    if(this.usuariodos == ""){
+    if(this.usuariodos == null || ""){
+
+      let toast = this.toastCtrl.create({
+        message: 'Ingresa un usuario',
+        duration: 1500,
+        position: 'top'
+      });
+      toast.present();
       
-    }else if (this.contra == "") {
-      console.log("USUARIO NO CHIDO");
+    }else if (this.contra == null || "") {
+      
+      let toast = this.toastCtrl.create({
+        message: 'Ingresa una contraseña',
+        duration: 1500,
+        position: 'top'
+      });
+      toast.present();
+
     }else {
       this.someFunction();
     }

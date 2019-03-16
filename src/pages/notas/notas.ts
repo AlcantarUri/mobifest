@@ -2,6 +2,7 @@
 import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { text } from '@angular/core/src/render3/instructions';
+import { LoginPage } from '../login/login';
 
 /**
  * Generated class for the NotasPage page.
@@ -22,6 +23,7 @@ export class NotasPage {
   notas: any;
   respuesta: any;
   respuestaBorrar: any;
+  nombreusuario: string
 
   nombreNota: string;
   cuerponota: string;
@@ -43,12 +45,58 @@ export class NotasPage {
 
 
 
+  salirFunction(){
+    
+    let alert = this.alertCtrl.create({
+      title: 'Cerrar sesión',
+      subTitle: 'Esta seguro que desea salir?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+          } 
+          },
+          {
+            text: 'Si',
+            handler: () => {
+              this.navCtrl.setRoot(LoginPage);
+            }
+          }
+      ]
+    });
+    alert.present();
+
+
+
+
+  }
   sacarNotesChidoris()
   {
     this.http.sacarNotas(this.user,this.pass).then(
       (res)=>{
 
-        this.notas= res["notasuno"];
+        
+        
+          this.notas = res["notasuno"];
+        if (res["notasuno"] == undefined) {
+
+          let alert = this.alertCtrl.create({
+            title: 'UPSS',
+            subTitle: 'Parece ser que no estas registrado. <br/> Vuelve al inicio y da click en registrar :D',
+            buttons: [
+              {
+                text: 'SALIR',
+                role: 'cancel',
+                handler: () => {
+                  this.navCtrl.setRoot(LoginPage);
+                }
+              }
+            ]
+          });
+          alert.present();
+          
+        }
 
       },(error)=>{
       console.log("Error"+JSON.stringify(error));

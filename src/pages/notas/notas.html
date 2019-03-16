@@ -6,23 +6,39 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="registrar">
+      
     <ion-title>Tus notas</ion-title>
+
+    <ion-buttons end>
+        <button ion-button icon-only (click)="salirFunction()">
+          <ion-icon name="exit"></ion-icon>
+        </button>
+      </ion-buttons>
+
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-    <ion-card *ngFor="let nota of notas" (click)="borrarNota(nota.id_note, nota.note, nota.body)">
-        <ion-card-header>
-          <ion-card-title>{{nota.note}}</ion-card-title>
-          <ion-card-content>{{nota.body | slice:0:38}}</ion-card-content>
-        </ion-card-header>
-    </ion-card>
+<ion-content class="fondo">
+   
 
-    <ion-fab right bottom (click)="agregarnota()">
-        <button ion-fab><ion-icon name="add"></ion-icon></button>
+
+    <ion-card *ngFor="let nota of notas" (click)="borrarNota(nota.id_note, nota.note, nota.body)" class="cards">
+      
+            <ion-card-header color="registrar">{{nota.note}}</ion-card-header>
+            <ion-card-content color="light">{{nota.body | slice:0:38}}</ion-card-content>   
+          
+        </ion-card>
+         
+  
+
+
+
+
+    <ion-fab right bottom (click)="agregarnota()" >
+        <button ion-fab color="registrar"><ion-icon name="add"></ion-icon></button>
     </ion-fab>
     
 
