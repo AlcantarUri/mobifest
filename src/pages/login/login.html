@@ -6,25 +6,35 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
 
   <body>
        <ion-img src="../../assets/img/ic_logo.png"></ion-img> 
   <ion-item>
     <ion-label color="primary" stacked>Usuario</ion-label>
-    <ion-input type="text"  [(ngModel)]="usuario" placeholder="JoseManuelGdlO"></ion-input>
+    <ion-input type="text"  [(ngModel)]="usuario" [(ngModel)]="usuariodos" placeholder="JoseManuelGdlO"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label color="primary" stacked>Contraseña</ion-label>
-    <ion-input type="password"  [(ngModel)]="contra" placeholder="**************"></ion-input>
+    <ion-input type="password"  [(ngModel)]="contra" [(ngModel)]="contrados" placeholder="**************"></ion-input>
   </ion-item>
   <ion-item>
       <ion-label>¡Recuerdame!</ion-label>
       <ion-toggle [(ngModel)]="recuerda" (ionChange)="notify()"></ion-toggle>
     </ion-item>
   <p></p>
-  <button ion-button (click)="someFunction($event);" block>Iniciar Sesion</button>
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+          <button ion-button color="registrar" block (click)="registrar()">Registrar</button>
+      </ion-col>
+      <ion-col>
+          <button ion-button (click)="verifivarllenos()" block>Iniciar Sesion</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
  </body>
 </ion-content>

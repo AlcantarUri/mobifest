@@ -12,6 +12,7 @@ import { LoginPage } from '../pages/login/login';
 import { MobiliarioPage } from '../pages/mobiliario/mobiliario';
 import { TabsPage } from '../pages/tabs/tabs';
 import { ConfiguracionPage } from '../pages/configuracion/configuracion';
+import { NotasPage } from '../pages/notas/notas';
 
 import { EventModalPage } from '../pages/event-modal/event-modal';
 import { DetalleventodiaPage } from '../pages/detalleventodia/detalleventodia';
@@ -41,7 +42,8 @@ import { Camera } from '@ionic-native/camera';
     ConfiguracionPage,
     EventModalPage,
     DetalleventodiaPage,
-    SeguimientopagodosPage
+    SeguimientopagodosPage,
+    NotasPage
   ],
   imports: [
     NgCalendarModule,
@@ -63,7 +65,8 @@ import { Camera } from '@ionic-native/camera';
     ConfiguracionPage,
     EventModalPage,   
     DetalleventodiaPage,
-    SeguimientopagodosPage
+    SeguimientopagodosPage,
+    NotasPage
   ],
   providers: [
     StatusBar,

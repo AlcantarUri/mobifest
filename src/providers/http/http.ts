@@ -424,6 +424,55 @@ sacarItemsporEventos(id_evento:string){
            });
              });
     }
+
+    borrarNota(id_note:string)
+    {
+      var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/borrarNota.php?id_note='+id_note;
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
+
+    meterNotas(user:string, pass: string, note:string, body: string){
+     let datos = {
+       user:user,
+       pass:pass,
+       note:note,
+       body:body
+
+     }
+     let options = {
+      headers: {
+   'Content-Type': 'application/x-www-form-urlencoded'
+     }
+    };
+    var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/insertarNotas.php/';
+     return new Promise(resolve => {
+     this.http.post(url,JSON.stringify(datos),options)
+       .subscribe(data => {
+    resolve(data);
+    });
+      });
+    }
+    sacarNotas(user:string, pass:string){
+ 
+    
+     var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/notasChidas.php?user='+user+'&pass='+pass;
+     return new Promise((resolve, reject) => {
+      this.http.get(url)
+         .subscribe(data => {
+           resolve(data);
+          }, (err) =>{
+            reject(err);
+          });
+     });
+    }
+
 ///////////////////////////Troca////////////////////////////////77
 
   loginApp(usuario:string, contra:string){
@@ -474,7 +523,6 @@ sacarItemsporEventos(id_evento:string){
    }
  
    
- 
  
    sacarDetalles(nombre_mob:string){
  
