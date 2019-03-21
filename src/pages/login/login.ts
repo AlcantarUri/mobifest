@@ -307,7 +307,7 @@ registrar() {
     inputs: [
       {
         name: 'user',
-        placeholder: 'Nombre del Usuario'
+        placeholder: 'Correo Electrónico'
       },
       {
         name: 'pass',
