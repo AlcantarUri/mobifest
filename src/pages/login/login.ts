@@ -364,7 +364,7 @@ registrarUsuarioNotas(user, pass){
 
 anadirNotas(user, note, body)
   {
-    this.http.meterNotas(user,note,body).then(
+    this.http.meterNotas(user,note,body,"").then(
       (res)=>{
 
         this.respuesta= res["notasuno"];

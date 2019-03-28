@@ -109,7 +109,7 @@ export class NotasPage {
   agregarnota()
   {
 
-    const myAnadir = this.modalCtl.create('EditarInventarioPage', {nombre:this.user});
+    const myAnadir = this.modalCtl.create('ModalnotasaddPage', {nombre:this.user});
 
     myAnadir.present();
 
