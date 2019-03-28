@@ -1,5 +1,5 @@
   import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, AlertController, LoadingController, ModalController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { text } from '@angular/core/src/render3/instructions';
 import { LoginPage } from '../login/login';
@@ -32,7 +32,8 @@ export class NotasPage {
               public navParams: NavParams,
               public http: HttpProvider,
               public alertCtrl: AlertController,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              public modalCtl: ModalController) {
 
     this.user = navParams.get('user');
     this.pass = navParams.get('pass');
@@ -107,55 +108,15 @@ export class NotasPage {
 
   agregarnota()
   {
-    let alert = this.alertCtrl.create({
-      title: 'Nueva Nota',
-      inputs: [
-        {
-          name: 'titulo',
-          placeholder: 'Titulo de nota'
-        },
-        {
-          type: 'text',
-          name: 'cuerpo',
-          placeholder: 'Desahogate aqui :V'
-        }
-      ],
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          handler: data => {
-            console.log('Cancel clicked');
-          }
-        },
-        {
-          text: 'Añadir',
-          handler: data => {
-           
-            this.anadirNotas(this.user, this.pass, data.titulo, data.cuerpo);
-            this.presentLoadingDefault();
-            
-          }
-        }
-      ]
-    });
-    alert.present();
+
+    const myAnadir = this.modalCtl.create('EditarInventarioPage', {nombre:this.user});
+
+    myAnadir.present();
+
+    
   }
 
-  anadirNotas(user, pass, note, body)
-  {
-    this.http.meterNotas(user,pass,note,body).then(
-      (res)=>{
-
-        this.respuesta= res["notasuno"];
-        console.log(this.respuesta);
-
-      },(error)=>{
-      console.log("Error"+JSON.stringify(error));
-        alert("Verifica que cuentes con internet");
-    })
-  }
-
+  
 
 
   borrarNota(id_nota, note, body)
