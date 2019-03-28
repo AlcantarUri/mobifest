@@ -494,6 +494,21 @@ sacarItemsporEventos(id_evento:string){
       });
     }
 
+    compararUsuarioNotas(user: string, pass: string){
+     
+       var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/loginNotas.php?user='+user+'&pass='+pass;
+       
+    return new Promise((resolve, reject) => {
+     this.http.get(url)
+        .subscribe(data => {
+          resolve(data);
+         }, (err) =>{
+           reject(err);
+         });
+    });
+
+    }
+
 ///////////////////////////Troca////////////////////////////////77
 
   loginApp(usuario:string, contra:string){

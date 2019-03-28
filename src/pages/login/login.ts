@@ -25,6 +25,7 @@ export class LoginPage {
   id:any;
   guard:any;
   rol:any;
+  idNotas: string;
   
   usuariodos:string;
   contrados:string;
@@ -132,14 +133,14 @@ export class LoginPage {
       this.storage.set('USU',this.usuario);
       this.storage.set('PASS',this.contra);
       this.storage.set('NUM', 1);
-      console.log("Guardaste"+this.usuario+this.contra);
+      //console.log("Guardaste"+this.usuario+this.contra);
     }else{
-      console.log("No vas a guardar DATOS");
+      //console.log("No vas a guardar DATOS");
     }
 
     this.http.loginApp(this.usuario,this.contra).then(
       (data) => { 
-        console.log(data)  
+        //console.log(data)  
 
 
         //var result = data["Usuario"];
@@ -148,7 +149,7 @@ export class LoginPage {
        // console.log(data["rol"]);
 
        var json = data["Usuario"];
-       console.log("este es el json: "+json);
+       //console.log("este es el json: "+json);
 
        for (var i = 0; i < json.length; i++) {
        // console.log(json[i].nombre_mob);
@@ -162,7 +163,7 @@ export class LoginPage {
       
      
       //console.log("Result"+result);
-      console.log("ID:  "+this.id);
+      //console.log("ID:  "+this.id);
 
       if(this.id != 0){
         loading.dismiss();
@@ -187,11 +188,9 @@ export class LoginPage {
       }
       }else{
 
-        this.navCtrl.setRoot(NotasPage,{user: this.usuario,pass: this.contra});
-       
+        this.compararUsuaroNotas(this.usuario, this.contra);
 
-
-        this.presentToast("Hola usuario...", "top");
+        
        
         loading.dismiss();
       }
@@ -207,6 +206,28 @@ export class LoginPage {
     );
     
 }
+
+  compararUsuaroNotas(usuario: string, contra: string){
+   
+  this.http.compararUsuarioNotas(usuario, contra).then(
+    (res)=>{
+
+      
+      var respuesta = res["esta"];
+      if (respuesta == "esta") {
+        
+        
+        this.navCtrl.setRoot(NotasPage,{user: usuario, pass: contra});
+        this.presentToast("Hola usuario...", "top");
+      }else{
+        this.presentToast("Usuario o Contraseña incorrectas","top");
+      }
+    },(error)=>{
+      console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
+    }
+  )
+  }
 
 presentToast(mensaje: string, posision: any) {
   let toast = this.toastCtrl.create({
@@ -240,27 +261,12 @@ inicioSesion(usuario:string, contra:string){
   this.http.loginApp(usuario,contra).then(
     (data) => { 
       console.log(data)  
-
-
-     
-        //var result = data["Usuario"];
-        
-
-       // console.log(data["rol"]);
-
        var json = data["Usuario"];
-
        for (var i = 0; i < json.length; i++) {
        // console.log(json[i].nombre_mob);
        this.rol = json[i].rol;
        this.id=json[i].id_usuario;
        }
-
-      // console.log(this.id+this.rol);
-
-      
-     
-      //console.log("Result"+result);
       console.log("ID:  "+this.id);
 
       if(this.id != 0){
@@ -354,11 +360,14 @@ registrarUsuarioNotas(user, pass){
       if (answer == "registrado") {
         this.presentToast("Registro Exitoso", "middle");
         this.anadirNotas(user,"Bienvenido","Te damos la bienvenida a NotasSeguras Mobifest :D donde"+
-        " podras guardar de manera segura tus notas. <br/>Puedes borrar esta nota cuando quieras."+
-        "<br/>Sinceramente CarlitosRugratz DP");
+        " podras guardar de manera segura tus notas. Puedes borrar esta nota cuando quieras."+
+        "Sinceramente CarlitosRugratz DP");
       } else {
         this.presentToast("Nombre de usuario no disponible", "middle");
       }
+    },(error)=>{
+      console.log("Error"+JSON.stringify(error));
+        alert("Verifica que cuentes con internet");
     }
   )
 }
