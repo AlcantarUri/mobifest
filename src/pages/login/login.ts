@@ -188,9 +188,7 @@ export class LoginPage {
       }
       }else{
 
-        this.navCtrl.setRoot(NotasPage,{user: this.usuario,pass: this.contra});
-       
-
+        this.compararUsuaroNotas(this.usuario, this.contra);
 
         
        
@@ -208,6 +206,7 @@ export class LoginPage {
     );
     
 }
+
   compararUsuaroNotas(usuario: string, contra: string){
    
   this.http.compararUsuarioNotas(usuario, contra).then(
@@ -361,8 +360,8 @@ registrarUsuarioNotas(user, pass){
       if (answer == "registrado") {
         this.presentToast("Registro Exitoso", "middle");
         this.anadirNotas(user,"Bienvenido","Te damos la bienvenida a NotasSeguras Mobifest :D donde"+
-        " podras guardar de manera segura tus notas. <br/>Puedes borrar esta nota cuando quieras."+
-        "<br/>Sinceramente CarlitosRugratz DP");
+        " podras guardar de manera segura tus notas. Puedes borrar esta nota cuando quieras."+
+        "Sinceramente CarlitosRugratz DP");
       } else {
         this.presentToast("Nombre de usuario no disponible", "middle");
       }

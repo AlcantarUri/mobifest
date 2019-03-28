@@ -25,7 +25,7 @@
    
 
 
-    <ion-card *ngFor="let nota of notas" (click)="borrarNota(nota.id_note, nota.note, nota.body)" class="cards">
+    <ion-card *ngFor="let nota of notas" (click)="editarnota(nota.id_note, nota.note, nota.body)" class="cards">
       
             <h1>{{nota.note}}</h1>  
             <div class="divclass">{{nota.body}}</div>

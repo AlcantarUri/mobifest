@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { HttpProvider } from '../../providers/http/http';
 import { text } from '@angular/core/src/render3/instructions';
 import { LoginPage } from '../login/login';
+import { EditarnotaPage } from '../editarnota/editarnota'
 
 /**
  * Generated class for the NotasPage page.
@@ -122,7 +123,7 @@ export class NotasPage {
 
   
 
-
+/*
   borrarNota(id_nota, note, body)
   {
     let alert = this.alertCtrl.create({
@@ -149,6 +150,12 @@ export class NotasPage {
     alert.present();
   }
 
+*/
+editarnota(id_nota, nota, cuerpo){
+
+    this.navCtrl.push(EditarnotaPage,{id_nota: id_nota, note: nota, body: cuerpo});
+
+}
 
   presentConfirm(id_nota) {
     let alert = this.alertCtrl.create({
