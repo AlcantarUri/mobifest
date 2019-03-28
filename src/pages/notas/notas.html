@@ -27,12 +27,18 @@
 
     <ion-card *ngFor="let nota of notas" (click)="borrarNota(nota.id_note, nota.note, nota.body)" class="cards">
       
-            <ion-card-header color="registrar">{{nota.note}}</ion-card-header>
-            <ion-card-content color="light">{{nota.body | slice:0:38}}</ion-card-content>   
-          
+            <h1>{{nota.note}}</h1>  
+            <ion-card-content text-wrap color="light">
+              <p>{{nota.body}}   
+              </p>
+            </ion-card-content>
+            <h3 item-end>{{nota.fecha}}</h3>
         </ion-card>
+
+        
+
+    
          
-  
 
 
 

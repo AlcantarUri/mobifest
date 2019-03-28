@@ -97,6 +97,9 @@ export class NotasPage {
           });
           alert.present();
           
+        }else{
+          console.log(this.notas);
+          
         }
 
       },(error)=>{
