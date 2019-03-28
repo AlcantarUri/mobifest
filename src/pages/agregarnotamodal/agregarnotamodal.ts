@@ -29,9 +29,9 @@ export class AgregarnotamodalPage {
   }
 
   respuesta:any;
-  anadirNotas(user, pass, note, body)
+  anadirNotas(user, note, body)
   {
-    this.http.meterNotas(user,pass,note,body).then(
+    this.http.meterNotas(user,note,body).then(
       (res)=>{
 
         this.respuesta= res["notasuno"];
