@@ -38,6 +38,7 @@ export class NotasPage {
     this.user = navParams.get('user');
     this.pass = navParams.get('pass');
     this.sacarNotesChidoris();
+    
   }
 
   ionViewDidLoad() {

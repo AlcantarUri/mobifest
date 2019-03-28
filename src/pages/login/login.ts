@@ -188,6 +188,7 @@ export class LoginPage {
       }else{
 
         this.navCtrl.setRoot(NotasPage,{user: this.usuario,pass: this.contra});
+       
 
 
         this.presentToast("Hola usuario...", "top");

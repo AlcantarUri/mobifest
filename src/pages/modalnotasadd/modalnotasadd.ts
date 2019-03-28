@@ -26,7 +26,7 @@ export class ModalnotasaddPage {
   constructor( public http:HttpProvider, public navCtrl: NavController, public navParams: NavParams, public view:ViewController, public camera:Camera) {
 
 
-    this.user = navParams.get('data');
+    this.user = navParams.get('nombre');
     console.log(this.user);
   }
 
