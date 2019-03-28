@@ -188,7 +188,9 @@ export class LoginPage {
       }
       }else{
 
-        this.compararUsuaroNotas(this.usuario, this.contra);
+        this.navCtrl.setRoot(NotasPage,{user: this.usuario,pass: this.contra});
+       
+
 
         
        
@@ -373,7 +375,7 @@ registrarUsuarioNotas(user, pass){
 
 anadirNotas(user, note, body)
   {
-    this.http.meterNotas(user,note,body).then(
+    this.http.meterNotas(user,note,body,"").then(
       (res)=>{
 
         this.respuesta= res["notasuno"];

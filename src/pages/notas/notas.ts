@@ -38,6 +38,7 @@ export class NotasPage {
     this.user = navParams.get('user');
     this.pass = navParams.get('pass');
     this.sacarNotesChidoris();
+    
   }
 
   ionViewDidLoad() {
@@ -112,7 +113,7 @@ export class NotasPage {
   agregarnota()
   {
 
-    const myAnadir = this.modalCtl.create('EditarInventarioPage', {nombre:this.user});
+    const myAnadir = this.modalCtl.create('ModalnotasaddPage', {nombre:this.user});
 
     myAnadir.present();
 

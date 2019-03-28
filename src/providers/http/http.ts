@@ -439,11 +439,12 @@ sacarItemsporEventos(id_evento:string){
      });
     }
 
-    meterNotas(user:string, note:string, body: string){
+    meterNotas(user:string, note:string, body: string, imagen:string){
      let datos = {
        user:user,
        note:note,
-       body:body
+       body:body,
+       imagen:imagen
 
      }
      let options = {
