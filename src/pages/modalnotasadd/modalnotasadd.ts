@@ -79,7 +79,7 @@ export class ModalnotasaddPage {
     this.http.meterNotas(this.user,this.titulo,this.texto,this.base64Image).then(
       (res)=>{
 
-        this.respuesta= res["notasuno"];
+        this.respuesta= res["registro"];
         console.log(this.respuesta);
 
       },(error)=>{
