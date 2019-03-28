@@ -73,7 +73,7 @@ export class NotasPage {
   }
   sacarNotesChidoris()
   {
-    this.http.sacarNotas(this.user,this.pass).then(
+    this.http.sacarNotas(this.user).then(
       (res)=>{
 
         
@@ -132,7 +132,7 @@ export class NotasPage {
           text: 'Añadir',
           handler: data => {
            
-            this.anadirNotas(this.user, this.pass, data.titulo, data.cuerpo);
+            this.anadirNotas(this.user, data.titulo, data.cuerpo);
             this.presentLoadingDefault();
             
           }
@@ -142,9 +142,9 @@ export class NotasPage {
     alert.present();
   }
 
-  anadirNotas(user, pass, note, body)
+  anadirNotas(user, note, body)
   {
-    this.http.meterNotas(user,pass,note,body).then(
+    this.http.meterNotas(user,note,body).then(
       (res)=>{
 
         this.respuesta= res["notasuno"];

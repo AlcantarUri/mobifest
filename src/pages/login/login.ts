@@ -190,7 +190,7 @@ export class LoginPage {
         this.navCtrl.setRoot(NotasPage,{user: this.usuario,pass: this.contra});
 
 
-        this.presentToast();
+        this.presentToast("Hola usuario...", "top");
        
         loading.dismiss();
       }
@@ -207,11 +207,11 @@ export class LoginPage {
     
 }
 
-presentToast() {
+presentToast(mensaje: string, posision: any) {
   let toast = this.toastCtrl.create({
-    message: 'Hola Usuario',
+    message: mensaje,
     duration: 3000,
-    position: 'top'
+    position: posision
   });
 
   toast.present();
@@ -284,7 +284,7 @@ inicioSesion(usuario:string, contra:string){
       }
       }else{
 
-        this.presentToast();
+        this.presentToast("Hola usuario!", "top");
        
         loading.dismiss();
       }
@@ -312,6 +312,9 @@ registrar() {
       {
         name: 'pass',
         placeholder: 'Contraseña'
+      },{
+        name: 'pass2',
+        placeholder: 'Confirma tu contraseña'
       },
     ],
     buttons: [
@@ -326,17 +329,13 @@ registrar() {
         text: 'Registrar',
         handler: data => {
 
-
-          this.anadirNotas(data.user,data.pass,"Bienvenido","Te damos la bienvenida a NotasSeguras Mobifest :D donde"+
-          " podras guardar de manera segura tus notas. <br/>Puedes borrar esta nota cuando quieras."+
-          "<br/>Sinceramente CarlitosRugratz DP");
-          
-          let toast = this.toastCtrl.create({
-            message: 'Ingresa tu usuario y contraseña recien creados',
-            duration: 3000
-          });
-          toast.present();
-         
+if (data.pass == data.pass2) {
+  
+  this.registrarUsuarioNotas(data.user, data.pass);
+}else {
+  this.presentToast("Ambas contraseñas deben ser iguales", "bottom")
+}
+    
         }
       }
     ]
@@ -344,9 +343,28 @@ registrar() {
   alert.present();
 }
 
-anadirNotas(user, pass, note, body)
+
+registrarUsuarioNotas(user, pass){
+  
+  this.http.registrarUsuarioNotas(user, pass).then(
+    (res)=>{
+      var answer = res["registro"];
+      console.log(answer);
+      if (answer == "registrado") {
+        this.presentToast("Registro Exitoso", "middle");
+        this.anadirNotas(user,"Bienvenido","Te damos la bienvenida a NotasSeguras Mobifest :D donde"+
+        " podras guardar de manera segura tus notas. <br/>Puedes borrar esta nota cuando quieras."+
+        "<br/>Sinceramente CarlitosRugratz DP");
+      } else {
+        this.presentToast("Nombre de usuario no disponible", "middle");
+      }
+    }
+  )
+}
+
+anadirNotas(user, note, body)
   {
-    this.http.meterNotas(user,pass,note,body).then(
+    this.http.meterNotas(user,note,body).then(
       (res)=>{
 
         this.respuesta= res["notasuno"];

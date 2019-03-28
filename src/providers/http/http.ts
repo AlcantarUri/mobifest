@@ -425,6 +425,7 @@ sacarItemsporEventos(id_evento:string){
              });
     }
 
+    ////notas
     borrarNota(id_note:string)
     {
       var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/borrarNota.php?id_note='+id_note;
@@ -438,10 +439,9 @@ sacarItemsporEventos(id_evento:string){
      });
     }
 
-    meterNotas(user:string, pass: string, note:string, body: string){
+    meterNotas(user:string, note:string, body: string){
      let datos = {
        user:user,
-       pass:pass,
        note:note,
        body:body
 
@@ -459,10 +459,10 @@ sacarItemsporEventos(id_evento:string){
     });
       });
     }
-    sacarNotas(user:string, pass:string){
+    sacarNotas(user:string){
  
     
-     var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/notasChidas.php?user='+user+'&pass='+pass;
+     var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/notasChidas.php?user='+user;
      return new Promise((resolve, reject) => {
       this.http.get(url)
          .subscribe(data => {
@@ -471,6 +471,26 @@ sacarItemsporEventos(id_evento:string){
             reject(err);
           });
      });
+    }
+    registrarUsuarioNotas(user: string, pass: string){
+      var datos = {
+        user:user,
+        pass: pass
+      }
+      let options = {
+        headers: {
+     'Content-Type': 'application/x-www-form-urlencoded'
+       }
+      }
+      var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/registrarUsuario.php';
+      return new Promise((resolve, reject)=>{
+        this.http.post(url, JSON.stringify(datos), options)
+        .subscribe(data =>{
+          resolve(data);
+        }, (err)=>{
+          reject(err);
+        });
+      });
     }
 
 ///////////////////////////Troca////////////////////////////////77
