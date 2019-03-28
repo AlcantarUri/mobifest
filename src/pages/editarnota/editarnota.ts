@@ -34,9 +34,7 @@ export class EditarnotaPage {
     console.log("Ruta imagen"+this.base64Image);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad EditarnotaPage');
-  }
+  
 
   foto(){
     const options: CameraOptions = {
@@ -77,6 +75,7 @@ export class EditarnotaPage {
 
   respuesta:any;
   actualizar(){
+    console.log(this.base64Image);
     this.http.actualizarNotas(this.id_nota,this.note,this.body,this.base64Image).then(
       (res)=>{
 

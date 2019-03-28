@@ -22,17 +22,17 @@ export class ModalnotasaddPage {
   user:string;
   titulo:string;
   texto:string;
+  respuesta:any;
 
   constructor( public http:HttpProvider, public navCtrl: NavController, public navParams: NavParams, public view:ViewController, public camera:Camera) {
 
 
     this.user = navParams.get('nombre');
+    this.base64Image = "nohay";
     console.log(this.user);
+    console.log(this.base64Image);
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ModalnotasaddPage');
-  }
 
   foto(){
     const options: CameraOptions = {
@@ -71,10 +71,10 @@ export class ModalnotasaddPage {
 
   }
 
-  respuesta:any;
+  
   agregar(){
 
-    
+    console.log(this.base64Image);
  
     this.http.meterNotas(this.user,this.titulo,this.texto,this.base64Image).then(
       (res)=>{

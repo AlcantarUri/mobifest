@@ -25,12 +25,24 @@
    
 
 
+  
+
+
     <ion-card *ngFor="let nota of notas" (click)="editarnota(nota.id_note, nota.note, nota.body, nota.ruta)" class="cards">
       
-            <h1>{{nota.note}}</h1>  
+      <div *ngIf="nota.ruta == 'http://avisositd.xyz/mobiliaria/notasNoMover/'; else nofoto">
+        <h1>{{nota.note}}</h1>  
+        <div class="divclass">{{nota.body}}</div>
+        <h3 item-end>{{nota.fecha}}</h3>
+      </div>
+      <ng-template #nofoto >
+        <h1>{{nota.note}}</h1>  
             <div class="divclass">{{nota.body}}</div>
             <img [src]='nota.ruta' />
             <h3 item-end>{{nota.fecha}}</h3>
+      </ng-template>
+
+            
         </ion-card>
 
 

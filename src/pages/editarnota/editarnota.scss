@@ -17,5 +17,28 @@ page-editarnota {
           padding: 1vw;
 
       }
+      ion-card{
+          padding: 0%;
+      }
+      
+      .input{
+          color:white;
+          background-color: rgb(80, 80, 80);  
+      }
+          
+      textarea.text-input {
+        display: block;
+        height: 290px;
+        color: white;
+        background-color: rgb(80, 80, 80);
+          margin-top: 0px;
+          margin-left: 0px;
+          margin-right: 0px;
+          border: 1 none white;
+        overflow: hidden;
+        padding: 0;
+        outline: none;
+      
+        }
 
 }

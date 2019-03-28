@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-  <ion-navbar>
+  <ion-navbar color="registrar">
     <ion-title>Nueva Nota</ion-title>
     <ion-buttons end>
         <button ion-button (click)="cerrarModal()">Cerrar</button>
@@ -16,37 +16,45 @@
 </ion-header>
 
 
-<ion-content padding>
-  
-  <img [src]="base64Image" />
-
-  <ion-grid>
-        <ion-row>
-          <ion-col col-12><button ion-button (click)="foto()" clear>Tomar Foto </button></ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col col-6><button ion-button (click)="galeria()" clear>Galeria</button></ion-col>
-        </ion-row>
-      </ion-grid>
-
-      <ion-list>
-
-          <ion-item>
-            <ion-label floating>Titulo de la Nota</ion-label>
+<ion-content class="fondo"g> 
+  <div *ngIf="base64Image == 'nohay'; else nofoto">
+    <ion-list>
+          <ion-label class="stak" stacked>Titulo de la Nota</ion-label>
             <ion-input [(ngModel)]="titulo" type="text"></ion-input>
-          </ion-item>
-        
-          <ion-item>
-            <ion-label floating>Texto de la nota</ion-label>
-            <ion-input [(ngModel)]="texto" type="text"></ion-input>
-          </ion-item>
-        
-        </ion-list>
+          <ion-label class="stak" stacked>Texto de la nota</ion-label>
+            <ion-textarea [(ngModel)]="texto" 
+            class="textbox"
+            autocomplete="on"
+            autocorrect="on"
+            type="text"></ion-textarea>
+    </ion-list>
+  </div>
+  <ng-template #nofoto >
+      <img [src]="base64Image" />
+    <ion-list>
+        <ion-label class="stak" stacked>Titulo de la Nota</ion-label>
+            <ion-input [(ngModel)]="titulo" type="text"></ion-input>
+            <ion-label class="stak" stacked>Texto de la nota</ion-label>
+            <ion-textarea [(ngModel)]="texto" 
+            class="textbox"
+            autocomplete="on"
+            autocorrect="on"
+            type="text"></ion-textarea>
+      </ion-list>
+  </ng-template>
+
+  
 
 
 
 </ion-content>
 
 <ion-footer primary>
-    <button ion-button (click)="agregar()" full>Agregar Nota </button>
+    
+        <ion-row>
+          <ion-col col-6><button ion-button (click)="foto()" color="registrar"  outline full round>Tomar Foto </button></ion-col>
+          <ion-col col-6><button ion-button (click)="galeria()" color="registrar"  outline full round>Galeria</button></ion-col>
+        </ion-row>
+      
+    <button ion-button (click)="agregar()" full color="registrar" >Agregar Nota </button>
 </ion-footer>
