@@ -25,19 +25,13 @@
    
 
 
-    <ion-card *ngFor="let nota of notas" (click)="editarnota(nota.id_note, nota.note, nota.body)" class="cards">
+    <ion-card *ngFor="let nota of notas" (click)="editarnota(nota.id_note, nota.note, nota.body, nota.ruta)" class="cards">
       
             <h1>{{nota.note}}</h1>  
             <div class="divclass">{{nota.body}}</div>
+            <img [src]='nota.ruta' />
             <h3 item-end>{{nota.fecha}}</h3>
         </ion-card>
-
-        
-
-    
-         
-
-
 
 
     <ion-fab right top (click)="agregarnota()" >

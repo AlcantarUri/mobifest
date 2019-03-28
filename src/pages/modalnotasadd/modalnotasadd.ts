@@ -81,6 +81,7 @@ export class ModalnotasaddPage {
 
         this.respuesta= res["registro"];
         console.log(this.respuesta);
+        this.cerrarModal();
 
       },(error)=>{
       console.log("Error"+JSON.stringify(error));
