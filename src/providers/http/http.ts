@@ -460,6 +460,29 @@ sacarItemsporEventos(id_evento:string){
     });
       });
     }
+
+
+    actualizarNotas(user:string, note:string, body: string, imagen:string){
+      let datos = {
+        user:user,
+        note:note,
+        body:body,
+        imagen:imagen
+ 
+      }
+      let options = {
+       headers: {
+    'Content-Type': 'application/x-www-form-urlencoded'
+      }
+     };
+     var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/actualizarnota.php/';
+      return new Promise(resolve => {
+      this.http.post(url,JSON.stringify(datos),options)
+        .subscribe(data => {
+     resolve(data);
+     });
+       });
+     }
     sacarNotas(user:string){
  
     
@@ -581,9 +604,9 @@ sacarItemsporEventos(id_evento:string){
 
 
    
-    insertarInventario(todo){
+    insertarInventario(todo, imagen:string){
 
-      let datos = { nombre:todo["nombre"],cantidad:todo["cantidad"], costo:todo["costo"],nombre_extra:todo["nombre_extra"], precio_extra:todo["precio_extra"]}
+      let datos = { nombre:todo["nombre"],cantidad:todo["cantidad"], costo:todo["costo"],nombre_extra:todo["nombre_extra"], precio_extra:todo["precio_extra"],imagen:imagen}
   
       console.log(todo["precio_extra"]);  
        let options = {
@@ -601,9 +624,9 @@ sacarItemsporEventos(id_evento:string){
 
     }
 
-    modificarInventario(id:string, nombre:string, cantidad:string, costo:string,nombre_exta:string, extra_costo:string){
+    modificarInventario(id:string, nombre:string, cantidad:string, costo:string,nombre_exta:string, extra_costo:string, imagen:string){
 
-      let datos = { id:id, nombre:nombre, cantidad:cantidad, costo:costo, nombre_extra:nombre_exta, precio_extra:extra_costo}
+      let datos = { id:id, nombre:nombre, cantidad:cantidad, costo:costo, nombre_extra:nombre_exta, precio_extra:extra_costo, imagen:imagen}
   
       console.log("Saliente      ");
       console.log(datos);

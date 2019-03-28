@@ -3,7 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, LoadingController
 import { HttpProvider } from '../../providers/http/http';
 import { text } from '@angular/core/src/render3/instructions';
 import { LoginPage } from '../login/login';
-import { EditarnotaPage } from '../editarnota/editarnota'
+
 
 /**
  * Generated class for the NotasPage page.
@@ -157,7 +157,16 @@ export class NotasPage {
 */
 editarnota(id_nota, nota, cuerpo, ruta){
 
-    this.navCtrl.push(EditarnotaPage,{id_nota: id_nota, note: nota, body: cuerpo, ruta: ruta});
+    
+
+    const myAnadir = this.modalCtl.create('EditarnotaPage', {id_nota: id_nota, note: nota, body: cuerpo, ruta: ruta});
+    myAnadir.onDidDismiss(() => {
+      this.sacarNotesChidoris();
+         console.log('Modal closed');
+      });
+
+    myAnadir.present();
+
 
 }
 

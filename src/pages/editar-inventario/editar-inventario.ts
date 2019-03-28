@@ -21,8 +21,8 @@ import { Platform } from 'ionic-angular';
 })
 export class EditarInventarioPage {
 
-  theWallImageUrl: any=  "../assets/img/ic_card.jpg";
-  base64Image:any;
+  theWallImageUrl: any;
+  base64Image:string =  "../assets/img/ic_card.jpg";
   photos : any;
 
   cantidad_mob:string;
@@ -135,7 +135,7 @@ export class EditarInventarioPage {
   logForm() {
     
 
-    this.http.modificarInventario(this.id_mob,this.nombre_mob,this.cantidad_mob,this.costo_mob, this.extra_mob, this.extra_costo_mob).then(
+    this.http.modificarInventario(this.id_mob,this.nombre_mob,this.cantidad_mob,this.costo_mob, this.extra_mob, this.extra_costo_mob, this.base64Image).then(
       (res) => { 
         console.log(res["registro"]);
 
@@ -192,7 +192,7 @@ actionSheet.present();
 
 takephoto() {
         const options: CameraOptions = {
-          quality: 100,
+          quality: 50,
           destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,
           mediaType: this.camera.MediaType.PICTURE
@@ -202,9 +202,7 @@ takephoto() {
           // imageData is either a base64 encoded string or a file URI
           // If it's base64:
           this.base64Image  = 'data:image/jpeg;base64,' + imageData;
-          this.photos.push(this.base64Image);
-          this.photos.reverse();
-          this.theWallImageUrl = this.photos;
+         
         }, (err) => {
           // Handle error
         })
@@ -217,16 +215,14 @@ takephoto() {
          destinationType: this.camera.DestinationType.DATA_URL,
          encodingType: this.camera.EncodingType.JPEG,
          mediaType: this.camera.MediaType.PICTURE,
-         sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
        }
    
        this.camera.getPicture(options).then((imageData) => {
          // imageData is either a base64 encoded string or a file URI
          // If it's base64:
          this.base64Image  = 'data:image/jpeg;base64,' + imageData;
-         this.photos.push(this.base64Image);
-         this.photos.reverse();
-         this.theWallImageUrl = this.photos;
+        
        }, (err) => {
          // Handle error
        })}

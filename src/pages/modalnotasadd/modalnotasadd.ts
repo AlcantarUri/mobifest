@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
-import { Observable } from 'rxjs/Observable';
+
 
 /**
  * Generated class for the ModalnotasaddPage page.
@@ -36,7 +36,7 @@ export class ModalnotasaddPage {
 
   foto(){
     const options: CameraOptions = {
-      quality: 100,
+      quality: 30,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
@@ -86,7 +86,7 @@ export class ModalnotasaddPage {
       },(error)=>{
       console.log("Error"+JSON.stringify(error));
         alert("Verifica que cuentes con internet");
-    })
+    });
   
 
   }

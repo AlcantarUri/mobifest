@@ -7,12 +7,58 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>editarnota</ion-title>
+    <ion-title>Editar mi Nota</ion-title>
+    <ion-buttons end>
+        <button ion-button (click)="cerrarModal()">Cerrar</button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="fondo" >
+
+  <ion-card style="background-color: #393939;">
+
+      <ion-card-header>
+         <img [src]='base64Image' />
+        </ion-card-header>
+      
+        <ion-card-content>
+           
+            <ion-item style="background-color: #393939;">
+                <ion-label color="registrar" stacked>Titulo Nota</ion-label>
+                <ion-input [(ngModel)]="note" disabled="true" type="text" ></ion-input>
+              </ion-item>
+            
+              <ion-item style="background-color: #393939;">
+                <ion-label color="registrar" stacked>Mensaje</ion-label>
+                <ion-input [(ngModel)]="body" type="text"></ion-input>
+              </ion-item>
+            
+        </ion-card-content>
+
+        
+      
+    
+  </ion-card>
+
+  <div class="row">
+
+      <div class="column">
+          <button ion-button color="registrar"(click)="foto()" block>Tomar Foto</button>
+      </div>
+
+      <div class="column">
+          <button ion-button color="naranja" (click)="galeria()" block>Galeria</button>
+      </div>
+
+    </div>
+
+    
 
 </ion-content>
+
+<ion-footer primary>
+    <button ion-button color="registrar" (click)="actualizar()" full>Actualizar Nota</button>
+</ion-footer>

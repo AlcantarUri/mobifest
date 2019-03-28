@@ -18,7 +18,7 @@ import { HttpProvider } from '../../providers/http/http';
 })
 export class AnadirInvModalPage {
 
-  theWallImageUrl: any=  "../assets/img/ic_card.jpg";
+  theWallImageUrl: any;
   nombre_extra_item;
   precio_extra_item;
 
@@ -27,7 +27,7 @@ export class AnadirInvModalPage {
   
 
   /////Fotos////
-  base64Image:any;
+  base64Image:string=  "../assets/img/ic_card.jpg";
   photos : any;
 
   constructor(public camera: Camera,
@@ -83,7 +83,7 @@ export class AnadirInvModalPage {
     console.log(this.todo);
 
 
-    this.http.insertarInventario(this.todo).then(
+    this.http.insertarInventario(this.todo, this.base64Image).then(
       (res) => { 
         console.log(res["registro"]);
 
@@ -131,7 +131,7 @@ actionSheet.present();
 
 takephoto() {
         const options: CameraOptions = {
-          quality: 100,
+          quality: 50,
           destinationType: this.camera.DestinationType.DATA_URL,
           encodingType: this.camera.EncodingType.JPEG,
           mediaType: this.camera.MediaType.PICTURE
@@ -141,9 +141,7 @@ takephoto() {
           // imageData is either a base64 encoded string or a file URI
           // If it's base64:
           this.base64Image  = 'data:image/jpeg;base64,' + imageData;
-          this.photos.push(this.base64Image);
-          this.photos.reverse();
-          this.theWallImageUrl = this.photos;
+         
         }, (err) => {
           // Handle error
         })
@@ -156,16 +154,13 @@ takephoto() {
          destinationType: this.camera.DestinationType.DATA_URL,
          encodingType: this.camera.EncodingType.JPEG,
          mediaType: this.camera.MediaType.PICTURE,
-         sourceType: this.camera.PictureSourceType.SAVEDPHOTOALBUM
+         sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
        }
    
        this.camera.getPicture(options).then((imageData) => {
          // imageData is either a base64 encoded string or a file URI
          // If it's base64:
          this.base64Image  = 'data:image/jpeg;base64,' + imageData;
-         this.photos.push(this.base64Image);
-         this.photos.reverse();
-         this.theWallImageUrl = this.photos;
        }, (err) => {
          // Handle error
        })}
