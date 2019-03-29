@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ViewController, AlertController, LoadingController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { HttpProvider } from '../../providers/http/http';
 
@@ -22,7 +22,13 @@ export class EditarnotaPage {
   body: string;
   base64Image: string;
 
-  constructor(public navCtrl: NavController, public view:ViewController, public navParams: NavParams, public camera:Camera, public http:HttpProvider) {
+  constructor(public navCtrl: NavController, 
+    public view:ViewController, 
+    public navParams: NavParams, 
+    public camera:Camera, 
+    public http:HttpProvider,
+    public alertCtrl: AlertController,
+    public loadingCtrl: LoadingController) {
 
     this.id_nota = navParams.get('id_nota');
     this.note = navParams.get('note');
@@ -94,5 +100,66 @@ export class EditarnotaPage {
   cerrarModal(){
     this.view.dismiss();
   }
+
+ 
+
+  presentConfirm() {
+    console.log(this.id_nota);
+    let alert = this.alertCtrl.create({
+      title: 'Eliminar nota',
+      message: 'Esta accion ya no se puede deshacer :C',
+      buttons: [
+        {
+          text: 'NO',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Si, Acepto',
+          handler: () => {
+            this.loadingDeBorrar();
+            console.log();
+          }
+        }
+      ]
+    });
+    alert.present();
+  }
+
+  loadingDeBorrar() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  
+
+    loading.onDidDismiss(() => {
+
+this.confirmar();
+
+      
+    });
+    
+    loading.present();
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 2000);
+  }
+
+  confirmar(){
+    this.http.borrarNota(this.id_nota).then(
+        (res)=>{
+  
+          
+          this.cerrarModal();
+  
+        },(error)=>{
+        console.log("Error"+JSON.stringify(error));
+          alert("Verifica que cuentes con internet");
+      })
+      
+    }
 
 }
