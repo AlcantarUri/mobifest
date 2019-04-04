@@ -34,7 +34,7 @@ export class EventoAgregaritemsPage {
 
 prueba: any;
 
-
+  botonAgregar : boolean;
   ivavalor: number;
   descuento: number;
 
@@ -123,6 +123,7 @@ costo_subtotal: number = 0;
 
 
 
+
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: HttpProvider,
@@ -142,6 +143,9 @@ costo_subtotal: number = 0;
     this.anticipo = 0;
     this.hideIva = false;
       //para pasar al final de la cotizacion
+
+      //enable add event button when class starts
+      this.botonAgregar = false;
       
 
       //carga el metodo que trae los items de la abse de datos y lo guarda
@@ -186,6 +190,7 @@ costo_subtotal: number = 0;
    continuarCotizacion(arreglochido: any){
     //this.navCtrl.push(EventModalPage, {arreglo: arreglochido});
 
+    this.botonAgregar =!this.botonAgregar;
     
     if(this.nombre_titular_evento==null){
 
@@ -197,6 +202,7 @@ costo_subtotal: number = 0;
       });
     
       toast.present(); 
+      this.botonAgregar =!this.botonAgregar;
     }else if(this.fecha_envio_evento==""){
       let toast = this.toastCtrl.create({
         message: 'No se eligió fecha de Evento!!',
@@ -205,6 +211,7 @@ costo_subtotal: number = 0;
       });
     
       toast.present(); 
+      this.botonAgregar =!this.botonAgregar;
     }else {
             this.save();
             
@@ -354,6 +361,7 @@ ocultarFormulario(){
         console.log(this.arreglodos);
         if(this.arreglodos =='registrado'){
           console.log("registro Satisfactorio");
+          
           this.presentLoadingCustom();
 
         }else if(this.arreglodos=='noregistrado'){
@@ -645,6 +653,7 @@ this.http.dispoibilidadmob(
       loading.onDidDismiss(() => {
       //this.view.dismiss(this.event);
       this.navCtrl.setRoot(TabsPage);
+      this.botonAgregar =!this.botonAgregar;
     });
     loading.present();
 

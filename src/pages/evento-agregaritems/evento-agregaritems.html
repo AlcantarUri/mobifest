@@ -197,7 +197,7 @@
                 </ion-grid>
            
     <button [hidden]="hideCards" ion-button full (click)="tgExtras()">Continuar</button>
-    <button [hidden]="!hideCards" ion-button full (click)="continuarCotizacion()">Agregar Evento</button>
+    <button [hidden]="!hideCards" [disabled]=botonAgregar ion-button full (click)="continuarCotizacion()">Agregar Evento</button>
   
   </ion-toolbar>
 

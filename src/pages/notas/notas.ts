@@ -244,5 +244,4 @@ this.confirmar(id_nota);
       loading.dismiss();
     }, 2000);
   }
-
 }
