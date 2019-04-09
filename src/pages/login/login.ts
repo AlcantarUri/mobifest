@@ -208,7 +208,7 @@ export class LoginPage {
 }
 
   compararUsuaroNotas(usuario: string, contra: string){
-   
+   console.log(usuario +" "+ contra);
   this.http.compararUsuarioNotas(usuario, contra).then(
     (res)=>{
 

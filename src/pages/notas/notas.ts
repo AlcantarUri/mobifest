@@ -76,33 +76,14 @@ export class NotasPage {
   }
   sacarNotesChidoris()
   {
+    console.log("Dentro del page de notas "+this.user);
     this.http.sacarNotas(this.user).then(
       (res)=>{
 
         
         
           this.notas = res["notasuno"];
-        if (res["notasuno"] == undefined) {
-
-          let alert = this.alertCtrl.create({
-            title: 'UPSS',
-            subTitle: 'Parece ser que no estas registrado. <br/> Vuelve al inicio y da click en registrar :D',
-            buttons: [
-              {
-                text: 'SALIR',
-                role: 'cancel',
-                handler: () => {
-                  this.navCtrl.setRoot(LoginPage);
-                }
-              }
-            ]
-          });
-          alert.present();
-          
-        }else{
-          console.log(this.notas);
-          
-        }
+        
 
       },(error)=>{
       console.log("Error"+JSON.stringify(error));

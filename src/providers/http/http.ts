@@ -518,7 +518,7 @@ sacarItemsporEventos(id_evento:string){
     }
 
     compararUsuarioNotas(user: string, pass: string){
-     
+     console.log("dentro del provider"+user +" "+pass)
        var url = 'http://avisositd.xyz/mobiliaria/notasNoMover/loginNotas.php?user='+user+'&pass='+pass;
        
     return new Promise((resolve, reject) => {
