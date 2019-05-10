@@ -265,7 +265,7 @@ llenarCards(){
     if (this.mesmasuno == 4){
       this.masmes = "Abril"
     }else
-    if (this.mesmasuno = 5){
+    if (this.mesmasuno == 5){
       this.masmes = "Mayo"
     }else
     if (this.mesmasuno == 6){
@@ -336,6 +336,7 @@ llenarCards(){
 
   //prueba
 alarm() {
+  console.log(this.fechados);
   let prompt = this.alertCtrl.create({
     title: 'Atención',
     subTitle: "Esta a punto de crear un evento el dia: <br/>"+ this.fechados,
