@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ToastController, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import { HttpProvider } from '../../providers/http/http';
 import { SeguimientopagodetallePage } from '../seguimientopagodetalle/seguimientopagodetalle';
 import { SeguimientopagodosPage } from '../seguimientopagodos/seguimientopagodos';
@@ -55,7 +55,8 @@ ivavalor: number;
               public http: HttpProvider,
               public toastCtrl : ToastController,
               public modalCtrl: ModalController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController,
+              public loadingCtrl: LoadingController) {
 
                 this.id_evento= navParams.get('data');
                 this.fecha_envio_evento = navParams.get('date');
@@ -168,9 +169,32 @@ if(this.observaciones == null)
     );
   }
 
+  async presentLoading(mesnaje: string){
+    let loading = this.loadingCtrl.create({
+      content: mesnaje
+    });
   
+    loading.present();
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 2000);
+    loading.onDidDismiss(() =>
+    {
+      let toast = this.toastCtrl.create({
+        message: 'Moviliario Eliminado',
+        duration: 2000,
+        position: 'top'
+      });
+      toast.present();
+    })
+
+    
+  }
 
   borrar(id_evento, id_mob, ocupados, costo){
+
+    this.presentLoading("Borrando elemento porfaver espere...");
 
     console.log(id_evento,id_mob);
     console.log(this.ivavalor);
@@ -211,13 +235,9 @@ if(this.observaciones == null)
                 this.costo_total=0;
                 this.saldo=0;
 
-          let toast = this.toastCtrl.create({
-            message: 'Moviliario Eliminado',
-            duration: 2000,
-            position: 'top'
-          });
+         
         
-          toast.present();
+          
           this.sacarItems(id_evento);
 
 
