@@ -37,6 +37,7 @@ prueba: any;
   botonAgregar : boolean;
   ivavalor: number;
   descuento: number;
+  fletevalor: number;
 
   id: string;
   inventario: any;
@@ -246,6 +247,50 @@ costo_subtotal: number = 0;
 
             
 
+          }
+        }
+      ]
+    });
+    alert.present();
+   }
+
+   flete(){
+    let alert = this.alertCtrl.create({
+      title: 'Escriba el total del Flete',
+      inputs: [
+        {
+          name: 'fletev',
+          placeholder: 'Flete',
+          type: 'number'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Aplicar',
+          handler: data => {
+            this.fletevalor=data.fletev;
+            console.log(this.fletevalor);
+
+           if(data.fletev == ""){
+
+            let toast = this.toastCtrl.create({
+              message: 'Introduzca un valor porfavor',
+              duration: 2500,
+              position: 'bottom'
+              
+            });
+            toast.present();
+
+           }else{
+            this.costo_total = (this.fletevalor*1) + (this.costo_total*1);
+           }
           }
         }
       ]
