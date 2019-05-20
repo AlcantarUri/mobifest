@@ -624,6 +624,8 @@ this.http.dispoibilidadmob(
   this.arreglodefecha[i].hora_recoleccion_evento
 ).then((inv)=>{
 
+  console.log(inv);
+
 },(error)=>{
   console.log("Error"+JSON.stringify(error));
 })
