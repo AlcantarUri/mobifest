@@ -32,7 +32,7 @@ export class HttpProvider {
   }
 
 
-insertarEvento(nombre_evento: string, 
+insertarEvento(nombre_evento: string,
   tipo_evento: string, 
   fecha_envio_evento: any, 
   hora_envio_evento: any,
@@ -43,11 +43,13 @@ insertarEvento(nombre_evento: string,
   direccion:string,
   telefono_titular_evento:string,
   descuento: number,
-  ivavalor: number
+  ivavalor: number,
+  fletevalor:number
   
  
   ){
 
+    console.log(fletevalor);
 
   let datos = { nombre_evento:nombre_evento,
      tipo_evento:tipo_evento,
@@ -60,7 +62,8 @@ insertarEvento(nombre_evento: string,
      direccion:direccion,
      telefono_titular_evento:telefono_titular_evento,
      descuento:descuento,
-     ivavalor:ivavalor
+     ivavalor:ivavalor,
+     fletevalor:fletevalor
      
         }
   
@@ -297,10 +300,11 @@ detallesdeleventodeldia(id_evento: string){
 }
 
 
-sacarItemsporEventos(id_evento:string){
-
+sacarItemsporEventos(id_evento:string, fecha_envio_evento: string){
+console.log(fecha_envio_evento);
    
-  var url = 'http://avisositd.xyz/mobiliaria/ItemsDelEventoDelDia.php?id_evento='+id_evento;
+  var url = 'http://avisositd.xyz/mobiliaria/ItemsDelEventoDelDia.php?id_evento='+id_evento+'&fecha_envio_evento='+fecha_envio_evento;
+  console.log(url);
   return new Promise((resolve, reject) => {
    this.http.get(url)
       .subscribe(data => {

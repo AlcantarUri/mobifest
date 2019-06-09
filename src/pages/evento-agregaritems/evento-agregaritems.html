@@ -135,7 +135,7 @@
             </button>
           </ion-col>
           <ion-col col-6>
-            <button ion-button round icon-end (click)="ocultarFormulario()">
+            <button [hidden]="esconderfab" ion-button round icon-end (click)="ocultarFormulario()">
                 <ion-icon padding name="checkmark"></ion-icon>Añadir Inv
             </button>
           </ion-col>

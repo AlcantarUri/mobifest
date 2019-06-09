@@ -37,7 +37,8 @@ prueba: any;
   botonAgregar : boolean;
   ivavalor: number;
   descuento: number;
-  fletevalor: number;
+  fletevalor: string;
+  fletechido : number;
 
   id: string;
   inventario: any;
@@ -113,6 +114,8 @@ fecha_evento: string;
 hora_evento:string;
 ocupados: number;
 
+esconderfab: boolean;
+
 //id del evento
 idEvento: number = 9999;
 
@@ -135,7 +138,7 @@ costo_subtotal: number = 0;
     public view: ViewController,
     public loadingCtrl: LoadingController
     ) {    
-
+      this.esconderfab= false;
     
         //inician los cards visibles y ls fechas ocultas
     this.hideCards=false;
@@ -147,6 +150,7 @@ costo_subtotal: number = 0;
 
       //enable add event button when class starts
       this.botonAgregar = false;
+      this.fletevalor = "0";
       
 
       //carga el metodo que trae los items de la abse de datos y lo guarda
@@ -156,8 +160,15 @@ costo_subtotal: number = 0;
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
 
 
-    this.fecha_envio_evento = this.navParams.get('selectedDay');
-    console.log(this.fecha_envio_evento);
+    var fechallega = this.navParams.get('selectedDay')
+
+
+    var date = new Date(fechallega).toISOString();
+    this.fecha_envio_evento = date.slice(0,10);
+
+  
+
+    console.log("esta es la fecha "+this.fecha_envio_evento);
     //this.fecha_envio_evento = this.fecha_tentativa['title'];
     //console.log(this.fecha_envio_evento);
 
@@ -171,7 +182,13 @@ costo_subtotal: number = 0;
     this.event.startTime = preselectedDate;
     this.event.endTime = preselectedDate;
 
-    this.fecha_recoleccion_evento = this.fecha_envio_evento
+    //dateMove.setDate(dateMove.getDate()+1); 
+//var dateMove = new Date(startDate);
+    var fechainicio = new Date(this.fecha_envio_evento);
+    fechainicio.setDate(fechainicio.getDate()+1);
+
+    this.fecha_recoleccion_evento =fechainicio.toISOString().slice(0,10);
+    console.log(this.fecha_recoleccion_evento);
     this.traerClientes();
     this.initializeClientes();
 
@@ -204,7 +221,7 @@ costo_subtotal: number = 0;
     
       toast.present(); 
       this.botonAgregar =!this.botonAgregar;
-    }else if(this.fecha_envio_evento==""){
+    }else if(!this.fecha_envio_evento){
       let toast = this.toastCtrl.create({
         message: 'No se eligió fecha de Evento!!',
         duration: 2500,
@@ -244,6 +261,7 @@ costo_subtotal: number = 0;
             console.log("aplico iva?? "+this.ivavalor);
             this.costo_total= this.costo_total+(this.costo_total*.16);
             this.hideIva= true;
+            this.esconderfab = true;
 
             
 
@@ -289,7 +307,8 @@ costo_subtotal: number = 0;
             toast.present();
 
            }else{
-            this.costo_total = (this.fletevalor*1) + (this.costo_total*1);
+             var constante = parseInt(this.fletevalor)
+            this.costo_total = (constante*1) + (this.costo_total*1);
            }
           }
         }
@@ -336,6 +355,7 @@ costo_subtotal: number = 0;
            }else{
             this.porcentaje= parseInt(data.descuento)/100;
             this.costo_total = this.costo_total - this.costo_total*this.porcentaje;
+            this.esconderfab = true;
            }
             
             
@@ -360,6 +380,10 @@ ocultarFormulario(){
    agregaraInventario(){
     //console.log(this.costo_total);
    // console.log(this.anticipo);
+
+  
+   this.fletechido = parseInt(this.fletevalor);
+   console.log("Flete desde app " +this.fletevalor);
     
     console.log("IVA = "+this.ivavalor+" Descuento = "+this.descuento);
 
@@ -396,7 +420,8 @@ ocultarFormulario(){
       this.direccion_evento,
       this.telefono_titular_evento,
       this.descuento,
-      this.ivavalor
+      this.ivavalor,
+      this.fletechido
 
       ).then(
       (res) => { 
@@ -597,18 +622,47 @@ console.log(this.arreglodeobjetos);
 
 juntarobjetos(){
 
-  
+/*
+  var listDate = [];
+var startDate = new Date(this.fecha_envio_evento);
+var endDate = new Date(this.fecha_recoleccion_evento);
+var movDate = startDate
+
+
+while (movDate <= endDate) {
+  listDate.push(new Date(movDate));
+  movDate
+
+}*/
+var listDate = [];
+var startDate = this.fecha_envio_evento;
+var endDate = this.fecha_recoleccion_evento;
+var dateMove = new Date(startDate);
+var strDate = startDate;
+while (strDate < endDate){
+  strDate = dateMove.toISOString().slice(0,10);
+  listDate.push(strDate);
+  dateMove.setDate(dateMove.getDate()+1);
+};
+
+console.log("Contento ", listDate);
+ var contar = listDate.length - 1;
+
+console.log(listDate.length);
+
+
 
   for (var i = 0; i < this.arreglodeobjetos.length; i++) {
     // console.log(json[i].nombre_mob);
     this.arreglodefecha.push({
-      fecha_evento: this.fecha_envio_evento, 
       hora_evento: this.hora_envio_evento, 
       hora_recoleccion_evento: this.hora_recoleccion_evento
       
     })
     
     }
+    for (let j = 0; j < contar ; j++) {
+      
 
     for (var i = 0; i < this.arreglodeobjetos.length; i++) {
       // console.log(json[i].nombre_mob);
@@ -617,7 +671,7 @@ juntarobjetos(){
       
 
 this.http.dispoibilidadmob(
-  this.arreglodefecha[i].fecha_evento,
+  listDate[j],
   this.arreglodefecha[i].hora_evento,
   this.arreglodeobjetos[i].id_mob,
   this.arreglodeobjetos[i].ocupados,
@@ -631,7 +685,7 @@ this.http.dispoibilidadmob(
 })
       
       
-      }
+      }}
 
     
     

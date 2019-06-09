@@ -44,6 +44,7 @@ ivavalor: number;
   eliminadores: any;
   camentarios: any;
   comnets: any;
+  paralanora: boolean;
 
   fecha_envio_evento: any;
   hora_envio_evento: any;
@@ -58,15 +59,18 @@ ivavalor: number;
               public alertCtrl: AlertController,
               public loadingCtrl: LoadingController) {
 
+                this.paralanora=false;
+
                 this.id_evento= navParams.get('data');
                 this.fecha_envio_evento = navParams.get('date');
+                console.log(this.fecha_envio_evento);
 
                 this.costot =0;
                 this.costo_total=0;
                 this.saldo=0;
 
                 this.sacardetalles(this.id_evento);
-                this.sacarItems(this.id_evento);
+                this.sacarItems(this.id_evento,this.fecha_envio_evento);
                 this.sacarPago(this.id_evento);
 
                 
@@ -81,7 +85,7 @@ ivavalor: number;
 
   actualizar(){
     this.sacardetalles(this.id_evento);
-    this.sacarItems(this.id_evento);
+    this.sacarItems(this.id_evento,this.fecha_envio_evento);
     this.sacarPago(this.id_evento);
 
   }
@@ -127,15 +131,15 @@ if(this.observaciones == null)
   }
 
   
-  sacarItems(id_evento: string){
+  sacarItems(id_evento: string, fecha: string){
     
-    this.http.sacarItemsporEventos(id_evento).then(
+    this.http.sacarItemsporEventos(id_evento, fecha).then(
       (res)=>{
 
        
         this.items = res["detalles"];
         
-        console.log(this.items);
+        console.log(res);
 
       },(error)=>{
       console.log("Error"+JSON.stringify(error));
@@ -169,32 +173,18 @@ if(this.observaciones == null)
     );
   }
 
-  async presentLoading(mesnaje: string){
+  
+
+  async borrar(id_evento, id_mob, ocupados, costo){
+    console.log(id_evento, +"  "+id_mob);
+    this.paralanora = true;
     let loading = this.loadingCtrl.create({
-      content: mesnaje
+      content: "Borrarndo Inventario por favor espere"
     });
   
     loading.present();
   
-    setTimeout(() => {
-      loading.dismiss();
-    }, 2000);
-    loading.onDidDismiss(() =>
-    {
-      let toast = this.toastCtrl.create({
-        message: 'Moviliario Eliminado',
-        duration: 2000,
-        position: 'top'
-      });
-      toast.present();
-    })
-
     
-  }
-
-  borrar(id_evento, id_mob, ocupados, costo){
-
-    this.presentLoading("Borrando elemento porfaver espere...");
 
     console.log(id_evento,id_mob);
     console.log(this.ivavalor);
@@ -227,6 +217,9 @@ if(this.observaciones == null)
 
     this.http.borrrarItemsDelevento(id_evento,id_mob, this.costo_total, this.saldo).then(
       (res) => { 
+
+        console.log(res);
+        //cliente: "eliminado"
         
           this.sacarPago(this.id_evento);
         if(res["cliente"] == "eliminado"){
@@ -238,7 +231,9 @@ if(this.observaciones == null)
          
         
           
-          this.sacarItems(id_evento);
+          this.sacarItems(id_evento,this.fecha_envio_evento);
+          loading.dismiss();
+          this.paralanora = false;
 
 
         }else{
@@ -286,7 +281,7 @@ if(this.observaciones == null)
   modal.onDidDismiss(data=>{
 
 this.sacardetalles(this.id_evento);
-this.sacarItems(this.id_evento);
+this.sacarItems(this.id_evento,this.fecha_envio_evento);
 this.sacarPago(this.id_evento);
   }
     );

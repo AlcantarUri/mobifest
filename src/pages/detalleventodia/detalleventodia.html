@@ -136,7 +136,7 @@
         </ion-item>
         <ion-item-options side="right">
           
-          <button ion-button color="danger" (click)="borrar(id_evento,item.id_fecha, item.ocupados, item.costo_mob)">
+          <button [disabled]="paralanora" ion-button color="danger" (click)="borrar(id_evento,item.id_mob, item.ocupados, item.costo_mob)">
               <ion-icon name="trash">
             Eliminar 
               </ion-icon>

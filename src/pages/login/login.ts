@@ -250,6 +250,11 @@ internetToast() {
   toast.present();
 }
 
+logeo123(){
+  this.navCtrl.push(TabsPage, {
+    data: this.id
+  });
+}
 
 inicioSesion(usuario:string, contra:string){
   let loading = this.loadingCtrl.create({
