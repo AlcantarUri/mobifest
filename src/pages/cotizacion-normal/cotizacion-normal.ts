@@ -212,7 +212,8 @@ public costo_total:number=0;
       this.direccion_evento,
       this.telefono_titular_evento,
       this.ivavalor,
-      this.descuento).then(
+      this.descuento,
+      200).then(
       (res) => { 
         console.log(res["registro"]);
 
