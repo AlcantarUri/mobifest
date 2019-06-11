@@ -198,6 +198,29 @@ addEventNormal(){
 
   addEvent(data: any){
 
+    var arrayDeCadenas = this.fecha.split("-");
+
+    
+    var ano = arrayDeCadenas[0];
+    var mes = arrayDeCadenas[1];
+    var dia = arrayDeCadenas[2];
+
+    if(mes.length < 2 ){
+      mes = "0"+mes;
+    }
+
+
+    var arrayDia = dia.split("T");
+    
+
+    if(arrayDia[0].length < 2){
+       dia = "0"+arrayDia[0];
+    }
+
+   this.fecha = ano+"-"+mes+"-"+dia;
+
+   console.log(this.fecha+" HOME");
+
 
 
     let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.fecha});

@@ -196,8 +196,14 @@ if(this.observaciones == null)
     console.log(precio);
     this.costo_total = Number(this.costo_total - precio);
     this.saldo = Number(this.saldo - precio);
+      console.log("Esto es el costo total "+this.costo_total);
+      console.log("esto es el saldo "+ this.saldo);
 
-    console.log(this.costo_total+"   "+this.saldo);
+      if (this.saldo < 0) {
+        this.saldo = 0;
+      }
+
+   
 
     }else if(this.ivavalor==0){
       var precio = (ocupados*costo)-this.descuento*(ocupados*costo);
@@ -207,7 +213,11 @@ if(this.observaciones == null)
 
     this.costo_total=Number(this.costo_total);
     this.saldo = Number(this.saldo);
-    console.log(this.costo_total+"   "+this.saldo);
+    console.log("Esto es el costo total "+this.costo_total);
+      console.log("esto es el saldo "+ this.saldo);
+      if (this.saldo < 0) {
+        this.saldo = 0;
+      }
 
     }
 

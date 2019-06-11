@@ -1,14 +1,21 @@
 page-notas {
 
+
+    .card-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #fff;
+        padding: 5px;
+      }
     
 
     .customClass{
-        color:#e74c3c !important;
+        color:#e7e43c !important;
        }
 
        .titulo{
         font-size: 4em;
-        color: #e74c3c;
+        color: #e7e43c;
        }
 
        .fondo{
@@ -19,7 +26,7 @@ page-notas {
         }
         h1{
             
-            color: white;
+            color: #ffffff;
             padding-top: 5px;
             padding-left: 10px;
         }
