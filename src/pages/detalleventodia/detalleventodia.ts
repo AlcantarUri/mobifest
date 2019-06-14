@@ -30,6 +30,7 @@ ivavalor: number;
 
   costot : number;
   costo_total: number;
+  anticipo:number;
   saldo: number;
   observaciones: string;
 
@@ -159,8 +160,11 @@ if(this.observaciones == null)
         var evento = entry.id_evento;
         this.costo_total = Number(entry.costo_total);
         this.saldo = Number(entry.saldo);
+        this.anticipo = Number(entry.anticipo);
         
       }
+
+      
 
        
       
@@ -188,6 +192,8 @@ if(this.observaciones == null)
 
     console.log(id_evento,id_mob);
     console.log(this.ivavalor);
+
+    console.log("Este es el Saldo de Incio"+this.saldo);
     
     
     console.log(this.descuento);
@@ -225,7 +231,7 @@ if(this.observaciones == null)
 
 
 
-    this.http.borrrarItemsDelevento(id_evento,id_mob, this.costo_total, this.saldo).then(
+    this.http.borrrarItemsDelevento(id_evento,id_mob, this.costo_total, this.saldo, this.anticipo).then(
       (res) => { 
 
         console.log(res);
@@ -273,6 +279,12 @@ if(this.observaciones == null)
       data: this.id_evento
     });
     
+  }
+
+  ionViewDidEnter() {
+    this.sacardetalles(this.id_evento);
+    this.sacarItems(this.id_evento,this.fecha_envio_evento);
+    this.sacarPago(this.id_evento);
   }
 
 

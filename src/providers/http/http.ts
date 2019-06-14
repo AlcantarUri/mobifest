@@ -330,12 +330,15 @@ console.log(fecha_envio_evento);
   });
  }
 
- borrrarItemsDelevento(id_evento:string, id_mob: string, costo_total: number, saldo:number){ 
+ borrrarItemsDelevento(id_evento:string, id_mob: string, costo_total: number, saldo:number, anticipo:number){ 
+
+  console.log("Anticipo"+anticipo);
   let datos = { 
     id_evento: id_evento,
     id_mob:id_mob,
     costo_total:costo_total,
     saldo: saldo,
+    anticipo:anticipo,
     
         }
        let options = {
