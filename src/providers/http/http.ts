@@ -304,7 +304,7 @@ sacarItemsporEventos(id_evento:string, fecha_envio_evento: string){
 console.log(fecha_envio_evento);
    
   var url = 'http://avisositd.xyz/mobiliaria/ItemsDelEventoDelDia.php?id_evento='+id_evento+'&fecha_envio_evento='+fecha_envio_evento;
-  console.log(url);
+  //console.log(url);
   return new Promise((resolve, reject) => {
    this.http.get(url)
       .subscribe(data => {

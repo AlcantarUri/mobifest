@@ -185,7 +185,7 @@ costo_subtotal: number = 0;
     //dateMove.setDate(dateMove.getDate()+1); 
 //var dateMove = new Date(startDate);
     var fechainicio = new Date(this.fecha_envio_evento);
-    fechainicio.setDate(fechainicio.getDate()+1);
+    fechainicio.setDate(fechainicio.getDate());
 
     this.fecha_recoleccion_evento =fechainicio.toISOString().slice(0,10);
     console.log(this.fecha_recoleccion_evento);
@@ -639,6 +639,11 @@ var startDate = this.fecha_envio_evento;
 var endDate = this.fecha_recoleccion_evento;
 var dateMove = new Date(startDate);
 var strDate = startDate;
+
+if (strDate == endDate) {
+  var contar = 1;
+  listDate.push(strDate);
+}else{
 while (strDate < endDate){
   strDate = dateMove.toISOString().slice(0,10);
   listDate.push(strDate);
@@ -646,10 +651,10 @@ while (strDate < endDate){
 };
 
 console.log("Contento ", listDate);
- var contar = listDate.length - 1;
+ var contar = listDate.length -1;
 
 console.log(listDate.length);
-
+}
 
 
   for (var i = 0; i < this.arreglodeobjetos.length; i++) {

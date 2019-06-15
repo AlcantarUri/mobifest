@@ -46,6 +46,7 @@ export class CotizacionrapidaModalPage {
  saldo_final: number;
  anticipo_recibido: string;
  anticipo_final:number;
+ fecha_recoleccion_evento:any;
 
  costo_final: number;
 
@@ -67,14 +68,14 @@ export class CotizacionrapidaModalPage {
       this.id_evento = navParams.get('id');
       this.ivavalor=Number(navParams.get('iva'));
       this.descuento= Number(navParams.get('descuent'));
+      this.fecha_recoleccion_evento=navParams.get('recoleccion');
       this.getMessages();
       this.sacarPago();
 
       
       
 
-      console.log(this.ivavalor);
-      console.log(this.descuento);
+      console.log(this.fecha_recoleccion_evento);
       
   
 
@@ -294,6 +295,8 @@ presentLoadingCustom() {
 }
 
 juntarobjetos(){
+
+  
 
   
 

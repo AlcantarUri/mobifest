@@ -50,7 +50,7 @@ ivavalor: number;
   fecha_envio_evento: any;
   hora_envio_evento: any;
   hora_recoleccion_evento: any;
-
+  fecha_recoleccion_evento: any;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
@@ -105,6 +105,7 @@ ivavalor: number;
 for(let entry of this.evento){
 
   this.hora_envio_evento= entry.hora_envio_evento;
+  this.fecha_recoleccion_evento =entry.fecha_recoleccion_evento;
   this.hora_recoleccion_evento = entry.hora_recoleccion_evento;
   this.ivavalor = Number(entry.ivavalor);
   this.descuento = Number(entry.descuento);
@@ -116,6 +117,7 @@ for(let entry of this.evento){
 
 
 }
+console.log(this.fecha_recoleccion_evento);
 
 this.descuento = this.descuento/100;
 if(this.observaciones == null)
@@ -298,7 +300,8 @@ if(this.observaciones == null)
       horar: this.hora_recoleccion_evento,
       id: this.id_evento,
       iva: this.ivavalor,
-      descuent: this.descuento});
+      descuent: this.descuento,
+      recoleccion: this.fecha_recoleccion_evento});
     
   modal.onDidDismiss(data=>{
 
