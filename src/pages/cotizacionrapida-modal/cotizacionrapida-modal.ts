@@ -93,7 +93,8 @@ export class CotizacionrapidaModalPage {
    }
 
    getMessages(){    
-    this.http.yanosequehaceesta(this.fecha_envio_evento).then(
+     console.log(this.hora_envio_evento)
+    this.http.yanosequehaceesta(this.fecha_envio_evento, this.hora_envio_evento).then(
       (inv) => { 
        this.inventario = inv["inventario"];
        //this.mobiliarios = this.inventario;     
@@ -295,14 +296,38 @@ presentLoadingCustom() {
 }
 
 juntarobjetos(){
+  var bloqueo = 0;
 
-  
+  console.log("--------");
+  console.log(this.fecha_envio_evento);
+  console.log(this.fecha_recoleccion_evento);
 
+  //empece a añadir desde aqui
+  var listDate = [];
+  var startDate = this.fecha_envio_evento;
+  var endDate = this.fecha_recoleccion_evento;
+  var dateMove = new Date(startDate);
+  var strDate = startDate;
+
+  if (strDate == endDate) {
+    var contar = 1;
+    listDate.push(strDate);
+  }else{
+  while (strDate < endDate){
+    strDate = dateMove.toISOString().slice(0,10);
+    listDate.push(strDate);
+    dateMove.setDate(dateMove.getDate()+1);
+  };
   
+  console.log("Contento ", listDate);
+   var contar = listDate.length -1;
+  
+  console.log(listDate.length);
+  }
+  //ultimo que añadi
 
   for (var i = 0; i < this.arreglodeobjetos.length; i++) {
     this.arreglodefecha.push({
-      fecha_evento: this.fecha_envio_evento, 
       hora_evento: this.hora_envio_evento, 
       id_evento: this.id_evento,
       hora_recoleccion_evento: this.hora_recoleccion_evento
@@ -311,6 +336,8 @@ juntarobjetos(){
     console.log(this.arreglodeobjetos);
     
     }
+    for (let j = 0; j < contar ; j++) {
+
 
     for (var i = 0; i < this.arreglodeobjetos.length; i++) {
       
@@ -318,20 +345,21 @@ juntarobjetos(){
       
 
 this.http.addInventorytoEvent(
-  this.arreglodefecha[i].fecha_evento,
+  listDate[j],
   this.arreglodefecha[i].hora_evento,
   this.arreglodeobjetos[i].id_mob,
   this.arreglodeobjetos[i].ocupados,
   this.arreglodefecha[i].id_evento,
   this.arreglodefecha[i].hora_recoleccion_evento
 ).then((inv)=>{
-
+console.log(inv);
 },(error)=>{
   console.log("Error"+JSON.stringify(error));
 })
       
       
       }
+    }
 
     
     

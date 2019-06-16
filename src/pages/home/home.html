@@ -8,7 +8,7 @@
     </ion-title>
 
  <ion-buttons end>
-    <button ion-button icon-only (click)="abrirAlert()">
+    <button ion-button icon-only (click)="pick.open()">
       <ion-icon name="add"></ion-icon>
   </button>
 </ion-buttons>
@@ -21,7 +21,9 @@
 <ion-content >
 
     <ion-fab top right edge>
-        <button ion-fab mini (click)="abrirAlert()" color="secondary"><ion-icon name="add"></ion-icon>
+        <button ion-fab mini (click)="pick.open()" color="secondary">
+            
+          <ion-icon name="add"></ion-icon>
         </button>
         
       </ion-fab>
@@ -58,5 +60,9 @@
       </ion-list>
 
   </div>
+
+  <ion-item [hidden]="true">
+      <ion-datetime #pick (ionChange)="alarm()"displayFormat="HH:mm" pickerFormtat="HH:mm" [(ngModel)]="hora_evento"></ion-datetime>
+   </ion-item>
   
 </ion-content>

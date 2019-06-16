@@ -259,7 +259,7 @@ public costo_total:number=0;
   }
 
   sacarCosas(){
-    this.http.yanosequehaceesta(this.fecha_envio_evento).then(
+    this.http.yanosequehaceesta(this.fecha_envio_evento, this.hora_envio_evento).then(
       (inv) => { 
         this.inventario = inv["inventario"];
         //this.mobiliarios = this.inventario;     

@@ -127,7 +127,6 @@ costo_subtotal: number = 0;
 
 
 
-
   constructor(public navCtrl: NavController, 
     public navParams: NavParams,
     private http: HttpProvider,
@@ -159,6 +158,9 @@ costo_subtotal: number = 0;
     this.initializeItems();
     let preselectedDate = moment(this.navParams.get('selectedDay')).format();
 
+    this.hora_envio_evento = this.navParams.get('hora_evento');
+
+    console.log("comida de troka"+this.hora_envio_evento);
 
     var fechallega = this.navParams.get('selectedDay')
 
@@ -697,8 +699,10 @@ this.http.dispoibilidadmob(
 
 }
 
+
+
    getMessages(){    
-    this.http.yanosequehaceesta(this.fecha_envio_evento).then(
+    this.http.yanosequehaceesta(this.fecha_envio_evento, this.hora_envio_evento).then(
       (inv) => { 
        this.inventario = inv["inventario"];
        //this.mobiliarios = this.inventario;     

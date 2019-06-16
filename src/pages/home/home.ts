@@ -29,6 +29,7 @@ export class HomePage {
 
   public dtae: number;
   fechasTraer:any;
+  hora_evento: any;
 
 
 
@@ -223,7 +224,7 @@ addEventNormal(){
 
 
 
-    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.fecha});
+    let modal = this.modalCtrl.create('EventoAgregaritemsPage', {selectedDay:this.fecha, hora_evento: this.hora_evento});
     modal.present();
     
     
@@ -274,7 +275,7 @@ llenarCards(){
     
 
     this.fecha = this.selectedDay.getFullYear()+"-"+this.mesmasuno+"-"+this.selectedDay.getDate();
-    console.log(this.fecha);
+    //console.log(this.fecha);
 
     if (this.mesmasuno == 1){
       this.masmes = "Enero"
@@ -313,14 +314,14 @@ llenarCards(){
       this.masmes = "Diciembre"
     }
     this.fechados = this.selectedDay.getDate()+" de "+this.masmes+" del "+this.selectedDay.getFullYear();
-    console.log(this.fechados);
+    //console.log(this.fechados);
     
     this.http.obtenerEventosdelDia(this.fecha).then(
       (res)=>{
 
       
       this.eventosChidos = res["eventodelDia"];
-     console.log(this.eventosChidos);
+     //console.log(this.eventosChidos);
           
       
       
@@ -336,10 +337,11 @@ llenarCards(){
 
   mostrarEvento(id_evento: string, fecha_envio_evento: string){
 
-    console.log(id_evento, fecha_envio_evento);
+    //console.log(id_evento, fecha_envio_evento);
     this.navCtrl.push(DetalleventodiaPage,{data: id_evento, date: fecha_envio_evento});
         
   }
+
 
 
 
@@ -359,7 +361,7 @@ llenarCards(){
 
   //prueba
 alarm() {
-  console.log(this.fechados);
+  //console.log(this.fechados);
   let prompt = this.alertCtrl.create({
     title: 'Atención',
     subTitle: "Esta a punto de crear un evento el dia: <br/>"+ this.fechados,
@@ -385,5 +387,13 @@ alarm() {
 }
 
 //termina prueba
+seve: boolean;
+horadelEvento(){
+  let element = document.getElementById('btnss');
+  element.animate;
+  this.seve = true;
+
+
+}
 
 }

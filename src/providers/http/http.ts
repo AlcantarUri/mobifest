@@ -270,11 +270,11 @@ revisarDisponibilidadDia(fecha_envio_evento:string){
  }
 
 
- yanosequehaceesta(fecha_envio_evento: string){
+ yanosequehaceesta(fecha_envio_evento: string, hora: string){
  
   //alert(usuario+contra);
  
- var url = 'http://avisositd.xyz/mobiliaria/sacarDisponiblesDelDia.php?fecha_envio_evento='+fecha_envio_evento;
+ var url = 'http://avisositd.xyz/mobiliaria/sacarDisponiblesDelDia.php?fecha_envio_evento='+fecha_envio_evento+'&hora'+hora;
  return new Promise((resolve, reject) => {
   this.http.get(url)
      .subscribe(data => {
