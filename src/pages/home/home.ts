@@ -387,13 +387,6 @@ alarm() {
 }
 
 //termina prueba
-seve: boolean;
-horadelEvento(){
-  let element = document.getElementById('btnss');
-  element.animate;
-  this.seve = true;
 
-
-}
 
 }

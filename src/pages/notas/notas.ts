@@ -83,6 +83,7 @@ export class NotasPage {
         
         
           this.notas = res["notasuno"];
+          console.log(res);
         
 
       },(error)=>{
@@ -108,34 +109,7 @@ export class NotasPage {
 
   
 
-/*
-  borrarNota(id_nota, note, body)
-  {
-    let alert = this.alertCtrl.create({
-      title: note,
-      subTitle: body,
-      buttons: [
-        {
-          text: 'Eliminar',
-          role: 'cancel',
-          cssClass: 'customClass',
-          handler: () => {
-            
-            this.presentConfirm(id_nota);
-          }
-        },
-        {
-          text: 'OK',
-          handler: () => {
-            
-          }
-        }
-      ]
-    });
-    alert.present();
-  }
 
-*/
 editarnota(id_nota, nota, cuerpo, ruta){
 
     

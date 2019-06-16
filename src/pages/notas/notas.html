@@ -33,13 +33,13 @@
       <div *ngIf="nota.ruta == 'http://avisositd.xyz/mobiliaria/notasNoMover/'; else nofoto">
         <div class="card-title">{{nota.note}}</div> 
         <div class="divclass">{{nota.body}}</div>
-        <h3 item-end>{{nota.fecha}}</h3>
+        <h3 item-end color="#ffffff">{{nota.fecha}}</h3>
       </div>
       <ng-template #nofoto >
         <div class="card-title">{{nota.note}}</div>  
             <div class="divclass">{{nota.body}}</div>
             <img [src]='nota.ruta' />
-            <h3 item-end>{{nota.fecha}}</h3>
+            <h3 item-end color="#ffffff">{{nota.fecha}}</h3>
       </ng-template>
 
             
