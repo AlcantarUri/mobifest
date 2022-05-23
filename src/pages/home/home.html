@@ -41,11 +41,11 @@
         </calendar>
 </div>
 
-  <div class="ocultarnoevents"></div>
+  <div class="ocultarnoevents" [ngStyle]="{ 'height': sizeHeight }"></div>
   
 
 
-    <div class="eventos">
+    <div id="events" class="eventos">
       <ion-list>
           <ion-card *ngFor="let evento of eventosChidos" (click)="mostrarEvento(evento.id_evento, evento.fecha_envio_evento)">
                 <div *ngIf="evento.saldo > 1; else pagado" class="cardnopadaga">
